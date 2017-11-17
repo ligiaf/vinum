@@ -10019,3 +10019,54 @@ if (Vel) {
     $.error('Method ' + methodOrOptions + ' does not exist on jQuery.tap-target');
   };
 })(jQuery);
+
+
+//modal
+$(document).ready(function(){
+    // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+    $('.modal').modal(
+        {
+            dismissible: true, // Modal can be dismissed by clicking outside of the modal
+            //opacity: .5, // Opacity of modal background
+            inDuration: 300, // Transition in duration
+            outDuration: 200, // Transition out duration
+            startingTop: '4%', // Starting top style attribute
+            endingTop: '10%', // Ending top style attribute
+        }
+    );
+});
+
+//selector
+$(document).ready(function() {
+    $('select').material_select();
+});
+
+//slider
+var slider = document.getElementById('test-slider');
+noUiSlider.create(slider, {
+    start: [70, 250],
+    connect: true,
+    step: 1,
+    orientation: 'horizontal', // 'horizontal' or 'vertical'
+    range: {
+        'min': 0,
+        'max': 5000
+    },
+    format: wNumb({
+        decimals: 0
+    })
+});
+
+
+$('input.autocomplete').autocomplete({
+    data: {
+        "Apple": null,
+        "Microsoft": null,
+        "Google": 'https://placehold.it/250x250'
+    },
+    limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+    onAutocomplete: function(val) {
+        // Callback function when value is autcompleted.
+    },
+    minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+});
