@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>VINUM</title>
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+
+<body style="background-image: radial-gradient(white,#355960)">
+
+<!-- NAO LOGADO -->
+<!--
+<nav class="black" role="navigation">
+    <div class="nav-wrapper container">
+        <a id="logo-container" href="index.html" class="brand-logo grey-text lighten-5">Vinum</a>
+        <ul class="right hide-on-med-and-down">
+            <li><a href="viewBuscarVinho.html" class="grey-text lighten-5" ><i class="material-icons left">search</i>Buscar vinhos</a></li>
+            <li>
+                <a class="modal-trigger grey-text lighten-5" href="#modal1">Login</a>
+            </li>
+            <div id="modal1" class="modal">
+                <div class="modal-content">
+                    <h4 class="black-text">Login</h4>
+                    <form class="container grey-text col s6">
+                        <div class="row">
+                            <div class="input-field ">
+                                <input type="email" name="txtLoginEmail"/>
+                                <label>Email: </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field ">
+                                <input type="password" name="txtLoginSenha"/>
+                                <label>Senha: </label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#!" class="modal-action waves-effect waves-green btn-flat">Entrar</a>
+                            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <li>
+                <a class="modal-trigger grey-text lighten-5" href="#modal2">Cadastre-se</a>
+            </li>
+            <div id="modal2" class="modal">
+                <div class="modal-content">
+                    <h4 class="black-text">Cadastro</h4>
+                    <form class="container grey-text">
+                        <div class="row">
+                            <div class="input-field">
+                                <input type="text" name="txtNome" class="validate"/>
+                                <label>Nome: </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field ">
+                                <input type="email" name="txtEmail" class="validate"/>
+                                <label>Email: </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field ">
+                                <input type="password" name="txtSenha" class="validate"/>
+                                <label>Senha: </label>
+                            </div>
+                        </div>
+                        <div class="row valign-wrapper">
+                            <div class="modal-footer">
+                                <a name="btnCadastrar" href="#!" class="modal-action waves-effect waves-green btn-flat">Entrar</a>
+                                <a href="#!" class="modal-action modal-close waves-effect waves-green  btn-flat">Cancelar</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </ul>
+        <ul id="nav-mobile" class="side-nav">
+            <li><a href="#">Login</a></li>
+            <li><a href="#">Entrar</a></li>
+        </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+</nav>
+-->
+
+<!-- LOGADO -->
+<nav class="black" role="navigation">
+    <div class="nav-wrapper container">
+        <a href="index.html " class="brand-logo grey-text lighten-5">Vinum</a>
+        <ul id="nav-mobile" class=" right hide-on-med-and-down">
+            <li><a href="viewBuscarVinho.html" class="grey-text lighten-5"><i class="material-icons left">search</i>Buscar vinhos</a></li>
+            <li><a href="viewMeusVinhos.html" class="grey-text lighten-5"><i class="material-icons left">dashboard</i>Meus vinhos</a></li>
+            <li><a href="#!" class="grey-text lighten-5"><i class="material-icons left">account_circle</i>Nome do individuo</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="col s10">
+        <div class="card-panel grey lighten-3" style="padding-right:3%">
+            <div class="row">
+                <h4 class="black-text col s10">Meus vinhos</h4>
+                <a href="viewAddVinho.html" class="btn-floating btn-large waves-effect waves-light teal darken-4"><i class="material-icons">add</i></a>
+            </div>
+            <div class="row ">
+                <div class="card small hoverable col s3">
+                    <div class="card-image">
+                        <img class="responsive-img" src="images/vinho1.jpg">
+                        <a href="#" class="card-title">Nome do vinho</a>
+                    </div>
+                    <div class="card-content">
+                        <p>Tipo do vinho.</p>
+                        <p>Estilo do vinho.</p>
+                        <p>Região do vinho.</p>
+                    </div>
+                </div>
+                <div class="card small hoverable col s3 offset-s1">
+                    <div class="card-image">
+                        <img class="responsive-img" src="images/vinho2.jpg">
+                        <a href="#" class="card-title">Card Title</a>
+                    </div>
+                    <div class="card-content">
+                        <p>Tipo do vinho.</p>
+                        <p>Estilo do vinho.</p>
+                        <p>Região do vinho.</p>
+                    </div>
+                </div>
+                <div class="card small hoverable col s3 offset-s1">
+                    <div class="card-image">
+                        <img class="responsive-img" src="images/vinho3.jpg">
+                        <a href="#" class="card-title">Card Title</a>
+                    </div>
+                    <div class="card-content">
+                        <p>Tipo do vinho.</p>
+                        <p>Estilo do vinho.</p>
+                        <p>Região do vinho.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--  Scripts-->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="js/materialize.js"></script>
+<script src="js/init.js"></script>
+<script src="js/nouislider.js"></script>
+</body>
+</html>

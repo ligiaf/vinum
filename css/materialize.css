@@ -2633,7 +2633,7 @@ a {
 blockquote {
   margin: 20px 0;
   padding-left: 1.5rem;
-  border-left: 5px solid #ee6e73;
+  border-left: 5px solid teal;
 }
 
 i {
@@ -4707,7 +4707,7 @@ small {
   transition: -webkit-box-shadow .25s;
   transition: box-shadow .25s;
   transition: box-shadow .25s, -webkit-box-shadow .25s;
-  padding: 24px;
+  padding: 24px 10%;
   margin: 2rem 0 1rem 0;
   border-radius: 2px;
   background-color: #fff;
@@ -4886,7 +4886,7 @@ small {
 }
 
 .card .card-action a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
-  color: #ffab40;
+  color: teal;
   margin-right: 24px;
   -webkit-transition: color .3s ease;
   transition: color .3s ease;
@@ -4894,7 +4894,7 @@ small {
 }
 
 .card .card-action a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating):hover {
-  color: #ffd8a6;
+  color: darkgrey;
 }
 
 .card .card-reveal {
