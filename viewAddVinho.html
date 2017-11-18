@@ -9,18 +9,19 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="css/nouislider.css.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
-<body style="background-image: radial-gradient(white,#355960)">
+<body style="background-image: radial-gradient(#ffffff,#2e525a)">
 
 <!-- NAO LOGADO -->
 <!--
-<nav class="black" role="navigation">
+<nav class="white" role="navigation">
     <div class="nav-wrapper container">
-        <a id="logo-container" href="index.html" class="brand-logo grey-text lighten-5">Vinum</a>
+        <a id="logo-container" href="index.html" class="brand-logo">Vinum</a>
         <ul class="right hide-on-med-and-down">
-            <li><a href="viewBuscarVinho.html" class="grey-text lighten-5" ><i class="material-icons left">search</i>Buscar vinhos</a></li>
+            <li><a href="viewBuscarVinho.html" class="" ><i class="material-icons left">search</i>Buscar vinhos</a></li>
             <li>
-                <a class="modal-trigger grey-text lighten-5" href="#modal1">Login</a>
+                <a class="modal-trigger" href="#modal1">Login</a>
             </li>
             <div id="modal1" class="modal">
                 <div class="modal-content">
@@ -46,7 +47,7 @@
                 </div>
             </div>
             <li>
-                <a class="modal-trigger grey-text lighten-5" href="#modal2">Cadastre-se</a>
+                <a class="modal-trigger" href="#modal2">Cadastre-se</a>
             </li>
             <div id="modal2" class="modal">
                 <div class="modal-content">
@@ -90,16 +91,18 @@
 -->
 
 <!-- LOGADO -->
-<nav class="black" role="navigation">
+
+<nav class="white" role="navigation">
     <div class="nav-wrapper container">
-        <a href="index.html" class="brand-logo grey-text lighten-5">Vinum</a>
+        <a href="index.html" class="brand-logo ">Vinum</a>
         <ul id="nav-mobile" class=" right hide-on-med-and-down">
-            <li><a href="viewBuscarVinho.html" class="grey-text lighten-5"><i class="material-icons left">search</i>Buscar vinhos</a></li>
-            <li><a href="viewMeusVinhos.html" class="grey-text lighten-5"><i class="material-icons left">dashboard</i>Meus vinhos</a></li>
-            <li><a href="#!" class="grey-text lighten-5"><i class="material-icons left">account_circle</i>Nome do individuo</a></li>
+            <li><a href="viewBuscarVinho.html" class=""><i class="material-icons left">search</i>Buscar vinhos</a></li>
+            <li><a href="viewMeusVinhos.html" class=""><i class="material-icons left">dashboard</i>Meus vinhos</a></li>
+            <li><a href="#!" class="5"><i class="material-icons left">account_circle</i>Nome do individuo</a></li>
         </ul>
     </div>
 </nav>
+
 
 <div class="container" >
     <div class="card-panel grey lighten-3">
@@ -116,64 +119,78 @@
                 <label>Nome do vinho</label>
             </div>
         </form>
+        <br>
 
         <!-- ISSO APARECE SE NAO TIVER VINHO CADASTRADO -->
         <div class="row">
             <form class="col s12">
+                <section>
+                    <h5>Adicione um novo vinho</h5>
+                </section>
+                <br>
                 <div class="row">
                     <div class="input-field col s6">
-                        <input placeholder="Placeholder" name="txtTitulo" type="text" class="validate">
+                        <input placeholder="" name="txtTitulo" type="text" class="validate">
                         <label>Título</label>
                     </div>
                     <div class="input-field col s6">
-                        <input id="last_name" type="text" class="validate">
-                        <label for="last_name">Região e país de origem</label>
+                        <input placeholder="" name="txtVinicola" type="text" class="validate">
+                        <label>Vinícola</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
                         <select>
-                            <option value="" disabled selected>Choose your option</option>
+                            <option value="" disabled selected>Selecionar</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
+                        <label>Região ou país de origem</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <select>
+                            <option value="" disabled selected>Selecionar</option>
                             <option value="1">Option 1</option>
                             <option value="2">Option 2</option>
                             <option value="3">Option 3</option>
                         </select>
                         <label>Tipo</label>
                     </div>
+                </div>
+                <div class="row">
                     <div class="input-field col s6">
                         <select>
-                            <option value="" disabled selected>Choose your option</option>
+                            <option value="" disabled selected>Selecionar</option>
                             <option value="1">Option 1</option>
                             <option value="2">Option 2</option>
                             <option value="3">Option 3</option>
                         </select>
                         <label>Estilo</label>
                     </div>
-                </div>
-                <div class="row">
                     <div class="input-field col s6">
                         <select>
-                            <option value="" disabled selected>Choose your option</option>
+                            <option value="" disabled selected>Selecionar</option>
                             <option value="1">Option 1</option>
                             <option value="2">Option 2</option>
                             <option value="3">Option 3</option>
                         </select>
                         <label>Tipo de uva</label>
                     </div>
+                </div>
+                <div class="row">
                     <div class="input-field col s6">
                         <select multiple>
-                            <option value="" disabled selected>Choose your option</option>
+                            <option value="" disabled selected>Selecionar</option>
                             <option value="1">Option 1</option>
                             <option value="2">Option 2</option>
                             <option value="3">Option 3</option>
                         </select>
                         <label>Harmonização com comidas</label>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="file-field input-field">
+                    <div class="file-field input-field col s6">
                         <div class="btn grey">
-                            <span>Imagem do rótulo: </span>
+                            <span>Rótulo: </span>
                             <input type="file">
                         </div>
                         <div class="file-path-wrapper">
@@ -182,13 +199,18 @@
                     </div>
                 </div>
                 <div class="row">
-                    <button class="btn waves-effect waves-light teal darken-4 col s2 offset-s9" type="submit" name="action">Adicionar</button>
+                    <button class="btn waves-effect waves-light teal darken-4 col s2 offset-s10" type="submit" name="action">Adicionar</button>
                 </div>
             </form>
         </div>
 
         <!-- SE O VINHO JA EXISTIR APARECE O CARTAO COM O BUTAO PRA PESSOA ADICIONAR AOS 'MEUS VINHOS' -->
+
         <div class="col s12">
+            <section>
+                <h5>Adicione aos seus vinhos</h5>
+            </section>
+            <br>
             <div class="card horizontal small">
                 <div class="card-image">
                     <img src="images/vinho7.jpg">

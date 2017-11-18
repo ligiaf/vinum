@@ -22,15 +22,22 @@ tipo varchar(50) not null,
 primary key (ID_uva)
 )ENGINE=InnoDB;
 
+CREATE TABLE regiao(
+ID_regiao int not null auto_increment,
+nome varchar(50) not null,
+primary key (ID_regiao)
+)ENGINE=InnoDB;
+
 CREATE TABLE vinho(
 ID_vinho int not null auto_increment,
 nome varchar(50) not null,
 rotulo longblob not null,
 produtor varchar(50) not null,
-regiao varchar(50) not null,
+ID_regiao int not null,
 ID_tipo int not null,
 ID_estilo int not null,
 primary key (ID_vinho),
+foreign key(ID_regiao) references regiao(ID_regiao) ON DELETE CASCADE,
 foreign key(ID_tipo) references tipo_vinho(ID_tipo) ON DELETE CASCADE,
 foreign key(ID_estilo) references estilo(ID_estilo) ON DELETE CASCADE
 )ENGINE=InnoDB;
