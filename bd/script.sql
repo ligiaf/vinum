@@ -67,7 +67,6 @@ primary key(ID_uva, ID_vinho)
 )ENGINE=InnoDB;
 
 CREATE TABLE resenha(
-titulo varchar(50) not null,
 resenha varchar(500) not null,
 datahora datetime not null,
 ID_usuario int not null,
@@ -77,7 +76,7 @@ foreign key(ID_vinho) references vinho(ID_vinho) ON DELETE CASCADE,
 primary key(ID_usuario, ID_vinho, datahora)
 )ENGINE=InnoDB;
 
-CREATE TABLE meus_vinhos(
+CREATE TABLE usuario_vinhos(
 ID_usuario int,
 ID_vinho int,
 foreign key(ID_usuario) references usuario(ID_usuario) ON DELETE CASCADE,

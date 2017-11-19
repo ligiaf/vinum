@@ -4210,6 +4210,7 @@ nav {
   color: #fff;
   background-color: #ee6e73;
   width: 100%;
+  min-height: 105px;
   height: 56px;
   line-height: 56px;
 }
@@ -4309,6 +4310,7 @@ nav .brand-logo [class^="mdi-"], nav .brand-logo [class*="mdi-"],
 nav .brand-logo i.material-icons {
   float: left;
   margin-right: 15px;
+
 }
 
 nav .nav-title {
@@ -4335,7 +4337,8 @@ nav ul li.active {
 nav ul a {
   -webkit-transition: background-color .3s;
   transition: background-color .3s;
-  font-size: 1rem;
+  min-height: 105px;
+  font-size: 1.1rem;
   color: #fff;
   display: block;
   padding: 0 15px;
