@@ -4,6 +4,12 @@
 	"description" : "Trabalho de com222",
 	"require": {
 		"j4mie/idiorm" : "*"
+	},
+
+	"autoload": {
+		"psr-0": {
+			"classes": "libs/"
+		}
 	}
 	
 }
