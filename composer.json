@@ -1,0 +1,9 @@
+
+{
+	"name" : "vinum",
+	"description" : "Trabalho de com222",
+	"require": {
+		"j4mie/idiorm" : "*"
+	}
+	
+}
