@@ -10057,6 +10057,14 @@ noUiSlider.create(slider, {
     })
 });
 
+var rangeSliderValueElement = document.getElementById('test-slider-value');
+
+rangeSlider.noUiSlider.on('update', function( values, handle ) {
+    rangeSliderValueElement.innerHTML = values[handle];
+});
+
+
+
 
 $('input.autocomplete').autocomplete({
     data: {
