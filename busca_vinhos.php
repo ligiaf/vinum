@@ -3,7 +3,7 @@
 require_once 'vendor/autoload.php';
 include 'conecta.php';
 
-function buscaVinhos($estrela, $preco, $regiao, $estilo, $tipo_vinho, $tipo_uva, $harmonizacao){
+function buscaVinhos($estrela, $preco, $regiao=array(), $estilo=array(), $tipo_vinho=array(), $tipo_uva=array(), $harmonizacao=array()){
 	$vinhos = ORM::for_table('vinho')->find_many();
 	foreach ($vinhos as $vinho) {
 		$vinho['estrela'] = ORM::for_table('avaliacao')->where('ID_vinho', $vinho['ID_vinho'])->avg('nota');
@@ -45,36 +45,42 @@ function buscaVinhos($estrela, $preco, $regiao, $estilo, $tipo_vinho, $tipo_uva,
 	}
 	if ($regiao){
 		$vinhos_regiao = array();
-		foreach ($vinhos as $vinho) {
-			if ($vinho['nome_regiao']==$regiao){
-				array_push($vinhos_regiao, $vinho);
+		foreach ($regiao as $value) {
+			foreach ($vinhos as $vinho) {
+				if ($vinho['nome_regiao']==$value){
+					array_push($vinhos_regiao, $vinho);
+				}
 			}
 		}
 		$vinhos = $vinhos_regiao;		
 	}
 	if ($estilo){
 		$vinhos_estilo = array();
-		foreach ($vinhos as $vinho) {
-			if ($vinho['nome_estilo']==$estilo){
-				array_push($vinhos_estilo, $vinho);
+		foreach ($estilo as $value) {
+			foreach ($vinhos as $value) {
+				if ($vinho['nome_estilo']==$estilo){
+					array_push($vinhos_estilo, $vinho);
+				}
 			}
 		}
 		$vinhos = $vinhos_estilo;		
 	}
 	if ($tipo_vinho){
 		$vinhos_tipo_vinho = array();
-		foreach ($vinhos as $vinho) {
-			if ($vinho['nome_tipo']==$tipo_vinho){
-				array_push($vinhos_tipo_vinho, $vinho);
+		foreach ($tipo_vinho as $value) {
+			foreach ($vinhos as $vinho) {
+				if ($vinho['nome_tipo']==$value){
+					array_push($vinhos_tipo_vinho, $vinho);
+				}
 			}
 		}
 		$vinhos = $vinhos_tipo_vinho;		
 	}
 	if ($tipo_uva){
 		$vinhos_tipo_uva = array();
-		foreach ($vinhos as $vinho) {
-			foreach ($vinhos['uvas'] as $vinho_uva) {
-				if ($vinho_uva['tipo']==$tipo_uva){
+		foreach ($tipo_uva as $value) {
+			foreach ($vinhos as $vinho) {
+				if ($vinho['tipo_uva']==$value){
 					array_push($vinhos_tipo_uva, $vinho);
 				}
 			}
@@ -83,10 +89,12 @@ function buscaVinhos($estrela, $preco, $regiao, $estilo, $tipo_vinho, $tipo_uva,
 	}
 	if ($harmonizacao){
 		$vinhos_harmonizacao = array();
-		foreach ($vinhos as $vinho) {
-			foreach ($vinho['comidas'] as $vinho_comida) {
-				if ($vinho_comida==$harmonizacao){
-					array_push($vinhos_harmonizacao, $vinho);
+		foreach ($harmonizacao as $value) {		
+			foreach ($vinhos as $vinho) {
+				foreach ($vinho['comidas'] as $vinho_comida) {
+					if ($vinho_comida==$value){
+						array_push($vinhos_harmonizacao, $vinho);
+					}
 				}
 			}
 		}
@@ -94,8 +102,10 @@ function buscaVinhos($estrela, $preco, $regiao, $estilo, $tipo_vinho, $tipo_uva,
 	}
 	return $vinhos;
 }
-
-$vinhos = buscaVinhos(null,null,null,null,null,null,'Cordeiro');
+$filtro = array();
+array_push($filtro, 'Merlot');
+array_push($filtro, 'Blend');
+$vinhos = buscaVinhos(null,null,null,null,null,$filtro,null);
 	foreach ($vinhos as $vinho) {
 		echo $vinho ['nome']." - ".$vinho['estrela'].' | REGIÃO - '.$vinho['nome_regiao'].' | TIPO - '.$vinho['nome_tipo'].' | ESTILO -'.$vinho['nome_estilo'].' | TIPO UVA - '.$vinho['tipo_uva'].'<br>'.'COMIDAS: ';
 		foreach ($vinho['comidas'] as $comida) {
