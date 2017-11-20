@@ -7,21 +7,23 @@ function buscaVinhos($estrela, $preco, $regiao, $estilo, $tipo_vinho, $tipo_uva,
 	$vinhos = ORM::for_table('vinho')->find_many();
 	foreach ($vinhos as $vinho) {
 		$vinho['estrela'] = ORM::for_table('avaliacao')->where('ID_vinho', $vinho['ID_vinho'])->avg('nota');
-		$vinho['nome_regiao'] = ORM::for_table('regiao')->where('ID_regiao', $vinho['ID_regiao'])->find_many();
-		$vinho['nome_tipo'] = ORM::for_table('tipo_vinho')->where('ID_tipo', $vinho['ID_tipo'])->find_many();
-		$vinho['nome_estilo'] = ORM::for_table('estilo')->where('ID_estilo', $vinho['ID_estilo'])->find_many();
-		$vinho['tipo_uva'] = ORM::for_table('uva')->where('ID_uva', $vinho['ID_uva'])->find_many();
-		$comidas = ORM::for_table('vinho_comida')->where('ID_vinho', $vinho['ID_vinho'])->find_many();
-		$vinho['comidas'] = array();
-		foreach ($comidas as $comida) {
-			array_push($vinho['comidas'],ORM::for_table('comida')->where('ID_comida', $comida['ID_comida'])->find_many());
+		$resultado = ORM::for_table('regiao')->where('ID_regiao', $vinho['ID_regiao'])->find_one();
+		$vinho['nome_regiao'] = $resultado['nome'];
+		$resultado = ORM::for_table('tipo_vinho')->where('ID_tipo', $vinho['ID_tipo'])->find_one();
+		$vinho['nome_tipo'] = $resultado['nome'];
+		$resultado = ORM::for_table('estilo')->where('ID_estilo', $vinho['ID_estilo'])->find_one();
+		$vinho['nome_estilo'] = $resultado['nome'];
+		$resultado = ORM::for_table('uva')->where('ID_uva', $vinho['ID_uva'])->find_one();
+		$vinho['tipo_uva'] = $resultado['tipo'];
+		$comidas_vinho = ORM::for_table('vinho_comida')->where('ID_vinho', $vinho['ID_vinho'])->select('ID_comida')->find_many();
+		$resultados = array();
+		foreach ($comidas_vinho as $comida_vinho) {
+			$resultado = ORM::for_table('comida')->where('ID_comida', $comida_vinho['ID_comida'])->select('nome')->find_one();
+			$ID_comida = $comida_vinho['ID_comida'];
+			$resultados[strval($ID_comida)] = $resultado['nome'];
 		}
-		echo implode(",",$vinho['comidas']);
+		$vinho['comidas'] = $resultados;
 				
-	}
-	foreach ($vinhos as $vinho) {
-		echo $vinho ['nome']." - ".$vinho['estrela'].'<br>';
-		echo implode(",",$vinho['comidas']);
 	}
 	if ($estrela){
 		$vinhos_estrela = array();
@@ -82,8 +84,8 @@ function buscaVinhos($estrela, $preco, $regiao, $estilo, $tipo_vinho, $tipo_uva,
 	if ($harmonizacao){
 		$vinhos_harmonizacao = array();
 		foreach ($vinhos as $vinho) {
-			foreach ($vinhos['comidas'] as $vinho_comida) {
-				if ($vinho_comida['nome']==$harmonizacao){
+			foreach ($vinho['comidas'] as $vinho_comida) {
+				if ($vinho_comida==$harmonizacao){
 					array_push($vinhos_harmonizacao, $vinho);
 				}
 			}
@@ -93,11 +95,11 @@ function buscaVinhos($estrela, $preco, $regiao, $estilo, $tipo_vinho, $tipo_uva,
 	return $vinhos;
 }
 
-//print_r(buscaVinhos(5,null,null,null,null,null,null));
-
-
-$vinhos = buscaVinhos(null,null,'mexico',null,null,null,null);
+$vinhos = buscaVinhos(null,null,null,null,null,null,'Cordeiro');
 	foreach ($vinhos as $vinho) {
-		echo $vinho ['nome']." - ".$vinho['estrela'].'<br>';
-		echo implode(",",$vinho['comidas']);
+		echo $vinho ['nome']." - ".$vinho['estrela'].' | REGIÃO - '.$vinho['nome_regiao'].' | TIPO - '.$vinho['nome_tipo'].' | ESTILO -'.$vinho['nome_estilo'].' | TIPO UVA - '.$vinho['tipo_uva'].'<br>'.'COMIDAS: ';
+		foreach ($vinho['comidas'] as $comida) {
+			echo ' '.$comida.' |';
+		}
+		echo '<br>';
 	}
