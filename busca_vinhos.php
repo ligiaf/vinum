@@ -3,7 +3,7 @@
 require_once 'vendor/autoload.php';
 include 'conecta.php';
 
-function buscaVinhos($estrela, $preco, $regiao=array(), $estilo=array(), $tipo_vinho=array(), $tipo_uva=array(), $harmonizacao=array()){
+function buscaVinhos($estrela, $preco_min, $preco_max, $regiao=array(), $estilo=array(), $tipo_vinho=array(), $tipo_uva=array(), $harmonizacao=array()){
 	$vinhos = ORM::for_table('vinho')->find_many();
 	foreach ($vinhos as $vinho) {
 		$vinho['estrela'] = ORM::for_table('avaliacao')->where('ID_vinho', $vinho['ID_vinho'])->avg('nota');
@@ -22,8 +22,7 @@ function buscaVinhos($estrela, $preco, $regiao=array(), $estilo=array(), $tipo_v
 			$ID_comida = $comida_vinho['ID_comida'];
 			$resultados[strval($ID_comida)] = $resultado['nome'];
 		}
-		$vinho['comidas'] = $resultados;
-				
+		$vinho['comidas'] = $resultados;	
 	}
 	if ($estrela){
 		$vinhos_estrela = array();
@@ -34,10 +33,10 @@ function buscaVinhos($estrela, $preco, $regiao=array(), $estilo=array(), $tipo_v
 		}
 		$vinhos = $vinhos_estrela;
 	}
-	if ($preco){
+	if ($preco_max){
 		$vinhos_preco = array();
 		foreach ($vinhos as $vinho) {
-			if ($vinho['preco']>=$preco){
+			if (($vinho['preco']>=$preco_min)&&($vinho['preco']<=$preco_max)){
 				array_push($vinhos_preco, $vinho);
 			}
 		}
@@ -102,12 +101,17 @@ function buscaVinhos($estrela, $preco, $regiao=array(), $estilo=array(), $tipo_v
 	}
 	return $vinhos;
 }
+
+
+
 $filtro = array();
 array_push($filtro, 'Merlot');
 array_push($filtro, 'Blend');
-$vinhos = buscaVinhos(null,null,null,null,null,$filtro,null);
+$filtro2 = array();
+array_push($filtro2, 'Brasil');
+$vinhos = buscaVinhos(null,0,200,null,null,null,$filtro,null);
 	foreach ($vinhos as $vinho) {
-		echo $vinho ['nome']." - ".$vinho['estrela'].' | REGIÃO - '.$vinho['nome_regiao'].' | TIPO - '.$vinho['nome_tipo'].' | ESTILO -'.$vinho['nome_estilo'].' | TIPO UVA - '.$vinho['tipo_uva'].'<br>'.'COMIDAS: ';
+		echo $vinho ['nome']." - ".$vinho['preco']." - ".$vinho['estrela'].' | REGIÃO - '.$vinho['nome_regiao'].' | TIPO - '.$vinho['nome_tipo'].' | ESTILO -'.$vinho['nome_estilo'].' | TIPO UVA - '.$vinho['tipo_uva'].'<br>'.'COMIDAS: ';
 		foreach ($vinho['comidas'] as $comida) {
 			echo ' '.$comida.' |';
 		}
