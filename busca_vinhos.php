@@ -10,11 +10,7 @@ function buscaVinhos($estrela, $preco, $regiao, $estilo, $tipo_vinho, $tipo_uva,
 		$vinho['nome_regiao'] = ORM::for_table('regiao')->where('ID_regiao', $vinho['ID_regiao'])->find_many();
 		$vinho['nome_tipo'] = ORM::for_table('tipo_vinho')->where('ID_tipo', $vinho['ID_tipo'])->find_many();
 		$vinho['nome_estilo'] = ORM::for_table('estilo')->where('ID_estilo', $vinho['ID_estilo'])->find_many();
-		$uvas = ORM::for_table('vinho_uva')->where('ID_vinho', $vinho['ID_vinho'])->find_many();
-		$vinho['uvas'] = array();
-		foreach ($uvas as $uva) {
-			array_push($vinho['uvas'],ORM::for_table('uva')->where('ID_uva', $uva['ID_uva'])->find_many());
-		}
+		$vinho['tipo_uva'] = ORM::for_table('uva')->where('ID_uva', $vinho['ID_uva'])->find_many();
 		$comidas = ORM::for_table('vinho_comida')->where('ID_vinho', $vinho['ID_vinho'])->find_many();
 		$vinho['comidas'] = array();
 		foreach ($comidas as $comida) {
@@ -100,7 +96,7 @@ function buscaVinhos($estrela, $preco, $regiao, $estilo, $tipo_vinho, $tipo_uva,
 //print_r(buscaVinhos(5,null,null,null,null,null,null));
 
 
-$vinhos = buscaVinhos(null,null,'Norte',null,null,null,null);
+$vinhos = buscaVinhos(null,null,'mexico',null,null,null,null);
 	foreach ($vinhos as $vinho) {
 		echo $vinho ['nome']." - ".$vinho['estrela'].'<br>';
 		echo implode(",",$vinho['comidas']);
