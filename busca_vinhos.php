@@ -102,7 +102,8 @@ function buscaVinhos($estrela, $preco_min, $preco_max, $regiao=array(), $estilo=
 	return $vinhos;
 }
 
-
+//DESCOMENTE O CÓDIGO ABAIXO PARA TESTAR A FUNÇÃO
+/*
 
 $filtro = array();
 array_push($filtro, 'Merlot');
