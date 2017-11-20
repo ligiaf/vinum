@@ -33,6 +33,7 @@ ID_vinho int not null auto_increment,
 nome varchar(50) not null,
 rotulo longblob not null,
 produtor varchar(50) not null,
+preco decimal not null,
 ID_regiao int not null,
 ID_tipo int not null,
 ID_estilo int not null,
@@ -119,14 +120,14 @@ INSERT INTO regiao VALUES
 ('', 'Estados Unidos'), ('', 'Itália'), ('', 'México');
 
 INSERT INTO vinho VALUES 
-('', 'Chanteau Lafit Rothschild', 'LOAD_FILE("C:/xampp/htdocs/vinum/images/vinho1.jpg")', 'Almadén', 4, 1, 1, 1), 
-('', 'Chablis Grand', 'LOAD_FILE("C:/xampp/htdocs/vinum/images/vinho2.jpg")', 'Cave Geisse', 5, 2, 5, 2), 
-('', 'Cepparello', 'LOAD_FILE("C:/xampp/htdocs/vinum/images/vinho3.jpg")', 'Domno', 1, 3, 4, 2),
-('', 'Heras Cordon', 'LOAD_FILE("C:/xampp/htdocs/vinum/images/vinho4.jpg")', 'Hermann', 3, 1, 1, 2),
-('', 'Bourgogne', 'LOAD_FILE("C:/xampp/htdocs/vinum/images/vinho5.jpg")', 'Laurentia', 2, 1, 7, 5),
-('', 'Granbussia', 'LOAD_FILE("C:/xampp/htdocs/vinum/images/vinho6.jpg")', 'Mioranza', 2, 4, 8, 6),
-('', 'Fairview', 'LOAD_FILE("C:/xampp/htdocs/vinum/images/vinho7.jpg")', 'Almadén', 2, 5, 6, 7),
-('', 'Ciclos', 'LOAD_FILE("C:/xampp/htdocs/vinum/images/vinho8.jpg")', 'Mioranza', 2, 6, 3, 11);
+('', 'Chanteau Lafit Rothschild', 'LOAD_FILE("C:/xampp/htdocs/vinum/images/vinho1.jpg")', 'Almadén', 250, 4, 1, 1, 1), 
+('', 'Chablis Grand', 'LOAD_FILE("C:/xampp/htdocs/vinum/images/vinho2.jpg")', 'Cave Geisse', 150.50, 5, 2, 5, 2), 
+('', 'Cepparello', 'LOAD_FILE("C:/xampp/htdocs/vinum/images/vinho3.jpg")', 'Domno', 78, 1, 3, 4, 2),
+('', 'Heras Cordon', 'LOAD_FILE("C:/xampp/htdocs/vinum/images/vinho4.jpg")', 'Hermann', 689, 3, 1, 1, 2),
+('', 'Bourgogne', 'LOAD_FILE("C:/xampp/htdocs/vinum/images/vinho5.jpg")', 'Laurentia', 93.70, 2, 1, 7, 5),
+('', 'Granbussia', 'LOAD_FILE("C:/xampp/htdocs/vinum/images/vinho6.jpg")', 'Mioranza', 135.65, 2, 4, 8, 6),
+('', 'Fairview', 'LOAD_FILE("C:/xampp/htdocs/vinum/images/vinho7.jpg")', 'Almadén', 420.50, 2, 5, 6, 7),
+('', 'Ciclos', 'LOAD_FILE("C:/xampp/htdocs/vinum/images/vinho8.jpg")', 'Mioranza', 890, 2, 6, 3, 11);
 
 INSERT INTO usuario VALUES
 ('', 'joao@live.com', 'João', '', '12345'),
