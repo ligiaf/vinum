@@ -139,7 +139,7 @@
                 </section>
             </div>
             <div class="row">
-                <p> <b>Nome do usuario</b> <small>12/05/1017</small></p>
+                <p><a href="viewVisualizarUsuario.php" class="black-text"><b>Nome do usuario</b></a> <small>12/05/1017</small></p>
             </div>
             <div class="row">
                 <blockquote>
@@ -148,7 +148,7 @@
             </div>
             <div class="divider"> </div>
             <div class="row">
-                <p> <b>Nome do usuario</b>  <small>12/05/1017</small></p>
+                <p><a href="viewVisualizarUsuario.php" class="black-text"><b>Nome do usuario</b></a> <small>12/05/1017</small></p>
             </div>
             <div class="row">
                 <blockquote>
@@ -157,7 +157,7 @@
             </div>
             <div class="divider"> </div>
             <div class="row">
-                <p> <b>Nome do usuario</b>  <small>12/05/1017</small></p>
+                <p><a href="viewVisualizarUsuario.php" class="black-text"><b>Nome do usuario</b></a> <small>12/05/1017</small></p>
             </div>
             <div class="row">
                 <blockquote>

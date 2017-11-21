@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="css/nouislider.css.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/10.1.0/nouislider.min.css" />
 </head>
 <body style="background-image: radial-gradient(#ffffff,#2e525a)">
 
@@ -97,7 +97,7 @@
         <ul id="nav-mobile" class=" right hide-on-med-and-down">
             <li><a href="viewBuscarVinho.html" class="valign-wrapper"><i class="material-icons left">search</i>Buscar vinhos</a></li>
             <li><a href="viewMeusVinhos.html" class="valign-wrapper"><i class="material-icons left">dashboard</i>Meus vinhos</a></li>
-            <li><a href="#!" class="valign-wrapper"><i class="material-icons left">account_circle</i>Nome do individuo</a></li>
+            <li><a href="viewVisualizarUsuario.php" class="valign-wrapper"><i class="material-icons left">account_circle</i>Nome do individuo</a></li>
         </ul>
     </div>
 </nav>
@@ -124,16 +124,17 @@
                     <section>
                         <b>Faixa de preço</b>
                     </section>
-                    <br>
+                    <br><br>
+                    <div id="sliderPreco"></div>
                     <br>
                     <div class="input-field">
                         <section>
                             <b>Avaliação dos usuários</b>
                         </section>
-                        <p class="range-field">
-                            <input type="range" id="test5" min="0" max="5"/>
-                        </p>
+                        <br><br>
+                        <div id="sliderAvaliacao"></div>
                     </div>
+                    <br>
                     <section>
                         <b>Uva</b>
                     </section>
@@ -181,7 +182,7 @@
                             <img class="responsive-img" src="images/vinho6.jpg">
                         </div>
                         <div class="card-stacked">
-                            <a href="viewVisualizarVinho.html"> <h4 class="header teal-text">&nbsp; Nome vinho</h4> </a>
+                            <a href="viewVisualizarVinho.php"> <h4 class="header teal-text">&nbsp; Nome vinho</h4> </a>
                             <div class="card-content">
                                 <p><i class="material-icons left yellow-text text-darken-2">star</i>4.5</p>
                                 <p>Tipo do vinho.</p>
@@ -195,7 +196,7 @@
                             <img class="responsive-img" src="images/vinho7.jpg">
                         </div>
                         <div class="card-stacked">
-                            <a href="viewVisualizarVinho.html"> <h4 class="header teal-text">&nbsp; Nome vinho</h4> </a>
+                            <a href="viewVisualizarVinho.php"> <h4 class="header teal-text">&nbsp; Nome vinho</h4> </a>
                             <div class="card-content">
                                 <p><i class="material-icons left yellow-text text-darken-2">star</i>3.0</p>
                                 <p>Tipo do vinho.</p>
@@ -214,7 +215,32 @@
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="js/materialize.js"></script>
     <script src="js/init.js"></script>
-    <script src="js/nouislider.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/10.1.0/nouislider.min.js"></script>
+    <script src="wnumb-1.1.0/wNumb.js"></script>
+    <script>
+        var sliderPreco = document.getElementById('sliderPreco');
 
+        noUiSlider.create(sliderPreco, {
+            start: [200, 800],
+            connect: true,
+            tooltips: [wNumb({ decimals: 0 }), wNumb({ decimals: 0 })],
+            range: {
+                'min': 0,
+                'max': 1300
+            }
+        });
+
+        var sliderAv = document.getElementById('sliderAvaliacao');
+
+        noUiSlider.create(sliderAv, {
+            start: [3],
+            connect: [false, true],
+            tooltips: [wNumb({ decimals: 1 })],
+            range: {
+                'min': 1,
+                'max': 5
+            }
+        });
+    </script>
 </body>
 </html>

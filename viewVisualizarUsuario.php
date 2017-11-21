@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="css/nouislider.css.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body style="background-image: radial-gradient(#ffffff,#2e525a)">
 
@@ -104,46 +103,55 @@
 
 <div class="container">
     <div class="col s10">
-        <div class="card-panel grey lighten-3" style="padding-right:3%">
+        <div class="card-panel grey lighten-3">
             <div class="row">
-                <h4 class="black-text col s10">Meus vinhos</h4>
-                <a href="viewAddVinho.php" class="btn-floating btn-large waves-effect waves-light teal darken-4"><i class="material-icons">add</i></a>
+                <div class="col s4 offset-s4">
+                <div class="card-panel white" style="padding-top: 10px; padding-bottom: 8px">
+                    <img src="images/vinho1.jpg" alt="" class="responsive-img">
+                </div>
+                </div>
             </div>
-            <div class="row ">
-                <div class="card small hoverable col s3">
-                    <div class="card-image">
-                        <img class="responsive-img" src="images/vinho1.jpg">
-                        <a href="#" class="card-title">Nome do vinho</a>
-                    </div>
-                    <div class="card-content">
-                        <p>Tipo do vinho.</p>
-                        <p>Estilo do vinho.</p>
-                        <p>Região do vinho.</p>
-                    </div>
-                </div>
-                <div class="card small hoverable col s3 offset-s1">
-                    <div class="card-image">
-                        <img class="responsive-img" src="images/vinho2.jpg">
-                        <a href="#" class="card-title">Card Title</a>
-                    </div>
-                    <div class="card-content">
-                        <p>Tipo do vinho.</p>
-                        <p>Estilo do vinho.</p>
-                        <p>Região do vinho.</p>
-                    </div>
-                </div>
-                <div class="card small hoverable col s3 offset-s1">
-                    <div class="card-image">
-                        <img class="responsive-img" src="images/vinho3.jpg">
-                        <a href="#" class="card-title">Card Title</a>
-                    </div>
-                    <div class="card-content">
-                        <p>Tipo do vinho.</p>
-                        <p>Estilo do vinho.</p>
-                        <p>Região do vinho.</p>
+            <div class="row">
+                <div class="col s9 valign-wrapper">
+                    <div class="col s6">
+                        <h5><b>Nome do individuo</b></h5>
                     </div>
                 </div>
             </div>
+            <div class="divider"> </div>
+            <div class="row">
+                <section>
+                    <h5>Resenhas</h5>
+                </section>
+            </div>
+            <div class="row">
+                <p><a href="viewVisualizarVinho.php" class="black-text"><b>Nome do vinho</b></a> <small>12/05/1017</small></p>
+            </div>
+            <div class="row">
+                <blockquote>
+                    <p class="light">This is an example quotation that uses the blockquote tag.</p>
+                </blockquote>
+            </div>
+            <div class="divider"> </div>
+            <div class="row">
+                <p><a href="viewVisualizarVinho.php" class="black-text"><b>Nome do vinho</b></a> <small>12/05/1017</small></p>
+            </div>
+            <div class="row">
+                <blockquote>
+                    <p class="light">This is an example quotation that uses the blockquote tag.</p>
+                </blockquote>
+            </div>
+            <div class="divider"> </div>
+            <div class="row">
+                <p><a href="viewVisualizarVinho.php" class="black-text"><b>Nome do vinho</b></a> <small>12/05/1017</small></p>
+            </div>
+            <div class="row">
+                <blockquote>
+                    <p class="light">This is an example quotation that uses the blockquote tag.</p>
+                </blockquote>
+            </div>
+            <div class="divider"> </div>
+            <br>
         </div>
     </div>
 </div>

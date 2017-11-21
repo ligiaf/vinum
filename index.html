@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="css/nouislider.css.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/10.1.0/nouislider.min.css" />
 </head>
 <body>
 
@@ -81,13 +81,13 @@
             </div>
           </form>
         </div>
-    </ul>
+      </div>
     <ul id="nav-mobile" class="side-nav">
       <li><a href="#">Login</a></li>
       <li><a href="#">Entrar</a></li>
     </ul>
     <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-  </div>
+
 </nav>
 
 <!-- MENU DE NAVEGAÇAO QUANDO USUARIO ESTA LOGADO -->
@@ -98,7 +98,7 @@
         <ul id="nav-mobile" class=" right hide-on-med-and-down">
             <li><a href="viewBuscarVinho.html" class="valign-wrapper"><i class="material-icons left">search</i>Buscar vinhos</a></li>
             <li><a href="viewMeusVinhos.html" class="valign-wrapper"><i class="material-icons left">dashboard</i>Meus vinhos</a></li>
-            <li><a href="#!" class="valign-wrapper"><i class="material-icons left">account_circle</i>Nome do individuo</a></li>
+            <li><a href="viewVisualizarUsuario.php" class="valign-wrapper"><i class="material-icons left">account_circle</i>Nome do individuo</a></li>
         </ul>
     </div>
 </nav>
@@ -138,15 +138,12 @@
           <label>Tipo do vinho </label>
         </div>
         <div class="input-field col s4" >
-          <div id="test-slider"></div>
-          <div id="test-slider-value"></div>
           <label>Preço </label>
+          <div id="slider"></div>
         </div>
         <div class="input-field col s3">
-          <p class="range-field">
-            <input type="range" id="test5" min="0" max="5" />
-          </p>
           <label>Nota </label>
+          <div id="slider2"></div>
         </div>
         <div class="col s2">
           <a href="#" id="download-button" class="btn-large waves-effect waves-light teal darken-4">Buscar</a>
@@ -197,6 +194,32 @@
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="js/materialize.js"></script>
 <script src="js/init.js"></script>
-<script src="js/nouislider.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/10.1.0/nouislider.min.js"></script>
+<script src="wnumb-1.1.0/wNumb.js"></script>
+<script>
+    var slider = document.getElementById('slider');
+
+    noUiSlider.create(slider, {
+        start: [200, 800],
+        connect: true,
+        tooltips: [wNumb({ decimals: 0 }), wNumb({ decimals: 0 })],
+        range: {
+            'min': 0,
+            'max': 1300
+        }
+    });
+
+    var slider2 = document.getElementById('slider2');
+
+    noUiSlider.create(slider2, {
+        start: [3],
+        connect: [false, true],
+        tooltips: [wNumb({ decimals: 1 })],
+        range: {
+            'min': 1,
+            'max': 5
+        }
+    });
+</script>
 </body>
 </html>

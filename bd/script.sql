@@ -74,6 +74,7 @@ primary key(ID_usuario, ID_vinho, datahora)
 CREATE TABLE usuario_vinhos(
 ID_usuario int,
 ID_vinho int,
+rotulo longblob not null,
 foreign key(ID_usuario) references usuario(ID_usuario) ON DELETE CASCADE,
 foreign key(ID_vinho) references vinho(ID_vinho) ON DELETE CASCADE,
 primary key(ID_usuario, ID_vinho)

@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="css/nouislider.css.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body style="background-image: radial-gradient(#ffffff,#2e525a)">
 
@@ -97,7 +96,7 @@
         <ul id="nav-mobile" class=" right hide-on-med-and-down">
             <li><a href="viewBuscarVinho.html" class="valign-wrapper"><i class="material-icons left">search</i>Buscar vinhos</a></li>
             <li><a href="viewMeusVinhos.html" class="valign-wrapper"><i class="material-icons left">dashboard</i>Meus vinhos</a></li>
-            <li><a href="#!" class="valign-wrapper"><i class="material-icons left">account_circle</i>Nome do individuo</a></li>
+            <li><a href="viewVisualizarUsuario.php" class="valign-wrapper"><i class="material-icons left">account_circle</i>Nome do individuo</a></li>
         </ul>
     </div>
 </nav>
@@ -221,7 +220,29 @@
                         <p>Região do vinho.</p>
                     </div>
                     <div class="card-action">
-                        <a class="btn-flat" href="#">Adicionar aos meus vinhos</a>
+                        <a class="btn-flat modal-trigger" href="#modal">Adicionar aos meus vinhos</a>
+                    </div>
+                </div>
+                <div id="modal" class="modal">
+                    <div class="modal-content">
+                        <h4 class="black-text">Insira o seu rótulo</h4>
+                        <form class="container grey-text">
+                            <div class="file-field input-field col s6">
+                                <div class="btn grey">
+                                    <span>Rótulo: </span>
+                                    <input type="file">
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                </div>
+                            </div>
+                            <div class="row valign-wrapper">
+                                <div class="modal-footer">
+                                    <a name="btnInserir" href="#!" class="modal-action waves-effect waves-green btn-flat">Inserir</a>
+                                    <a href="#!" class="modal-action modal-close waves-effect waves-green  btn-flat">Cancelar</a>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -232,6 +253,5 @@
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="js/materialize.js"></script>
 <script src="js/init.js"></script>
-<script src="js/nouislider.js"></script>
 </body>
 </html>
