@@ -1,7 +1,7 @@
 <?php
-    require_once 'vendor/autoload.php';
-    include 'conecta.php';
-    header('Content-type: text/html; charset=ISO-8859-1');
+require_once 'vendor/autoload.php';
+include 'conecta.php';
+header('Content-type: text/html; charset=ISO-8859-1');
 ?>
 
 <!DOCTYPE html>
@@ -22,76 +22,72 @@
 <!-- NAO LOGADO -->
 <!--
 <nav class="white" role="navigation">
-  <div class="nav-wrapper container">
-    <a id="logo-container" href="#" class="brand-logo"><img class="responsive-img" src="images/logo.fw.png"></a>
-    <ul class="right hide-on-med-and-down">
-      <li><a href="viewBuscarVinho.php" class="valign-wrapper"><i class="material-icons left">search</i>Buscar vinhos</a></li>
-      <li>
-<a class="modal-trigger valign-wrapper" href="#modal1">Login</a>
-</li>
-<div id="modal1" class="modal">
-    <div class="modal-content">
-        <h4 class="black-text">Login</h4>
-        <form class="container grey-text col s6">
-            <div class="row">
-                <div class="input-field ">
-                    <input type="email" name="txtLoginEmail"/>
-                    <label>Email: </label>
+    <div class="nav-wrapper container">
+        <a id="logo-container" href="#" class="brand-logo"><img class="responsive-img" src="images/logo.fw.png"></a>
+        <ul class="right hide-on-med-and-down">
+            <li><a href="viewBuscarVinho.php" class="valign-wrapper"><i class="material-icons left">search</i>Buscar vinhos</a></li>
+            <li>
+                <a class="modal-trigger valign-wrapper" href="#modal1">Login</a>
+            </li>
+            <div id="modal1" class="modal">
+                <div class="modal-content">
+                    <h4 class="black-text">Login</h4>
+                    <form class="container grey-text col s6">
+                        <div class="row">
+                            <div class="input-field ">
+                                <input type="email" name="txtLoginEmail"/>
+                                <label>Email: </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field ">
+                                <input type="password" name="txtLoginSenha"/>
+                                <label>Senha: </label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#!" class="modal-action waves-effect waves-green btn-flat" type="submit">Entrar</a>
+                            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <div class="row">
-                <div class="input-field ">
-                    <input type="password" name="txtLoginSenha"/>
-                    <label>Senha: </label>
+            <li>
+                <a class="modal-trigger valign-wrapper" href="#modal2">Cadastre-se</a>
+            </li>
+            <div id="modal2" class="modal">
+                <div class="modal-content">
+                    <h4 class="black-text">Cadastro</h4>
+                    <form class="container grey-text">
+                        <div class="row">
+                            <div class="input-field">
+                                <input type="text" name="txtNome" class="validate"/>
+                                <label>Nome: </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field ">
+                                <input type="email" name="txtEmail" class="validate"/>
+                                <label>Email: </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field ">
+                                <input type="password" name="txtSenha" class="validate"/>
+                                <label>Senha: </label>
+                            </div>
+                        </div>
+                        <div class="row valign-wrapper">
+                            <div class="modal-footer">
+                                <a name="btnCadastrar" href="#!" class="modal-action waves-effect waves-green btn-flat">Entrar</a>
+                                <a href="#!" class="modal-action modal-close waves-effect waves-green  btn-flat">Cancelar</a>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <div class="modal-footer">
-                <a href="#!" class="modal-action waves-effect waves-green btn-flat" type="submit">Entrar</a>
-                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
-            </div>
-        </form>
+        </ul>
     </div>
-</div>
-<li>
-    <a class="modal-trigger valign-wrapper" href="#modal2">Cadastre-se</a>
-</li>
-<div id="modal2" class="modal">
-    <div class="modal-content">
-        <h4 class="black-text">Cadastro</h4>
-        <form class="container grey-text">
-            <div class="row">
-                <div class="input-field">
-                    <input type="text" name="txtNome" class="validate"/>
-                    <label>Nome: </label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field ">
-                    <input type="email" name="txtEmail" class="validate"/>
-                    <label>Email: </label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field ">
-                    <input type="password" name="txtSenha" class="validate"/>
-                    <label>Senha: </label>
-                </div>
-            </div>
-            <div class="row valign-wrapper">
-                <div class="modal-footer">
-                    <a name="btnCadastrar" href="#!" class="modal-action waves-effect waves-green btn-flat">Entrar</a>
-                    <a href="#!" class="modal-action modal-close waves-effect waves-green  btn-flat">Cancelar</a>
-                </div>
-            </div>
-        </form>
-    </div>
-    </ul>
-    <ul id="nav-mobile" class="side-nav">
-        <li><a href="#">Login</a></li>
-        <li><a href="#">Entrar</a></li>
-    </ul>
-    <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-</div>
 </nav>
 -->
 
@@ -123,11 +119,11 @@
                     </section>
                     <br>
                     <?php
-                        $tiposVinho = ORM::for_table('tipo_vinho')->find_many();
-                        foreach ($tiposVinho as $tipo){
-                            echo '<a href="#"><div class="chip">'.$tipo['nome'].'</div></a>';
-                        }
-                        //QUANDO SELECIONADO OS CHIPS FICAM NESSA COR <a href="#"><div class="chip teal white-text">'.$tipo['nome'].'</div></a>
+                    $tiposVinho = ORM::for_table('tipo_vinho')->find_many();
+                    foreach ($tiposVinho as $tipo){
+                        echo '<a href="#"><div class="chip">'.$tipo['nome'].'</div></a>';
+                    }
+                    //QUANDO SELECIONADO OS CHIPS FICAM NESSA COR <a href="#"><div class="chip teal white-text">'.$tipo['nome'].'</div></a>
                     ?>
                     <br>
                     <br>

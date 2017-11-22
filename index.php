@@ -1,7 +1,6 @@
 <?php
 require_once 'vendor/autoload.php';
 include 'conecta.php';
-include 'banco.php';
 header('Content-type: text/html; charset=ISO-8859-1');
 ?>
 
@@ -61,7 +60,7 @@ header('Content-type: text/html; charset=ISO-8859-1');
             <div id="modal2" class="modal">
                 <div class="modal-content">
                     <h4 class="black-text">Cadastro</h4>
-                    <form action="banco.php" class="container grey-text">
+                    <form action="cadUsuario.php" method="post" id="cadastrar" class="container grey-text">
                         <div class="row">
                             <div class="input-field">
                                 <input type="text" name="txtNome" class="validate"/>
@@ -80,21 +79,18 @@ header('Content-type: text/html; charset=ISO-8859-1');
                                 <label>Senha: </label>
                             </div>
                         </div>
+
                         <div class="row valign-wrapper">
                             <div class="modal-footer">
-                                <a name="btnCadastrar" href="#!" class="modal-action waves-effect waves-green btn-flat">Entrar</a>
-                                <a href="#!" class="modal-action modal-close waves-effect waves-green  btn-flat">Cancelar</a>
+                                <a href="#" onclick="document.getElementById('cadastrar').submit();" name="btnCadastrar" class="modal-action waves-effect waves-green btn-flat">Entrar</a>
+                                <a href="#!"class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
-            <ul id="nav-mobile" class="side-nav">
-                <li><a href="#">Login</a></li>
-                <li><a href="#">Entrar</a></li>
-            </ul>
-            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-
+        </ul>
+    </div>
 </nav>
 
 <!-- MENU DE NAVEGAÇAO QUANDO USUARIO ESTA LOGADO -->
