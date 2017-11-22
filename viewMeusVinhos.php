@@ -1,3 +1,9 @@
+<?php
+require_once 'vendor/autoload.php';
+include 'conecta.php';
+header('Content-type: text/html; charset=ISO-8859-1');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +15,6 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="css/nouislider.css.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body style="background-image: radial-gradient(#ffffff,#2e525a)">
 
@@ -19,7 +24,7 @@
   <div class="nav-wrapper container">
     <a id="logo-container" href="#" class="brand-logo"><img class="responsive-img" src="images/logo.fw.png"></a>
     <ul class="right hide-on-med-and-down">
-      <li><a href="viewBuscarVinho.html" class="valign-wrapper"><i class="material-icons left">search</i>Buscar vinhos</a></li>
+      <li><a href="viewBuscarVinho.php" class="valign-wrapper"><i class="material-icons left">search</i>Buscar vinhos</a></li>
       <li>
 <a class="modal-trigger valign-wrapper" href="#modal1">Login</a>
 </li>
@@ -93,10 +98,10 @@
 
 <nav class="white" role="navigation">
     <div class="nav-wrapper container">
-        <a href="index.html" class="brand-logo"><img class="responsive-img" src="images/logo.fw.png"></a>
+        <a href="index.php" class="brand-logo"><img class="responsive-img" src="images/logo.fw.png"></a>
         <ul id="nav-mobile" class=" right hide-on-med-and-down">
-            <li><a href="viewBuscarVinho.html" class="valign-wrapper"><i class="material-icons left">search</i>Buscar vinhos</a></li>
-            <li><a href="viewMeusVinhos.html" class="valign-wrapper"><i class="material-icons left">dashboard</i>Meus vinhos</a></li>
+            <li><a href="viewBuscarVinho.php" class="valign-wrapper"><i class="material-icons left">search</i>Buscar vinhos</a></li>
+            <li><a href="viewMeusVinhos.php" class="valign-wrapper"><i class="material-icons left">dashboard</i>Meus vinhos</a></li>
             <li><a href="viewVisualizarUsuario.php" class="valign-wrapper"><i class="material-icons left">account_circle</i>Nome do individuo</a></li>
         </ul>
     </div>
@@ -118,7 +123,7 @@
                     <div class="card-content">
                         <p>Tipo do vinho.</p>
                         <p>Estilo do vinho.</p>
-                        <p>Regi√£o do vinho.</p>
+                        <p>Regi„o do vinho.</p>
                     </div>
                 </div>
                 <div class="card small hoverable col s3 offset-s1">
@@ -129,7 +134,7 @@
                     <div class="card-content">
                         <p>Tipo do vinho.</p>
                         <p>Estilo do vinho.</p>
-                        <p>Regi√£o do vinho.</p>
+                        <p>Regi„o do vinho.</p>
                     </div>
                 </div>
                 <div class="card small hoverable col s3 offset-s1">
@@ -140,7 +145,7 @@
                     <div class="card-content">
                         <p>Tipo do vinho.</p>
                         <p>Estilo do vinho.</p>
-                        <p>Regi√£o do vinho.</p>
+                        <p>Regi„o do vinho.</p>
                     </div>
                 </div>
             </div>

@@ -1,3 +1,9 @@
+<?php
+    require_once 'vendor/autoload.php';
+    include 'conecta.php';
+    header('Content-type: text/html; charset=ISO-8859-1');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +25,7 @@
   <div class="nav-wrapper container">
     <a id="logo-container" href="#" class="brand-logo"><img class="responsive-img" src="images/logo.fw.png"></a>
     <ul class="right hide-on-med-and-down">
-      <li><a href="viewBuscarVinho.html" class="valign-wrapper"><i class="material-icons left">search</i>Buscar vinhos</a></li>
+      <li><a href="viewBuscarVinho.php" class="valign-wrapper"><i class="material-icons left">search</i>Buscar vinhos</a></li>
       <li>
 <a class="modal-trigger valign-wrapper" href="#modal1">Login</a>
 </li>
@@ -93,10 +99,10 @@
 
 <nav class="white" role="navigation">
     <div class="nav-wrapper container">
-        <a href="index.html" class="brand-logo"><img class="responsive-img" src="images/logo.fw.png"></a>
+        <a href="index.php" class="brand-logo"><img class="responsive-img" src="images/logo.fw.png"></a>
         <ul id="nav-mobile" class=" right hide-on-med-and-down">
-            <li><a href="viewBuscarVinho.html" class="valign-wrapper"><i class="material-icons left">search</i>Buscar vinhos</a></li>
-            <li><a href="viewMeusVinhos.html" class="valign-wrapper"><i class="material-icons left">dashboard</i>Meus vinhos</a></li>
+            <li><a href="viewBuscarVinho.php" class="valign-wrapper"><i class="material-icons left">search</i>Buscar vinhos</a></li>
+            <li><a href="viewMeusVinhos.php" class="valign-wrapper"><i class="material-icons left">dashboard</i>Meus vinhos</a></li>
             <li><a href="viewVisualizarUsuario.php" class="valign-wrapper"><i class="material-icons left">account_circle</i>Nome do individuo</a></li>
         </ul>
     </div>
@@ -116,20 +122,24 @@
                         <b>Tipo do vinho</b>
                     </section>
                     <br>
-                    <div class="chip">Tinto</div>
-                    <div class="chip">Tinto</div>
-                    <div class="chip">Tinto</div>
+                    <?php
+                        $tiposVinho = ORM::for_table('tipo_vinho')->find_many();
+                        foreach ($tiposVinho as $tipo){
+                            echo '<a href="#"><div class="chip">'.$tipo['nome'].'</div></a>';
+                        }
+                        //QUANDO SELECIONADO OS CHIPS FICAM NESSA COR <a href="#"><div class="chip teal white-text">'.$tipo['nome'].'</div></a>
+                    ?>
                     <br>
                     <br>
                     <section>
-                        <b>Faixa de pre√ßo</b>
+                        <b>Faixa de preÁo</b>
                     </section>
                     <br><br>
                     <div id="sliderPreco"></div>
                     <br>
                     <div class="input-field">
                         <section>
-                            <b>Avalia√ß√£o dos usu√°rios</b>
+                            <b>AvaliaÁ„o dos usu·rios</b>
                         </section>
                         <br><br>
                         <div id="sliderAvaliacao"></div>
@@ -139,36 +149,49 @@
                         <b>Uva</b>
                     </section>
                     <br>
-                    <div class="chip">Uva</div>
-                    <div class="chip">Uva</div>
-                    <div class="chip">Uva</div>
-                    <div class="chip">Uva</div>
-                    <div class="chip">Uva</div>
+                    <?php
+                    $uvas = ORM::for_table('uva')->find_many();
+                    foreach ($uvas as $uva){
+                        echo '<a href="#"><div class="chip">'.$uva['tipo'].'</div></a>';
+                    }
+                    ?>
                     <br>
                     <br>
                     <section>
-                        <b>Pa√≠s de origem</b>
+                        <b>PaÌs de origem</b>
                     </section>
                     <br>
                     <div class="chip">Brasil</div>
-                    <div class="chip">Brasil</div>
-                    <div class="chip">Brasil</div>
-                    <div class="chip">Brasil</div>
+                    <?php
+                    $regioes = ORM::for_table('regiao')->find_many();
+                    foreach ($regioes as $regiao){
+                        echo '<a href="#"><div class="chip">'.$regiao['nome'].'</div></a>';
+                    }
+                    ?>
                     <br>
                     <br>
                     <section>
                         <b>Estilo do vinho</b>
                     </section>
                     <br>
-                    <div class="chip">Sei la viado</div>
+                    <?php
+                    $estilos = ORM::for_table('estilo')->find_many();
+                    foreach ($estilos as $estilo){
+                        echo '<a href="#"><div class="chip">'.$estilo['nome'].'</div></a>';
+                    }
+                    ?>
                     <br>
                     <br>
                     <section>
-                        <b>Harmoniza√ß√£o com comidas</b>
+                        <b>HarmonizaÁ„o com comidas</b>
                     </section>
                     <br>
-                    <div class="chip">Queijo</div>
-                    <div class="chip">Comida apimentada</div>
+                    <?php
+                    $comidas = ORM::for_table('comida')->find_many();
+                    foreach ($comidas as $comida){
+                        echo '<a href="#"><div class="chip">'.$comida['nome'].'</div></a>';
+                    }
+                    ?>
                     <br>
                 </div>
                 <div class="col s8">
@@ -187,7 +210,7 @@
                                 <p><i class="material-icons left yellow-text text-darken-2">star</i>4.5</p>
                                 <p>Tipo do vinho.</p>
                                 <p>Estilo do vinho.</p>
-                                <p>Regi√£o do vinho.</p>
+                                <p>Regi„o do vinho.</p>
                             </div>
                         </div>
                     </div>
@@ -201,7 +224,7 @@
                                 <p><i class="material-icons left yellow-text text-darken-2">star</i>3.0</p>
                                 <p>Tipo do vinho.</p>
                                 <p>Estilo do vinho.</p>
-                                <p>Regi√£o do vinho.</p>
+                                <p>Regi„o do vinho.</p>
                             </div>
                         </div>
                     </div>
@@ -221,7 +244,7 @@
         var sliderPreco = document.getElementById('sliderPreco');
 
         noUiSlider.create(sliderPreco, {
-            start: [200, 800],
+            start: [300, 1000],
             connect: true,
             tooltips: [wNumb({ decimals: 0 }), wNumb({ decimals: 0 })],
             range: {

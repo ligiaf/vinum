@@ -1,3 +1,9 @@
+<?php
+require_once 'vendor/autoload.php';
+include 'conecta.php';
+header('Content-type: text/html; charset=ISO-8859-1');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -92,10 +98,10 @@
 
 <nav class="white" role="navigation">
     <div class="nav-wrapper container">
-        <a href="index.html" class="brand-logo"><img class="responsive-img" src="images/logo.fw.png"></a>
+        <a href="index.php" class="brand-logo"><img class="responsive-img" src="images/logo.fw.png"></a>
         <ul id="nav-mobile" class=" right hide-on-med-and-down">
-            <li><a href="viewBuscarVinho.html" class="valign-wrapper"><i class="material-icons left">search</i>Buscar vinhos</a></li>
-            <li><a href="viewMeusVinhos.html" class="valign-wrapper"><i class="material-icons left">dashboard</i>Meus vinhos</a></li>
+            <li><a href="viewBuscarVinho.php" class="valign-wrapper"><i class="material-icons left">search</i>Buscar vinhos</a></li>
+            <li><a href="viewMeusVinhos.php" class="valign-wrapper"><i class="material-icons left">dashboard</i>Meus vinhos</a></li>
             <li><a href="viewVisualizarUsuario.php" class="valign-wrapper"><i class="material-icons left">account_circle</i>Nome do individuo</a></li>
         </ul>
     </div>
@@ -107,7 +113,7 @@
             <div class="row">
                 <div class="col s4 offset-s4">
                 <div class="card-panel white" style="padding-top: 10px; padding-bottom: 8px">
-                    <img src="images/vinho1.jpg" alt="" class="responsive-img">
+                    <img src="images/perfil.png" alt="" class="responsive-img">
                 </div>
                 </div>
             </div>

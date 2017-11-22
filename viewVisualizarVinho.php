@@ -1,3 +1,9 @@
+<?php
+require_once 'vendor/autoload.php';
+include 'conecta.php';
+header('Content-type: text/html; charset=ISO-8859-1');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -93,10 +99,10 @@
 
 <nav class="white" role="navigation">
     <div class="nav-wrapper container">
-        <a href="index.html" class="brand-logo"><img class="responsive-img" src="images/logo.fw.png"></a>
+        <a href="index.php" class="brand-logo"><img class="responsive-img" src="images/logo.fw.png"></a>
         <ul id="nav-mobile" class=" right hide-on-med-and-down">
-            <li><a href="viewBuscarVinho.html" class="valign-wrapper"><i class="material-icons left">search</i>Buscar vinhos</a></li>
-            <li><a href="viewMeusVinhos.html" class="valign-wrapper"><i class="material-icons left">dashboard</i>Meus vinhos</a></li>
+            <li><a href="viewBuscarVinho.php" class="valign-wrapper"><i class="material-icons left">search</i>Buscar vinhos</a></li>
+            <li><a href="viewMeusVinhos.php" class="valign-wrapper"><i class="material-icons left">dashboard</i>Meus vinhos</a></li>
             <li><a href="#!" class="valign-wrapper"><i class="material-icons left">account_circle</i>Nome do individuo</a></li>
         </ul>
     </div>
@@ -107,7 +113,7 @@
         <div class="card-panel grey lighten-3">
             <div class="row col s12">
                 <div class="card-panel white center col s3" style="padding-top: 10px; padding-bottom: 8px">
-                    <img src="images/exemplo.jpg" alt="" class="responsive-img">
+                    <img src="images/vinho1.jpg" alt="" class="responsive-img">
                 </div>
                 <div class="col s9 valign-wrapper">
                     <div class="col s4 offset-s1 left-align">
@@ -128,7 +134,7 @@
                         <p class="light" style="font-size:30px"><i class="material-icons left yellow-text text-darken-2" style="font-size: 28px">star</i>4.5</p>
                         <p> blablbala tipo</p>
                         <p> blablbala estilo</p>
-                        <p> blablbala regi√£o</p>
+                        <p> blablbala regi„o</p>
                     </div>
                 </div>
             </div>
