@@ -3,14 +3,14 @@ require_once '../vendor/autoload.php';
 include '../controllers/controllerUsuario.php';
 header('Content-type: text/html; charset=ISO-8859-1');
 
-if(!isset($_SESSION['nome']))
+/*if(!isset($_SESSION['nome']))
 {
     echo $_SESSION['nome'];
     //header('Location:index.php');
 
    // exit;
 }
-
+*/
 if(isset($_GET['id']))
 {
     $ctrUsuario = new controllerUsuario();

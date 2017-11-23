@@ -8,7 +8,8 @@ class controllerUsuario
     {
         $db = new conecta();
         $usuario = new usuario($nome, $email, $senha);
-        $db->cadastraUsuario($usuario);
+        $res = $db->cadastraUsuario($usuario);
+        return $res;
     }
 
     public function buscaUsuarioEmail($email)
@@ -22,6 +23,13 @@ class controllerUsuario
     {
         $db = new conecta();
         $res = $db->buscaUsuarioID($id);
+        return $res;
+    }
+
+    public function autenticaUsuario($email, $senha)
+    {
+        $db = new conecta();
+        $res = $db->autenticaUsuario($email, $senha);
         return $res;
     }
 }

@@ -9,14 +9,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         isset($_POST['txtSenha']) && $_POST['txtSenha'] != '')
     {
        $ctrUsuario = new controllerUsuario();
-       $ctrUsuario->cadastraUsuario($_POST['txtNome'], $_POST['txtEmail'], $_POST['txtSenha']);
-       session_start();
-       $_SESSION['nome'] = $_POST['txtNome'];
-       $_SESSION['email'] = $_POST['txtEmail'];
-        $res = $ctrUsuario->buscaUsuarioEmail($_POST['txtEmail']);
-        header("Location:viewVisualizarUsuario.php?id=$res");
+       $res = $ctrUsuario->cadastraUsuario($_POST['txtNome'], $_POST['txtEmail'], $_POST['txtSenha']);
+       if($res)
+       {
+           session_start();
+           $_SESSION['nome'] = $_POST['txtNome'];
+           $_SESSION['email'] = $_POST['txtEmail'];
+           $res = $ctrUsuario->buscaUsuarioEmail($_POST['txtEmail']);
+           header("Location:viewVisualizarUsuario.php?id=$res");
+       }
+       else
+       {
+           echo "<script language='JavaScript'>alert('Email já cadastrado!');</script>";
+       }
+
+    }
+
+    if(isset($_POST['txtLoginEmail']) && $_POST['txtLoginEmail'] != '' &&
+        isset($_POST['txtLoginSenha']) && $_POST['txtLoginSenha'] != '')
+    {
+        $ctrUsuario = new controllerUsuario();
+        $usuario = $ctrUsuario->autenticaUsuario($_POST['txtLoginEmail'], $_POST['txtLoginSenha']);
+        if($usuario)
+        {
+            header("Location:viewVisualizarUsuario.php?id=$usuario");
+        }
+        else
+        {
+            echo "<script language='JavaScript'>alert('Dados incorretos!');</script>";
+        }
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div id="modal1" class="modal">
                 <div class="modal-content">
                     <h4 class="black-text">Login</h4>
-                    <form class="container grey-text col s6">
+                    <form action="index.php" id="login" method="post" class="container grey-text col s6">
                         <div class="row">
                             <div class="input-field ">
                                 <input type="email" name="txtLoginEmail"/>
@@ -61,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <a href="#!" class="modal-action waves-effect waves-green btn-flat" type="submit">Entrar</a>
+                            <a href="#" onclick="document.getElementById('login').submit();" class="modal-action waves-effect waves-green btn-flat" type="submit">Entrar</a>
                             <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
                         </div>
                     </form>
@@ -243,6 +267,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             'max': 5
         }
     });
+
 </script>
 </body>
 </html>
