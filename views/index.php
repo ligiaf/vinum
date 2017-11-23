@@ -1,7 +1,22 @@
 <?php
-require_once 'vendor/autoload.php';
-include 'conecta.php';
+require_once '../vendor/autoload.php';
+require_once('../controllers/controllerUsuario.php');
 header('Content-type: text/html; charset=ISO-8859-1');
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if(isset($_POST['txtNome']) && $_POST['txtNome'] != '' &&
+        isset($_POST['txtEmail']) && $_POST['txtEmail'] != '' &&
+        isset($_POST['txtSenha']) && $_POST['txtSenha'] != '')
+    {
+       $ctrUsuario = new controllerUsuario();
+       $ctrUsuario->cadastraUsuario($_POST['txtNome'], $_POST['txtEmail'], $_POST['txtSenha']);
+       session_start();
+       $_SESSION['nome'] = $_POST['txtNome'];
+       $_SESSION['email'] = $_POST['txtEmail'];
+        $res = $ctrUsuario->buscaUsuarioEmail($_POST['txtEmail']);
+        header("Location:viewVisualizarUsuario.php?id=$res");
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -13,15 +28,15 @@ header('Content-type: text/html; charset=ISO-8859-1');
 
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="../css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/10.1.0/nouislider.min.css" />
 </head>
 <body>
 
 <nav class="white" role="navigation">
     <div class="nav-wrapper container">
-        <a id="logo-container" href="#" class="brand-logo"><img class="responsive-img" src="images/logo.fw.png"></a>
+        <a id="logo-container" href="#" class="brand-logo"><img class="responsive-img" src="../images/logo.fw.png"></a>
         <ul class="right hide-on-med-and-down">
             <li><a href="viewBuscarVinho.php" class="valign-wrapper"><i class="material-icons left">search</i>Buscar vinhos</a></li>
             <li>
@@ -60,7 +75,7 @@ header('Content-type: text/html; charset=ISO-8859-1');
             <div id="modal2" class="modal">
                 <div class="modal-content">
                     <h4 class="black-text">Cadastro</h4>
-                    <form action="cadUsuario.php" method="post" id="cadastrar" class="container grey-text">
+                    <form action="index.php" method="post" id="cadastrar" class="container grey-text">
                         <div class="row">
                             <div class="input-field">
                                 <input type="text" name="txtNome" class="validate"/>
@@ -117,7 +132,7 @@ header('Content-type: text/html; charset=ISO-8859-1');
             </div>
         </div>
     </div>
-    <div class="parallax"><img src="images/fundo.jpg" alt="Unsplashed background img 1"></div>
+    <div class="parallax"><img src="../images/fundo.jpg" alt="Unsplashed background img 1"></div>
 </div>
 
 <div class="container">
@@ -200,10 +215,10 @@ header('Content-type: text/html; charset=ISO-8859-1');
 
 <!--  Scripts-->
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="js/materialize.js"></script>
-<script src="js/init.js"></script>
+<script src="../js/materialize.js"></script>
+<script src="../js/init.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/10.1.0/nouislider.min.js"></script>
-<script src="wnumb-1.1.0/wNumb.js"></script>
+<script src="../wnumb-1.1.0/wNumb.js"></script>
 <script>
     var slider = document.getElementById('slider');
 

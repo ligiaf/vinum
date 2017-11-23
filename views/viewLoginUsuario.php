@@ -13,8 +13,8 @@ header('Content-type: text/html; charset=ISO-8859-1');
 
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="../css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body style="background-image: radial-gradient(#ffffff,#2e525a)">
 
@@ -85,11 +85,6 @@ header('Content-type: text/html; charset=ISO-8859-1');
         </form>
     </div>
     </ul>
-    <ul id="nav-mobile" class="side-nav">
-        <li><a href="#">Login</a></li>
-        <li><a href="#">Entrar</a></li>
-    </ul>
-    <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
 </div>
 </nav>
 -->
@@ -98,7 +93,7 @@ header('Content-type: text/html; charset=ISO-8859-1');
 
 <nav class="white" role="navigation">
     <div class="nav-wrapper container">
-        <a href="index.php" class="brand-logo"><img class="responsive-img" src="images/logo.fw.png"></a>
+        <a href="index.php" class="brand-logo"><img class="responsive-img" src="../images/logo.fw.png"></a>
         <ul id="nav-mobile" class=" right hide-on-med-and-down">
             <li><a href="viewBuscarVinho.php" class="valign-wrapper"><i class="material-icons left">search</i>Buscar vinhos</a></li>
             <li><a href="viewMeusVinhos.php" class="valign-wrapper"><i class="material-icons left">dashboard</i>Meus vinhos</a></li>
@@ -108,54 +103,43 @@ header('Content-type: text/html; charset=ISO-8859-1');
 </nav>
 
 <div class="container">
-    <div class="col s10">
-        <div class="card-panel grey lighten-3" style="padding-right:3%">
+    <div class="col s12">
+        <div class="card-panel grey lighten-3">
             <div class="row">
-                <h4 class="black-text col s10">Meus vinhos</h4>
-                <a href="viewAddVinho.php" class="btn-floating btn-large waves-effect waves-light teal darken-4"><i class="material-icons">add</i></a>
+                <div class="col s4 offset-s4 center">
+                    <h4>Login</h4>
+                </div>
             </div>
-            <div class="row ">
-                <div class="card small hoverable col s3">
-                    <div class="card-image">
-                        <img class="responsive-img" src="images/vinho1.jpg">
-                        <a href="#" class="card-title">Nome do vinho</a>
-                    </div>
-                    <div class="card-content">
-                        <p>Tipo do vinho.</p>
-                        <p>Estilo do vinho.</p>
-                        <p>Região do vinho.</p>
-                    </div>
-                </div>
-                <div class="card small hoverable col s3 offset-s1">
-                    <div class="card-image">
-                        <img class="responsive-img" src="images/vinho2.jpg">
-                        <a href="#" class="card-title">Card Title</a>
-                    </div>
-                    <div class="card-content">
-                        <p>Tipo do vinho.</p>
-                        <p>Estilo do vinho.</p>
-                        <p>Região do vinho.</p>
-                    </div>
-                </div>
-                <div class="card small hoverable col s3 offset-s1">
-                    <div class="card-image">
-                        <img class="responsive-img" src="images/vinho3.jpg">
-                        <a href="#" class="card-title">Card Title</a>
-                    </div>
-                    <div class="card-content">
-                        <p>Tipo do vinho.</p>
-                        <p>Estilo do vinho.</p>
-                        <p>Região do vinho.</p>
-                    </div>
-                </div>
+            <div class="row">
+                <div class="offset-s3 col s6">
+                    <form action="" method="post" id="login" class="container grey-text">
+                        <div class="row">
+                            <div class="input-field ">
+                                <input type="email" name="txtEmail" class="validate"/>
+                                <label>Email: </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field ">
+                                <input type="password" name="txtSenha" class="validate"/>
+                                <label>Senha: </label>
+                            </div>
+                        </div>
+                        <div class="row center">
+                            <a href="#" onclick="document.getElementById('login').submit();" name="btnCadastrar" class="modal-action waves-effect waves-green btn-flat">Entrar</a>
+                        </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
+</div>
+</div>
+
 
 <!--  Scripts-->
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="js/materialize.js"></script>
-<script src="js/init.js"></script>
+<script src="../js/materialize.js"></script>
+<script src="../js/init.js"></script>
 </body>
 </html>

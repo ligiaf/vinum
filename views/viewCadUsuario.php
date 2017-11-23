@@ -13,8 +13,8 @@ header('Content-type: text/html; charset=ISO-8859-1');
 
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="../css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body style="background-image: radial-gradient(#ffffff,#2e525a)">
 
@@ -93,7 +93,7 @@ header('Content-type: text/html; charset=ISO-8859-1');
 
 <nav class="white" role="navigation">
     <div class="nav-wrapper container">
-        <a href="index.php" class="brand-logo"><img class="responsive-img" src="images/logo.fw.png"></a>
+        <a href="index.php" class="brand-logo"><img class="responsive-img" src="../images/logo.fw.png"></a>
         <ul id="nav-mobile" class=" right hide-on-med-and-down">
             <li><a href="viewBuscarVinho.php" class="valign-wrapper"><i class="material-icons left">search</i>Buscar vinhos</a></li>
             <li><a href="viewMeusVinhos.php" class="valign-wrapper"><i class="material-icons left">dashboard</i>Meus vinhos</a></li>
@@ -112,7 +112,7 @@ header('Content-type: text/html; charset=ISO-8859-1');
             </div>
             <div class="row">
                 <div class="offset-s3 col s6">
-                    <form action="cadUsuario.php" method="post" id="cadastrar" class="container grey-text">
+                    <form action="../controllers/controllerUsuario.php" method="post" id="cadastrar" class="container grey-text">
                         <div class="row">
                             <div class="input-field">
                                 <input type="text" name="txtNome" class="validate"/>
@@ -144,7 +144,7 @@ header('Content-type: text/html; charset=ISO-8859-1');
 
 <!--  Scripts-->
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="js/materialize.js"></script>
-<script src="js/init.js"></script>
+<script src="../js/materialize.js"></script>
+<script src="../js/init.js"></script>
 </body>
 </html>
