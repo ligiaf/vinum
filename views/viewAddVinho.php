@@ -1,3 +1,8 @@
+<?php
+require_once '../vendor/autoload.php';
+include '../controllers/controllerVinho.php';
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -103,23 +108,26 @@
 
 <div class="container" >
     <div class="card-panel grey lighten-3">
-        <form>
-            <section class="section">
-                <h4> Adicionar vinho </h4>
-            </section>
-            <div class="divider"></div>
-            <br>
-            <!--AQUI É ONDE TEM Q APARECER AS SUGESTOES DE VINHO PRA NAO CADASTRAR DNV-->
+
+        <section class="section">
+            <h4> Adicionar vinho </h4>
+        </section>
+        <div class="divider"></div>
+        <br>
+        <!--AQUI É ONDE TEM Q APARECER AS SUGESTOES DE VINHO PRA NAO CADASTRAR DNV-->
+        <form id="vinho" method="post" action="viewVinhoExistente.php">
             <div class="input-field">
                 <i class="material-icons prefix">local_bar</i>
-                <input type="text" name="buscaVinho" id="autocomplete-input" class="autocomplete">
+
+                <input type="text" name="autocomplete" id="autocomplete-input" class="autocomplete">
                 <label>Nome do vinho</label>
+
             </div>
         </form>
         <br>
 
         <!-- ISSO APARECE SE NAO TIVER VINHO CADASTRADO -->
-        <div class="row">
+        <div class="row" id="cadastro">
             <form class="col s12">
                 <section>
                     <h5>Adicione um novo vinho</h5>
@@ -127,7 +135,7 @@
                 <br>
                 <div class="row">
                     <div class="input-field col s6">
-                        <input placeholder="" name="txtTitulo" type="text" class="validate">
+                        <input placeholder="" name="txtTitulo" id="txtTitulo" type="text" class="validate">
                         <label>Título</label>
                     </div>
                     <div class="input-field col s6">
@@ -203,55 +211,39 @@
 
         <!-- SE O VINHO JA EXISTIR APARECE O CARTAO COM O BUTAO PRA PESSOA ADICIONAR AOS 'MEUS VINHOS' -->
 
-        <div class="col s12">
-            <section>
-                <h5>Adicione aos seus vinhos</h5>
-            </section>
-            <br>
-            <div class="card horizontal small">
-                <div class="card-image">
-                    <img src="../images/vinho1.jpg">
-                </div>
-                <div class="card-stacked">
-                    <h4 class="header">&nbsp; Nome vinho</h4>
-                    <div class="card-content">
-                        <p>Tipo do vinho.</p>
-                        <p>Estilo do vinho.</p>
-                        <p>Região do vinho.</p>
-                    </div>
-                    <div class="card-action">
-                        <a class="btn-flat modal-trigger" href="#modal">Adicionar aos meus vinhos</a>
-                    </div>
-                </div>
-                <div id="modal" class="modal">
-                    <div class="modal-content">
-                        <h4 class="black-text">Insira o seu rótulo</h4>
-                        <form class="container grey-text">
-                            <div class="file-field input-field col s6">
-                                <div class="btn grey">
-                                    <span>Rótulo: </span>
-                                    <input type="file">
-                                </div>
-                                <div class="file-path-wrapper">
-                                    <input class="file-path validate" type="text">
-                                </div>
-                            </div>
-                            <div class="row valign-wrapper">
-                                <div class="modal-footer">
-                                    <a name="btnInserir" href="#!" class="modal-action waves-effect waves-green btn-flat">Inserir</a>
-                                    <a href="#!" class="modal-action modal-close waves-effect waves-green  btn-flat">Cancelar</a>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="../js/materialize.js"></script>
-<script src="../js/init.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
+<script type="text/javascript" src="../js/materialize.js"></script>
+
+<script>
+
+    $("#autocomplete-input").change(function(){
+       $("#txtTitulo").val($("#autocomplete-input").val());
+    });
+
+    $(function() {
+        $('input.autocomplete').autocomplete({
+            data: {
+                <?php
+                $ctrVinho = new controllerVinho();
+                $res =  $ctrVinho->listaVinho();
+                foreach ($res as $vinho){
+                ?>
+                "<?= $vinho['nome'] ?>": null,
+                <?php } ?>
+            },
+            limit: 15, // The max amount of results that can be shown at once. Default: Infinity.
+            onAutocomplete: function(val) {
+                $('#vinho').submit();
+            },
+            minLength: 1 // The minimum length of the input for the autocomplete to start. Default: 1.
+        });
+    });
+</script>
+
 </body>
 </html>

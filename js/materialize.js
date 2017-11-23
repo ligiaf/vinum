@@ -383,7 +383,7 @@ jQuery.Velocity ? console.log("Velocity is already loaded. You may be needlessly
           }, 1);
         }s && o.loop !== !0 && s(n), i(p) && o.loop === !0 && !t && (f.each(i(p).tweensContainer, function (e, t) {
           /^rotate/.test(e) && 360 === parseFloat(t.endValue) && (t.endValue = 0, t.startValue = 360), /^backgroundPosition/.test(e) && 100 === parseFloat(t.endValue) && "%" === t.unitType && (t.endValue = 0, t.startValue = 100);
-        }), b(p, "reverse", { loop: !0, delay: o.delay })), o.queue !== !1 && f.dequeue(p, o.queue);
+        }), (p, "reverse", { loop: !0, delay: o.delay })), o.queue !== !1 && f.dequeue(p, o.queue);
       }b.State.calls[e] = !1;for (var m = 0, y = b.State.calls.length; y > m; m++) {
         if (b.State.calls[m] !== !1) {
           l = !0;break;
@@ -10063,47 +10063,6 @@ rangeSlider.noUiSlider.on('update', function( values, handle ) {
     rangeSliderValueElement.innerHTML = values[handle];
 });
 
-
-
-
-$('input.autocomplete').autocomplete({
-    data: {
-        "Apple": null,
-        "Microsoft": null,
-        "Google": 'https://placehold.it/250x250'
-    },
-    limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
-    onAutocomplete: function(val) {
-        // Callback function when value is autcompleted.
-    },
-    minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
-});
-
-$('.chips').material_chip();
-$('.chips-initial').material_chip({
-    data: [{
-        tag: 'Apple',
-    }, {
-        tag: 'Microsoft',
-    }, {
-        tag: 'Google',
-    }],
-});
-$('.chips-placeholder').material_chip({
-    placeholder: 'Enter a tag',
-    secondaryPlaceholder: '+Tag',
-});
-$('.chips-autocomplete').material_chip({
-    autocompleteOptions: {
-        data: {
-            'Apple': null,
-            'Microsoft': null,
-            'Google': null
-        },
-        limit: Infinity,
-        minLength: 1
-    }
-});
 
 var chip = {
     tag: 'chip content',
