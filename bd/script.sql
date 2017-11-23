@@ -31,9 +31,10 @@ primary key (ID_regiao)
 CREATE TABLE vinho(
 ID_vinho int not null auto_increment,
 nome varchar(50) not null,
-rotulo longblob not null,
+rotulo varchar(100) not null,
 produtor varchar(50) not null,
 preco decimal not null,
+regiao varchar(100) not null,
 ID_regiao int not null,
 ID_tipo int not null,
 ID_estilo int not null,
@@ -47,9 +48,9 @@ foreign key(ID_uva) references uva(ID_uva) ON DELETE CASCADE
 
 CREATE TABLE usuario(
 ID_usuario int not null auto_increment primary key,
-email varchar(100) not null,
+email varchar(100) not null unique,
 nome varchar(100) not null,
-foto longblob,
+foto varchar (100),
 senha varchar(20) not null
 )ENGINE=InnoDB;
 
@@ -120,15 +121,16 @@ INSERT INTO regiao VALUES
 ('', 'Áustria'), ('', 'Portugal'), ('', 'Espanha'),
 ('', 'Estados Unidos'), ('', 'Itália'), ('', 'México');
 
+--COLOCAR REGIOES
 INSERT INTO vinho VALUES 
-('', 'Chanteau Lafit Rothschild', 'LOAD_FILE("C:/xampp/htdocs/vinum/images/vinho1.jpg")', 'Almadén', 250, 4, 1, 1, 1), 
-('', 'Chablis Grand', 'LOAD_FILE("C:/xampp/htdocs/vinum/images/vinho2.jpg")', 'Cave Geisse', 150.50, 5, 2, 5, 2), 
-('', 'Cepparello', 'LOAD_FILE("C:/xampp/htdocs/vinum/images/vinho3.jpg")', 'Domno', 78, 1, 3, 4, 2),
-('', 'Heras Cordon', 'LOAD_FILE("C:/xampp/htdocs/vinum/images/vinho4.jpg")', 'Hermann', 689, 3, 1, 1, 2),
-('', 'Bourgogne', 'LOAD_FILE("C:/xampp/htdocs/vinum/images/vinho5.jpg")', 'Laurentia', 93.70, 2, 1, 7, 5),
-('', 'Granbussia', 'LOAD_FILE("C:/xampp/htdocs/vinum/images/vinho6.jpg")', 'Mioranza', 135.65, 2, 4, 8, 6),
-('', 'Fairview', 'LOAD_FILE("C:/xampp/htdocs/vinum/images/vinho7.jpg")', 'Almadén', 420.50, 2, 5, 6, 7),
-('', 'Ciclos', 'LOAD_FILE("C:/xampp/htdocs/vinum/images/vinho8.jpg")', 'Mioranza', 890, 2, 6, 3, 11);
+('', 'Chanteau Lafit Rothschild', 'vinho1.jpg', 'Almadén', '', 250, 4, 1, 1, 1), 
+('', 'Chablis Grand', 'vinho2.jpg', 'Cave Geisse', '', 150.50, 5, 2, 5, 2), 
+('', 'Cepparello', 'vinho3.jpg', 'Domno', '', 78, 1, 3, 4, 2),
+('', 'Heras Cordon', 'vinho4.jpg', 'Hermann', '', 689, 3, 1, 1, 2),
+('', 'Bourgogne', 'vinho5.jpg)', 'Laurentia', '', 93.70, 2, 1, 7, 5),
+('', 'Granbussia', 'vinho6.jpg', 'Mioranza', '', 135.65, 2, 4, 8, 6),
+('', 'Fairview', 'vinho7.jpg', 'Almadén', '', 420.50, 2, 5, 6, 7),
+('', 'Ciclos', 'vinho8.jpg', 'Mioranza', '', 890, 2, 6, 3, 11);
 
 INSERT INTO usuario VALUES
 ('', 'joao@live.com', 'João', '', '12345'),
@@ -159,20 +161,20 @@ INSERT INTO vinho_comida VALUES
 (8, 8);
 
 INSERT INTO usuario_vinhos VALUES
-(1, 2),
-(1, 3),
-(2, 4),
-(2, 2),
-(2, 5),
-(4, 7),
-(4, 8),
-(4, 1),
-(3, 3),
-(3, 4),
-(5, 8),
-(5, 6),
-(6, 8),
-(6, 3);
+(1, 2, ''),
+(1, 3, ''),
+(2, 4, ''),
+(2, 2, ''),
+(2, 5, ''),
+(4, 7, ''),
+(4, 8, ''),
+(4, 1, ''),
+(3, 3, ''),
+(3, 4, ''),
+(5, 8, ''),
+(5, 6, ''),
+(6, 8, ''),
+(6, 3, '');
 
 INSERT INTO avaliacao VALUES
 (4, 1, 2),

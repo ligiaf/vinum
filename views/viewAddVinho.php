@@ -2,6 +2,15 @@
 require_once '../vendor/autoload.php';
 include '../controllers/controllerVinho.php';
 
+session_start();
+
+if(!isset($_SESSION['nome']))
+{
+    header('Location:index.php');
+    exit;
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -204,7 +213,7 @@ include '../controllers/controllerVinho.php';
                     </div>
                 </div>
                 <div class="row">
-                    <button class="btn waves-effect waves-light teal darken-4 col s2 offset-s10" type="submit" name="action">Adicionar</button>
+                    <input type="submit" class="btn waves-effect waves-light teal darken-4 col s2 offset-s10">Adicionar</input>
                 </div>
             </form>
         </div>

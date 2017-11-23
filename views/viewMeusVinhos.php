@@ -1,7 +1,30 @@
 <?php
 require_once '../vendor/autoload.php';
-include '../controllers/conecta.php';
+include '../controllers/controllerVinho.php';
+include '../controllers/controllerUsuario.php';
 header('Content-type: text/html; charset=ISO-8859-1');
+
+session_start();
+
+if(!isset($_SESSION['nome']))
+{
+    header('Location:index.php');
+    exit;
+}
+
+if(isset($_POST['vinho']) && isset($_POST['idUsuario']) && isset($_FILES['arquivo']))
+{
+    $ctrUsuario = new controllerUsuario();
+    if($ctrUsuario->verificaMeusVinhos($_POST['idUsuario'], $_POST['$vinho']))
+    {
+        echo "<script language='JavaScript'>alert('Vinho já adicionado a sua coleção!');</script>";
+    }
+    else
+    {
+        $rotulo = $_POST['idUsuario'].$_POST['vinho'];
+        $ctrUsuario->addMeuVinho($_POST['idUsuario'], $_POST['vinho'], $rotulo);
+    }
+}
 ?>
 
 <!DOCTYPE html>

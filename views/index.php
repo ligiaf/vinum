@@ -3,6 +3,8 @@ require_once '../vendor/autoload.php';
 require_once('../controllers/controllerUsuario.php');
 header('Content-type: text/html; charset=ISO-8859-1');
 
+session_start();
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if(isset($_POST['txtNome']) && $_POST['txtNome'] != '' &&
         isset($_POST['txtEmail']) && $_POST['txtEmail'] != '' &&
@@ -12,7 +14,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
        $res = $ctrUsuario->cadastraUsuario($_POST['txtNome'], $_POST['txtEmail'], $_POST['txtSenha']);
        if($res)
        {
-           session_start();
            $_SESSION['nome'] = $_POST['txtNome'];
            $_SESSION['email'] = $_POST['txtEmail'];
            $res = $ctrUsuario->buscaUsuarioEmail($_POST['txtEmail']);

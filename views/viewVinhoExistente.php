@@ -1,7 +1,19 @@
 <?php
 require_once '../vendor/autoload.php';
 include '../controllers/controllerVinho.php';
+include '../controllers/controllerUsuario.php';
 header('Content-type: text/html; charset=ISO-8859-1');
+
+session_start();
+
+if(!isset($_SESSION['nome']))
+{
+    header('Location:index.php');
+    exit;
+}
+
+$ctrUsuario = new controllerUsuario();
+$usuario = $ctrUsuario->buscaUsuarioEmail($_SESSION['email']);
 
 if(isset($_POST['autocomplete']))
 {
@@ -37,9 +49,9 @@ if(isset($_POST['autocomplete']))
 
 <div class="container" >
     <div class="card-panel grey lighten-3">
-        <div class="col s12" id="existente">
+        <div class="row" id="existente">
             <section>
-                <h5>Adicione aos seus vinhos</h5>
+                <h4>Adicione aos seus vinhos</h4>
             </section>
             <br>
             <div class="card horizontal small">
@@ -56,23 +68,25 @@ if(isset($_POST['autocomplete']))
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <h4 class="black-text">Insira o seu rótulo</h4>
-                <form class="container grey-text">
-                    <div class="file-field input-field col s10">
-                        <div class="btn grey">
-                            <span>Rótulo: </span>
-                            <input type="file">
-                        </div>
-                        <div class="file-path-wrapper">
-                            <input class="file-path validate" type="text">
-                        </div>
+        </div>
+        <div class="row">
+            <h5 class="black-text">Insira o seu rótulo</h5>
+            <form action="viewMeusVinhos.php" method="post" class="container grey-text">
+                <input type="hidden" name="vinho" value="<?=$vinho['ID_vinho']?>">
+                <input type="hidden" name="idUsuario" value="<?=$usuario['ID_usuario']?>">
+                <div class="file-field input-field col s10">
+                    <div class="btn grey">
+                        <span>Rótulo: </span>
+                        <input type="file" name="arquivo" accept="image/jpeg">
                     </div>
-                    <div class="col s2 valign-wrapper">
-                        <input name="btnInserir" type="submit" value="Inserir" class="waves-effect waves-green btn-flat">
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
                     </div>
-                </form>
-            </div>
+                </div>
+                <div class="col s2 valign-wrapper">
+                    <input name="btnInserir" type="submit" value="Inserir" class="btn waves-effect waves-light teal darken-4">
+                </div>
+            </form>
         </div>
     </div>
 </div>
