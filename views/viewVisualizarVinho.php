@@ -1,7 +1,16 @@
 <?php
 require_once '../vendor/autoload.php';
-include '../controllers/conecta.php';
+require_once '../controllers/controllerVinho.php';
 header('Content-type: text/html; charset=ISO-8859-1');
+
+if(isset($_GET['id']))
+{
+    $ctrVinho= new controllerVinho();
+    $vinho = $ctrVinho->buscaVinhoID($_GET['id']);
+
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -113,11 +122,11 @@ header('Content-type: text/html; charset=ISO-8859-1');
         <div class="card-panel grey lighten-3">
             <div class="row col s12">
                 <div class="card-panel white center col s3" style="padding-top: 10px; padding-bottom: 8px">
-                    <img src="../images/vinho1.jpg" alt="" class="responsive-img">
+                    <img src="../images/vinhos/vinho1.jpg" alt="" class="responsive-img">
                 </div>
                 <div class="col s9 valign-wrapper">
                     <div class="col s4 offset-s1 left-align">
-                        <h4><b>Titulo vinho</b></h4>
+                        <h4><b><?= $vinho['nome']; ?></b></h4>
                     </div>
                     <div class="right-align col col s4">
                         <form>

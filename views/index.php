@@ -23,7 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
        {
            echo "<script language='JavaScript'>alert('Email já cadastrado!');</script>";
        }
-
     }
 
     if(isset($_POST['txtLoginEmail']) && $_POST['txtLoginEmail'] != '' &&
@@ -122,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                         <div class="row valign-wrapper">
                             <div class="modal-footer">
-                                <a href="#" onclick="document.getElementById('cadastrar').submit();" name="btnCadastrar" class="modal-action waves-effect waves-green btn-flat">Entrar</a>
+                                <a href="#" onclick="document.getElementById('cadastrar').submit();" name="btnCadastrar" class="modal-action waves-effect waves-green btn-flat">Cadastrar</a>
                                 <a href="#!"class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
                             </div>
                         </div>

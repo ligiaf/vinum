@@ -1,7 +1,7 @@
 <?php
 require_once '../vendor/autoload.php';
-include '../controllers/controllerVinho.php';
-include '../controllers/controllerUsuario.php';
+require_once '../controllers/controllerVinho.php';
+require_once '../controllers/controllerUsuario.php';
 header('Content-type: text/html; charset=ISO-8859-1');
 
 session_start();
@@ -12,19 +12,38 @@ if(!isset($_SESSION['nome']))
     exit;
 }
 
-if(isset($_POST['vinho']) && isset($_POST['idUsuario']) && isset($_FILES['arquivo']))
-{
-    $ctrUsuario = new controllerUsuario();
-    if($ctrUsuario->verificaMeusVinhos($_POST['idUsuario'], $_POST['$vinho']))
-    {
-        echo "<script language='JavaScript'>alert('Vinho já adicionado a sua coleção!');</script>";
-    }
-    else
-    {
-        $rotulo = $_POST['idUsuario'].$_POST['vinho'];
-        $ctrUsuario->addMeuVinho($_POST['idUsuario'], $_POST['vinho'], $rotulo);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['vinho']) && isset($_POST['idUsuario']) && isset($_FILES['arquivo'])) {
+        $ctrUsuario = new controllerUsuario();
+        if ($ctrUsuario->verificaMeusVinhos($_POST['idUsuario'], $_POST['$vinho'])) {
+            echo "<script language='JavaScript'>alert('Vinho já adicionado a sua coleção!');</script>";
+        } else {
+            $rotulo = $_POST['idUsuario'] . $_POST['vinho'];
+            $destino = '../images/' . $rotulo;
+            $arquivo_tmp = $_FILES['arquivo']['tmp_name'];
+            move_uploaded_file($arquivo_tmp, $destino);
+
+            $ctrUsuario->addMeuVinho($_POST['idUsuario'], $_POST['vinho'], $rotulo);
+
+            header("Location:viewMeusVinhos.php?id=".$_POST['ID_usuario']);
+        }
     }
 }
+
+if(isset($_GET['id']))
+{
+    $ctrUsuario = new controllerUsuario();
+    $ctrVinho = new controllerVinho();
+
+    $meusvinhos = $ctrUsuario->buscaMeusVinhos($_GET['id']);
+
+    foreach ($meusvinhos as $meuvinho)
+    {
+        $vinhos = $ctrVinho->buscarVinhoID($meuvinho['ID_vinho']);
+    }
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -138,31 +157,23 @@ if(isset($_POST['vinho']) && isset($_POST['idUsuario']) && isset($_FILES['arquiv
                 <a href="viewAddVinho.php" class="btn-floating btn-large waves-effect waves-light teal darken-4"><i class="material-icons">add</i></a>
             </div>
             <div class="row ">
+                <?php foreach ($vinhos as $vinho){ ?>
                 <div class="card small hoverable col s3">
                     <div class="card-image">
-                        <img class="responsive-img" src="../images/vinho1.jpg">
-                        <a href="#" class="card-title">Nome do vinho</a>
+                        <img class="responsive-img" src="../images/vinhos/vinho1.jpg">
+                        <a href="#" class="card-title"><?=$vinho['nome'] ?></a>
                     </div>
                     <div class="card-content">
-                        <p>Tipo do vinho.</p>
-                        <p>Estilo do vinho.</p>
-                        <p>Região do vinho.</p>
+                        <p><?=$vinho['ID_tipo'] ?></p>
+                        <p><?=$vinho['ID_estilo'] ?></p>
+                        <p><?=$vinho['regiao'] ?></p>
+                        <p><?=$vinho['ID_regiao'] ?></p>
                     </div>
                 </div>
+                <?php } ?>
                 <div class="card small hoverable col s3 offset-s1">
                     <div class="card-image">
-                        <img class="responsive-img" src="../images/vinho2.jpg">
-                        <a href="#" class="card-title">Card Title</a>
-                    </div>
-                    <div class="card-content">
-                        <p>Tipo do vinho.</p>
-                        <p>Estilo do vinho.</p>
-                        <p>Região do vinho.</p>
-                    </div>
-                </div>
-                <div class="card small hoverable col s3 offset-s1">
-                    <div class="card-image">
-                        <img class="responsive-img" src="../images/vinho3.jpg">
+                        <img class="responsive-img" src="../images/vinhos/vinho2.jpg">
                         <a href="#" class="card-title">Card Title</a>
                     </div>
                     <div class="card-content">

@@ -1,7 +1,33 @@
 <?php
 require_once '../vendor/autoload.php';
-include '../controllers/conecta.php';
+require_once '../controllers/controllerVinho.php';
+require_once '../controllers/controllerPais.php';
+require_once '../controllers/controllerTipoVinho.php';
+require_once '../controllers/controllerEstilo.php';
+require_once '../controllers/controllerUva.php';
+require_once '../controllers/controllerComida.php';
 header('Content-type: text/html; charset=ISO-8859-1');
+
+session_start();
+
+if(!isset($_SESSION['nome']))
+{
+    header('Location:index.php');
+    exit;
+}
+
+$ctrPais = new controllerPais();
+$ctrTipo = new controllerTipoVinho();
+$ctrEstilo = new controllerEstilo();
+$ctrUva = new controllerUva();
+$ctrComida = new controllerComida();
+
+$paises = $ctrPais->buscaPaises();
+$tipos = $ctrTipo->buscaTipos();
+$estilos = $ctrEstilo->buscaEstilos();
+$uvas = $ctrUva->buscaUvas();
+$comidas = $ctrComida->buscaComidas();
+
 ?>
 
 <!DOCTYPE html>
@@ -198,7 +224,7 @@ header('Content-type: text/html; charset=ISO-8859-1');
                     <br>
                     <div class="card horizontal small">
                         <div class="card-image">
-                            <img class="responsive-img" src="../images/vinho6.jpg">
+                            <img class="responsive-img" src="../images/vinhos/vinho6.jpg">
                         </div>
                         <div class="card-stacked">
                             <a href="viewVisualizarVinho.php"> <h4 class="header teal-text">&nbsp; Nome vinho</h4> </a>
@@ -212,7 +238,7 @@ header('Content-type: text/html; charset=ISO-8859-1');
                     </div>
                     <div class="card horizontal small">
                         <div class="card-image">
-                            <img class="responsive-img" src="../images/vinho7.jpg">
+                            <img class="responsive-img" src="../images/vinhos/vinho7.jpg">
                         </div>
                         <div class="card-stacked">
                             <a href="viewVisualizarVinho.php"> <h4 class="header teal-text">&nbsp; Nome vinho</h4> </a>

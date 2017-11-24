@@ -1,6 +1,12 @@
 <?php
 require_once '../vendor/autoload.php';
-include '../controllers/controllerVinho.php';
+require_once '../controllers/controllerVinho.php';
+require_once '../controllers/controllerPais.php';
+require_once '../controllers/controllerTipoVinho.php';
+require_once '../controllers/controllerEstilo.php';
+require_once '../controllers/controllerUva.php';
+require_once '../controllers/controllerComida.php';
+header('Content-type: text/html; charset=ISO-8859-1');
 
 session_start();
 
@@ -10,6 +16,50 @@ if(!isset($_SESSION['nome']))
     exit;
 }
 
+$ctrPais = new controllerPais();
+$ctrTipo = new controllerTipoVinho();
+$ctrEstilo = new controllerEstilo();
+$ctrUva = new controllerUva();
+$ctrComida = new controllerComida();
+
+$paises = $ctrPais->buscaPaises();
+$tipos = $ctrTipo->buscaTipos();
+$estilos = $ctrEstilo->buscaEstilos();
+$uvas = $ctrUva->buscaUvas();
+$comidas = $ctrComida->buscaComidas();
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST')
+{
+    if(isset($_POST['txtTitulo']) && $_POST['txtTitulo'] != '' &&
+        isset($_POST['txtVinicola']) && $_POST['txtVinicola'] != '' &&
+        isset($_POST['selectPais']) && $_POST['selectPais'] != '' &&
+        isset($_POST['txtPreco']) && $_POST['txtPreco'] != '' &&
+        isset($_POST['txtRegiao']) && $_POST['txtRegiao'] != '' &&
+        isset($_POST['selectTipo']) && $_POST['selectTipo'] != '' &&
+        isset($_POST['selectEstilo']) && $_POST['selectEstilo'] != '' &&
+        isset($_POST['selectUva']) && $_POST['selectUva'] != '' &&
+        isset($_POST['selectComida']) && $_POST['selectComida'] != '' &&
+        isset($_FILES['arquivo']) && $_FILES['arquivo'] != '')
+    {
+        $ctrVinho = new controllerVinho();
+        $imagem = $_POST[''];
+        $res = $ctrVinho->cadastraVinho($_POST['txtTitulo'], $_POST['txtRotulo'], $_POST['txtVinicola'], $_POST['selectPais'],
+                                        $_POST['txtPreco'], $_POST['txtRegiao'], $_POST['selectTipo'], $_POST['selectEstilo'],
+                                        $_POST['selectUva'], $_POST['selectComida']);
+
+
+
+        if($res)
+        {
+           $idVinho = $res['ID_vinho'];
+            header("Location:viewVisualizarVinho.php?id=".$idVinho);
+        }
+
+    }
+
+
+
+}
 
 ?>
 <!DOCTYPE html>
@@ -123,7 +173,7 @@ if(!isset($_SESSION['nome']))
         </section>
         <div class="divider"></div>
         <br>
-        <!--AQUI Ã‰ ONDE TEM Q APARECER AS SUGESTOES DE VINHO PRA NAO CADASTRAR DNV-->
+        <!--AQUI É ONDE TEM Q APARECER AS SUGESTOES DE VINHO PRA NAO CADASTRAR DNV-->
         <form id="vinho" method="post" action="viewVinhoExistente.php">
             <div class="input-field">
                 <i class="material-icons prefix">local_bar</i>
@@ -137,7 +187,7 @@ if(!isset($_SESSION['nome']))
 
         <!-- ISSO APARECE SE NAO TIVER VINHO CADASTRADO -->
         <div class="row" id="cadastro">
-            <form class="col s12">
+            <form action="viewAddVinho.php" method="post" class="col s12">
                 <section>
                     <h5>Adicione um novo vinho</h5>
                 </section>
@@ -145,91 +195,95 @@ if(!isset($_SESSION['nome']))
                 <div class="row">
                     <div class="input-field col s6">
                         <input placeholder="" name="txtTitulo" id="txtTitulo" type="text" class="validate">
-                        <label>TÃ­tulo</label>
+                        <label>Título</label>
                     </div>
                     <div class="input-field col s6">
                         <input placeholder="" name="txtVinicola" type="text" class="validate">
-                        <label>VinÃ­cola</label>
+                        <label>Vinícola</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
-                        <select>
+                        <select name="selectPais">
                             <option value="" disabled selected>Selecionar</option>
-                            <option value="1">Option 1</option>
-                            <option value="2">Option 2</option>
-                            <option value="3">Option 3</option>
+                            <?php
+                            foreach ($paises as $pais){
+                                echo "<option value=".$pais['ID_pais'].">".$pais['nome']."</option>";
+                            }?>
                         </select>
-                        <label>PaÃ­s de origem</label>
+                        <label>País de origem</label>
                     </div>
                     <div class="input-field col s6">
                         <input placeholder="" name="txtRegiao" type="text" class="validate">
-                        <label>RegiÃ£o</label>
+                        <label>Região</label>
                     </div>
                 </div>
                 <div class="row">
-
                     <div class="input-field col s6">
-                        <select>
+                        <select name="selectTipo">
                             <option value="" disabled selected>Selecionar</option>
-                            <option value="1">Option 1</option>
-                            <option value="2">Option 2</option>
-                            <option value="3">Option 3</option>
+                            <?php
+                            foreach ($tipos as $tipo){
+                                echo "<option value=".$tipo['ID_tipo'].">".$tipo['nome']."</option>";
+                            }?>
                         </select>
                         <label>Tipo</label>
-
                     </div>
                     <div class="input-field col s6">
-                        <select>
+                        <select name="selectEstilo">
                             <option value="" disabled selected>Selecionar</option>
-                            <option value="1">Option 1</option>
-                            <option value="2">Option 2</option>
-                            <option value="3">Option 3</option>
+                            <?php
+                            foreach ($estilos as $estilo){
+                                echo "<option value=".$estilo['ID_estilo'].">".$estilo['nome']."</option>";
+                            }?>
                         </select>
                         <label>Estilo</label>
-
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
-                        <select>
+                        <select name="selectUva">
                             <option value="" disabled selected>Selecionar</option>
-                            <option value="1">Option 1</option>
-                            <option value="2">Option 2</option>
-                            <option value="3">Option 3</option>
+                            <?php
+                            foreach ($uvas as $uva){
+                                echo "<option value=".$uva['ID_estilo'].">".$uva['tipo']."</option>";
+                            }?>
                         </select>
                         <label>Tipo de uva</label>
                     </div>
                     <div class="file-field input-field col s6">
-                        <select multiple>
+                        <select multiple name="selectComida">
                             <option value="" disabled selected>Selecionar</option>
-                            <option value="1">Option 1</option>
-                            <option value="2">Option 2</option>
-                            <option value="3">Option 3</option>
+                            <?php
+                            foreach ($comidas as $comida){
+                                echo "<option value=".$comida['ID_comida'].">".$comida['nome']."</option>";
+                            }?>
                         </select>
-                        <label>HarmonizaÃ§Ã£o com comidas</label>
+                        <label>Harmonização com comidas</label>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="file-field input-field col s10">
+                    <div class="input-field col s6">
+                        <input placeholder="" name="txtPreco" type="text" class="validate">
+                        <label>Preço</label>
+                    </div>
+                    <div class="file-field input-field col s6">
                         <div class="btn grey">
-                            <span>RÃ³tulo: </span>
-                            <input type="file">
+                            <span>Rótulo: </span>
+                            <input type="file" name="arquivo" >
                         </div>
                         <div class="file-path-wrapper">
-                            <input class="file-path validate" type="text">
+                            <input class="file-path validate" type="text" name="txtRotulo" value="">
                         </div>
                     </div>
-                    <div class="file-field input-field col s1">
-                        <input type="submit" class="btn waves-effect waves-light teal darken-4 " value="Adicionar"></input>
+                </div>
+                <div class="row">
+                    <div class="file-field input-field col s2 offset-s10">
+                        <input type="submit" class="btn waves-effect waves-light teal darken-4" value="Adicionar">
                     </div>
                 </div>
             </form>
         </div>
-
-        <!-- SE O VINHO JA EXISTIR APARECE O CARTAO COM O BUTAO PRA PESSOA ADICIONAR AOS 'MEUS VINHOS' -->
-
-
     </div>
 </div>
 

@@ -128,7 +128,7 @@ if(isset($_GET['id']))
             <div class="row">
                 <div class="col s4 offset-s4">
                 <div class="card-panel white" style="padding-top: 10px; padding-bottom: 8px">
-                    <img src="../images/perfil.png" alt="" class="responsive-img">
+                    <img src="../images/users/<?=$usuario['foto']?>" alt="" class="responsive-img">
                 </div>
                 </div>
             </div>

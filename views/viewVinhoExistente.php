@@ -56,10 +56,10 @@ if(isset($_POST['autocomplete']))
             <br>
             <div class="card horizontal small">
                 <div class="card-image">
-                    <img src="../images/<?= $vinho['rotulo'] ?>">
+                    <img src="../images/vinhos/<?= $vinho['rotulo'] ?>">
                 </div>
                 <div class="card-stacked">
-                    <h4 class="header" id="nome">&nbsp; <?= $vinho['nome'] ?></h4>
+                    <h4 class="header" id="nome">&nbsp;<?= $vinho['nome'] ?></h4>
                     <div class="card-content">
                         <p>Tipo: <?= $vinho['ID_tipo'] ?></p>
                         <p>Estilo: <?= $vinho['ID_estilo'] ?></p>
@@ -77,13 +77,13 @@ if(isset($_POST['autocomplete']))
                 <div class="file-field input-field col s10">
                     <div class="btn grey">
                         <span>Rótulo: </span>
-                        <input type="file" name="arquivo" accept="image/jpeg">
+                        <input type="file" name="rotulo" >
                     </div>
                     <div class="file-path-wrapper">
-                        <input class="file-path validate" type="text">
+                        <input class="file-path validate" type="text" name="txtRotulo" value="">
                     </div>
                 </div>
-                <div class="col s2 valign-wrapper">
+                <div class="col s2">
                     <input name="btnInserir" type="submit" value="Inserir" class="btn waves-effect waves-light teal darken-4">
                 </div>
             </form>

@@ -69,13 +69,13 @@ ID_usuario int not null,
 ID_vinho int not null,
 foreign key(ID_usuario) references usuario(ID_usuario) ON DELETE CASCADE,
 foreign key(ID_vinho) references vinho(ID_vinho) ON DELETE CASCADE,
-primary key(ID_usuario, ID_vinho, datahora)
+primary key(ID_usuario, ID_vinho)
 )ENGINE=InnoDB;
 
 CREATE TABLE usuario_vinhos(
 ID_usuario int,
 ID_vinho int,
-rotulo longblob not null,
+rotulo varchar(50) not null,
 foreign key(ID_usuario) references usuario(ID_usuario) ON DELETE CASCADE,
 foreign key(ID_vinho) references vinho(ID_vinho) ON DELETE CASCADE,
 primary key(ID_usuario, ID_vinho)
@@ -87,8 +87,9 @@ ID_usuario int,
 ID_vinho int,
 foreign key(ID_usuario) references usuario(ID_usuario) ON DELETE CASCADE,
 foreign key(ID_vinho) references vinho(ID_vinho) ON DELETE CASCADE,
-primary key(ID_usuario, ID_vinho, nota)
+primary key(ID_usuario, ID_vinho)
 )ENGINE=InnoDB;
+
 
 -- INSERTS --
 
@@ -121,24 +122,23 @@ INSERT INTO regiao VALUES
 ('', 'Áustria'), ('', 'Portugal'), ('', 'Espanha'),
 ('', 'Estados Unidos'), ('', 'Itália'), ('', 'México');
 
---COLOCAR REGIOES
 INSERT INTO vinho VALUES 
-('', 'Chanteau Lafit Rothschild', 'vinho1.jpg', 'Almadén', 'Valle de Colchagua', 250, 4, 1, 1, 1), 
-('', 'Chablis Grand', 'vinho2.jpg', 'Cave Geisse', 'Alentejano', 150.50, 5, 2, 5, 2), 
-('', 'Cepparello', 'vinho3.jpg', 'Domno', 'Serra Gaúcha', 78, 1, 3, 4, 2),
-('', 'Heras Cordon', 'vinho4.jpg', 'Hermann', 'Valle del Maipo', 689, 3, 1, 1, 2),
-('', 'Bourgogne', 'vinho5.jpg)', 'Laurentia', 'Douro', 93.70, 2, 1, 7, 5),
-('', 'Granbussia', 'vinho6.jpg', 'Mioranza', 'Primitivo di Manduria', 135.65, 2, 4, 8, 6),
-('', 'Fairview', 'vinho7.jpg', 'Almadén', 'Terre Siciliane', 420.50, 2, 5, 6, 7),
-('', 'Ciclos', 'vinho8.jpg', 'Mioranza', 'Almeirim', 890, 2, 6, 3, 11);
+('', 'Chanteau Lafit Rothschild', '1.jpg', 'Almadén', 'Valle de Colchagua', 250, 4, 1, 1, 1), 
+('', 'Chablis Grand', '2.jpg', 'Cave Geisse', 'Alentejano', 150.50, 5, 2, 5, 2), 
+('', 'Cepparello', '3.jpg', 'Domno', 'Serra Gaúcha', 78, 1, 3, 4, 2),
+('', 'Heras Cordon', '4.jpg', 'Hermann', 'Valle del Maipo', 689, 3, 1, 1, 2),
+('', 'Bourgogne', '5.jpg', 'Laurentia', 'Douro', 93.70, 2, 1, 7, 5),
+('', 'Granbussia', '6.jpg', 'Mioranza', 'Primitivo di Manduria', 135.65, 2, 4, 8, 6),
+('', 'Fairview', '7.jpg', 'Almadén', 'Terre Siciliane', 420.50, 2, 5, 6, 7),
+('', 'Ciclos', '8.jpg', 'Mioranza', 'Almeirim', 890, 2, 6, 3, 11);
 
 INSERT INTO usuario VALUES
-('', 'joao@live.com', 'João', '', '12345'),
-('', 'maria@gmail.com', 'Maria', '', '12345'),
-('', 'julia@live.com', 'Júlia', '', '12345'),
+('', 'joao@live.com', 'João', 'perfil.jpg', '12345'),
+('', 'maria@gmail.com', 'Maria', 'perfil.jpg', '12345'),
+('', 'julia@live.com', 'Júlia', 'perfil.jpg', '12345'),
 ('', 'flavio@gmail.com', 'Flávio Mota', '4.jpg', '12345'),
-('', 'raffael@gmail.com', 'Raffael Carvalho', '', '12345'),
-('', 'ligia@hotmail.com', 'Lígia Fernandes', '', '12345'),
+('', 'raffael@gmail.com', 'Raffael Carvalho', 'perfil.jpg', '12345'),
+('', 'ligia@hotmail.com', 'Lígia Fernandes', 'perfil.jpg', '12345'),
 ('', 'jonas@hotmail.com', 'Jonas Henrique', '7.jpg', '12345');
 
 INSERT INTO vinho_comida VALUES 
@@ -162,20 +162,20 @@ INSERT INTO vinho_comida VALUES
 (8, 8);
 
 INSERT INTO usuario_vinhos VALUES
-(1, 2, ''),
-(1, 3, ''),
-(2, 4, ''),
-(2, 2, ''),
-(2, 5, ''),
-(4, 7, ''),
-(4, 8, ''),
-(4, 1, ''),
-(3, 3, ''),
-(3, 4, ''),
-(5, 8, ''),
-(5, 6, ''),
-(6, 8, ''),
-(6, 3, '');
+(1, 2, '1.jpg'),
+(1, 3, '2.jpg'),
+(2, 4, '4.jpg'),
+(2, 2, '3.jpg'),
+(2, 5, '2.jpg'),
+(4, 7, '2.jpg'),
+(4, 8, '5.jpg'),
+(4, 1, '7.jpg'),
+(3, 3, '8.jpg'),
+(3, 4, '1.jpg'),
+(5, 8, '2.jpg'),
+(5, 6, '1.jpg'),
+(6, 8, '1.jpg'),
+(6, 3, '2.jpg');
 
 INSERT INTO avaliacao VALUES
 (4, 1, 2),
@@ -187,7 +187,7 @@ INSERT INTO avaliacao VALUES
 (4, 3, 3),
 (3, 4, 8),
 (4, 4, 1),
-(5, 5, 6),
+(5, 5, 3),
 (3, 5, 8),
 (4, 5, 6),
 (5, 6, 3),
