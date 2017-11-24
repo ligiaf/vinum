@@ -33,8 +33,8 @@ ID_vinho int not null auto_increment,
 nome varchar(50) not null,
 rotulo varchar(100) not null,
 produtor varchar(50) not null,
-preco decimal not null,
 regiao varchar(100) not null,
+preco decimal not null,
 ID_regiao int not null,
 ID_tipo int not null,
 ID_estilo int not null,
@@ -123,22 +123,23 @@ INSERT INTO regiao VALUES
 
 --COLOCAR REGIOES
 INSERT INTO vinho VALUES 
-('', 'Chanteau Lafit Rothschild', 'vinho1.jpg', 'Almadén', '', 250, 4, 1, 1, 1), 
-('', 'Chablis Grand', 'vinho2.jpg', 'Cave Geisse', '', 150.50, 5, 2, 5, 2), 
-('', 'Cepparello', 'vinho3.jpg', 'Domno', '', 78, 1, 3, 4, 2),
-('', 'Heras Cordon', 'vinho4.jpg', 'Hermann', '', 689, 3, 1, 1, 2),
-('', 'Bourgogne', 'vinho5.jpg)', 'Laurentia', '', 93.70, 2, 1, 7, 5),
-('', 'Granbussia', 'vinho6.jpg', 'Mioranza', '', 135.65, 2, 4, 8, 6),
-('', 'Fairview', 'vinho7.jpg', 'Almadén', '', 420.50, 2, 5, 6, 7),
-('', 'Ciclos', 'vinho8.jpg', 'Mioranza', '', 890, 2, 6, 3, 11);
+('', 'Chanteau Lafit Rothschild', 'vinho1.jpg', 'Almadén', 'Valle de Colchagua', 250, 4, 1, 1, 1), 
+('', 'Chablis Grand', 'vinho2.jpg', 'Cave Geisse', 'Alentejano', 150.50, 5, 2, 5, 2), 
+('', 'Cepparello', 'vinho3.jpg', 'Domno', 'Serra Gaúcha', 78, 1, 3, 4, 2),
+('', 'Heras Cordon', 'vinho4.jpg', 'Hermann', 'Valle del Maipo', 689, 3, 1, 1, 2),
+('', 'Bourgogne', 'vinho5.jpg)', 'Laurentia', 'Douro', 93.70, 2, 1, 7, 5),
+('', 'Granbussia', 'vinho6.jpg', 'Mioranza', 'Primitivo di Manduria', 135.65, 2, 4, 8, 6),
+('', 'Fairview', 'vinho7.jpg', 'Almadén', 'Terre Siciliane', 420.50, 2, 5, 6, 7),
+('', 'Ciclos', 'vinho8.jpg', 'Mioranza', 'Almeirim', 890, 2, 6, 3, 11);
 
 INSERT INTO usuario VALUES
 ('', 'joao@live.com', 'João', '', '12345'),
 ('', 'maria@gmail.com', 'Maria', '', '12345'),
 ('', 'julia@live.com', 'Júlia', '', '12345'),
-('', 'flavio@gmail.com', 'Flávio Mota', '', '12345'),
+('', 'flavio@gmail.com', 'Flávio Mota', '4.jpg', '12345'),
 ('', 'raffael@gmail.com', 'Raffael Carvalho', '', '12345'),
-('', 'ligia@hotmail.com', 'Lígia Fernandes', '', '12345');
+('', 'ligia@hotmail.com', 'Lígia Fernandes', '', '12345'),
+('', 'jonas@hotmail.com', 'Jonas Henrique', '7.jpg', '12345');
 
 INSERT INTO vinho_comida VALUES 
 (1, 2),

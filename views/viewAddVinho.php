@@ -160,8 +160,15 @@ if(!isset($_SESSION['nome']))
                             <option value="2">Option 2</option>
                             <option value="3">Option 3</option>
                         </select>
-                        <label>Região ou país de origem</label>
+                        <label>País de origem</label>
                     </div>
+                    <div class="input-field col s6">
+                        <input placeholder="" name="txtRegiao" type="text" class="validate">
+                        <label>Região</label>
+                    </div>
+                </div>
+                <div class="row">
+
                     <div class="input-field col s6">
                         <select>
                             <option value="" disabled selected>Selecionar</option>
@@ -170,9 +177,8 @@ if(!isset($_SESSION['nome']))
                             <option value="3">Option 3</option>
                         </select>
                         <label>Tipo</label>
+
                     </div>
-                </div>
-                <div class="row">
                     <div class="input-field col s6">
                         <select>
                             <option value="" disabled selected>Selecionar</option>
@@ -181,7 +187,10 @@ if(!isset($_SESSION['nome']))
                             <option value="3">Option 3</option>
                         </select>
                         <label>Estilo</label>
+
                     </div>
+                </div>
+                <div class="row">
                     <div class="input-field col s6">
                         <select>
                             <option value="" disabled selected>Selecionar</option>
@@ -191,9 +200,7 @@ if(!isset($_SESSION['nome']))
                         </select>
                         <label>Tipo de uva</label>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s6">
+                    <div class="file-field input-field col s6">
                         <select multiple>
                             <option value="" disabled selected>Selecionar</option>
                             <option value="1">Option 1</option>
@@ -202,7 +209,9 @@ if(!isset($_SESSION['nome']))
                         </select>
                         <label>Harmonização com comidas</label>
                     </div>
-                    <div class="file-field input-field col s6">
+                </div>
+                <div class="row">
+                    <div class="file-field input-field col s10">
                         <div class="btn grey">
                             <span>Rótulo: </span>
                             <input type="file">
@@ -211,9 +220,9 @@ if(!isset($_SESSION['nome']))
                             <input class="file-path validate" type="text">
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <input type="submit" class="btn waves-effect waves-light teal darken-4 col s2 offset-s10">Adicionar</input>
+                    <div class="file-field input-field col s1">
+                        <input type="submit" class="btn waves-effect waves-light teal darken-4 " value="Adicionar"></input>
+                    </div>
                 </div>
             </form>
         </div>
@@ -231,7 +240,7 @@ if(!isset($_SESSION['nome']))
 <script>
 
     $("#autocomplete-input").change(function(){
-       $("#txtTitulo").val($("#autocomplete-input").val());
+        $("#txtTitulo").val($("#autocomplete-input").val());
     });
 
     $(function() {
