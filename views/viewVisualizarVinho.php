@@ -2,7 +2,29 @@
 require_once '../vendor/autoload.php';
 require_once '../controllers/controllerVinho.php';
 require_once '../controllers/controllerUsuario.php';
+require_once '../controllers/controllerResenha.php';
 header('Content-type: text/html; charset=ISO-8859-1');
+
+session_start();
+
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST')
+{
+    $ctrUsuario= new controllerUsuario();
+    if($ctrUsuario->verificaMeusVinhos($_SESSION['id'], $_GET['id']))
+    {
+        echo "<script language='JavaScript'>alert('Você precisa adicionar este vinho aos seus vinhos para escrever uma resenha!');</script>";
+    }
+    else
+    {
+        if(isset($_POST['txtResenha']) && $_POST['txtResenha'] != '')
+        {
+            $ctrResenha = new controllerResenha();
+            $datahora = new DateTime();
+            $ctrResenha->cadastraResenha($_SESSION['id'], $_GET['id'], $_POST['txtResenha'], date_format($datahora, 'Y-m-d H:i:s'));
+        }
+    }
+}
 
 if(isset($_GET['id']))
 {
@@ -12,7 +34,6 @@ if(isset($_GET['id']))
     $resenhas = $ctrVinho->buscaResenhaVinho($_GET['id']);
     $estrelas = $ctrVinho->calculaEstrelas($_GET['id']);
 }
-
 
 ?>
 
@@ -177,7 +198,7 @@ else {
             <form action="viewVisualizarVinho.php?id=<?= $_GET['id'] ?>" method="post" class="col s12">
                 <div class="row">
                     <div class="input-field col s12">
-                        <textarea id="textarea1" class="materialize-textarea"></textarea>
+                        <textarea name="txtResenha" id="textarea1" class="materialize-textarea"></textarea>
                         <label for="textarea1">Resenha</label>
                     </div>
                 </div>

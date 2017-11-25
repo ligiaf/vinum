@@ -31,11 +31,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 $ctrUsuario = new controllerUsuario();
 $ctrVinho = new controllerVinho();
 $meusvinhos = $ctrUsuario->buscaMeusVinhos($_SESSION['id']);
-
+$vinhos;
 foreach ($meusvinhos as $meuvinho)
 {
-    global $vinhos;
-    $vinhos = $ctrVinho->buscaVinhoID($meuvinho['ID_vinho']);
+   $vinhos = $ctrVinho->buscaVinhoID($meuvinho['ID_vinho']);
 }
 
 ?>
@@ -105,5 +104,6 @@ foreach ($meusvinhos as $meuvinho)
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="../js/materialize.js"></script>
 <script src="../js/init.js"></script>
+
 </body>
 </html>

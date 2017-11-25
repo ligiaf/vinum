@@ -158,7 +158,19 @@ class conecta
         return $res;
     }
 
+
     //RESENHA
+
+    public function cadastraResenha(classes\resenha $resenha)
+    {
+        $resenhaBD = ORM::for_table('resenha')->create();
+        $resenhaBD->ID_usuario = $resenha->getIdUsuario();
+        $resenhaBD->ID_vinho = $resenha->getIdVinho();
+        $resenhaBD->resenha = $resenha->getResenha();
+        $resenhaBD->datahora = $resenha->getDatahora();
+        $resenhaBD->save();
+    }
+
     public function buscaResenhaVinho($idVinho)
     {
         $resenhas = ORM::for_table('resenha')->where('ID_vinho', $idVinho)->find_many();
