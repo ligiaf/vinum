@@ -1,5 +1,5 @@
 <?php
-require_once('../models/usuario.php');
+require_once '../vendor/autoload.php';
 require_once ('conecta.php');
 
 class controllerUsuario
