@@ -11,10 +11,12 @@ if(!isset($_SESSION['nome']))
     header('Location:index.php');
     exit;
 }
+$ctrUsuario = new controllerUsuario();
+$ctrVinho = new controllerVinho();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['vinho']) && isset($_POST['idUsuario']) && isset($_FILES['arquivo'])) {
-        $ctrUsuario = new controllerUsuario();
+
         if ($ctrUsuario->verificaMeusVinhos($_POST['idUsuario'], $_POST['$vinho'])) {
             echo "<script language='JavaScript'>alert('Vinho já adicionado a sua coleção!');</script>";
         } else {
@@ -28,13 +30,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-$ctrUsuario = new controllerUsuario();
-$ctrVinho = new controllerVinho();
-$meusvinhos = $ctrUsuario->buscaMeusVinhos($_SESSION['id']);
-$vinhos;
-foreach ($meusvinhos as $meuvinho)
+$vinhos = array();
+
+if(isset($_GET['id']))
 {
-   $vinhos = $ctrVinho->buscaVinhoID($meuvinho['ID_vinho']);
+    $meusvinhos = $ctrUsuario->buscaMeusVinhos($_GET['id']);
+
+    foreach ($meusvinhos as $meuvinho)
+    {
+        $vinhos = $ctrVinho->buscaVinhoID($meuvinho['ID_vinho']);
+    }
+
 }
 
 ?>
@@ -76,24 +82,23 @@ foreach ($meusvinhos as $meuvinho)
             <div class="row">
                 <?php
                 if($vinhos) {
-                    foreach ($vinhos as $vinho){ ?>
+                    foreach ($vinhos as $vinho) { ?>
                         <div class="card small hoverable col s3">
                             <div class="card-image">
-                                <img class="responsive-img" src="../images/vinhos/<?=$vinho['rotulo']?>">
-                                <a href="#" class="card-title"><?=$vinho['nome'] ?></a>
+                                <img class="responsive-img" src="../images/vinhos/<?= $vinho['rotulo'] ?>">
+                                <a href="#" class="card-title"><?= $vinho['nome'] ?></a>
                             </div>
                             <div class="card-content">
-                                <p><b>Tipo:</b> <?=$vinho['ID_tipo']?> &nbsp;</p>
-                                <p><b>Estilo:</b> <?=$vinho['ID_estilo']?> </p>
-                                <p><b>Uva:</b> <?=$vinho['ID_uva']?></p>
-                                <p><b>Região:</b> <?=$vinho['regiao']?> </p>
-                                <p><b>País de origem:</b> <?=$vinho['ID_regiao']?></p>
+                                <p><b>Tipo:</b> <?= $vinho['ID_tipo'] ?> &nbsp;</p>
+                                <p><b>Estilo:</b> <?= $vinho['ID_estilo'] ?> </p>
+                                <p><b>Uva:</b> <?= $vinho['ID_uva'] ?></p>
+                                <p><b>Região:</b> <?= $vinho['regiao'] ?> </p>
+                                <p><b>País de origem:</b> <?= $vinho['ID_regiao'] ?></p>
                             </div>
                         </div>
                     <?php }
-                }
-                else{
-                    echo "<script language='JavaScript'>alert('Você ainda não adicionou nenhum vinho!');</script>";
+                }else{
+                    echo "<h4>Você ainda não adicionou nenhum vinho!</h4>";
                 }?>
             </div>
         </div>

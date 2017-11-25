@@ -69,7 +69,7 @@ if(isset($_POST['autocomplete']))
             </div>
         </div>
         <div class="row">
-            <form action="viewMeusVinhos.php" method="post" class="container grey-text">
+            <form action="viewMeusVinhos.php?id=<?=$_SESSION['id']?>" method="post" class="container grey-text">
                 <div class="file-field input-field col s10">
                     <div class="btn grey">
                         <span>Rótulo: </span>

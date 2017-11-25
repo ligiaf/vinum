@@ -30,6 +30,27 @@ $comidas = $ctrComida->buscaComidas();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
+    /*echo '<br/>titulo <br/>';
+    var_dump($_POST['txtTitulo']);
+    echo '<br/>vinicola <br/>';
+    var_dump($_POST['txtVinicola']);
+    echo '<br/>pais <br/>';
+    var_dump($_POST['selectPais']);
+    echo '<br/>regiao <br/>';
+    var_dump($_POST['txtRegiao']);
+    echo '<br/>tipo <br/>';
+    var_dump($_POST['selectTipo']);
+    echo '<br/>estilo <br/>';
+    var_dump($_POST['selectEstilo']);
+    echo '<br/>uva <br/>';
+    var_dump($_POST['selectUva']);
+    echo '<br/>preco <br/>';
+    var_dump($_POST['txtPreco']);
+    echo '<br/>comidas <br/>';
+    var_dump($_POST['selectComida']);
+    echo '<br/>rotulo <br/>';
+    var_dump($_POST['txtRotulo']);*/
+
     if(isset($_POST['txtTitulo']) && $_POST['txtTitulo'] != '' &&
         isset($_POST['txtVinicola']) && $_POST['txtVinicola'] != '' &&
         isset($_POST['selectPais']) && $_POST['selectPais'] != '' &&
@@ -96,17 +117,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         <form id="vinho" method="post" action="viewVinhoExistente.php">
             <div class="input-field">
                 <i class="material-icons prefix">local_bar</i>
-
                 <input type="text" name="autocomplete" id="autocomplete-input" class="autocomplete">
                 <label>Nome do vinho</label>
-
             </div>
         </form>
         <br>
 
         <!-- ISSO APARECE SE NAO TIVER VINHO CADASTRADO -->
         <div class="row" id="cadastro">
-            <form action="viewAddVinho.php" method="post" class="col s12">
+            <form action="viewAddVinho.php" method="post">
                 <section>
                     <h5>Adicione um novo vinho</h5>
                 </section>
@@ -127,7 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                             <option value="" disabled selected>Selecionar</option>
                             <?php
                             foreach ($paises as $pais){
-                                echo "<option value=".$pais['ID_pais'].">".$pais['nome']."</option>";
+                                echo "<option value=".$pais['ID_regiao'].">".$pais['nome']."</option>";
                             }?>
                         </select>
                         <label>País de origem</label>
@@ -165,7 +184,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                             <option value="" disabled selected>Selecionar</option>
                             <?php
                             foreach ($uvas as $uva){
-                                echo "<option value=".$uva['ID_estilo'].">".$uva['tipo']."</option>";
+                                echo "<option value=".$uva['ID_uva'].">".$uva['tipo']."</option>";
                             }?>
                         </select>
                         <label>Tipo de uva</label>
