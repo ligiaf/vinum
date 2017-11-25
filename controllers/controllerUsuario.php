@@ -53,5 +53,11 @@ class controllerUsuario
         return $res;
     }
 
+    public function buscaResenhaUsuario($idUsuario)
+    {
+        $db = new conecta();
+        $res = $db->buscaResenhaUsuario($idUsuario);
+        return $res;
+    }
 
 }

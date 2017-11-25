@@ -67,6 +67,16 @@ class conecta
     public function buscaVinhoID($id)
     {
         $vinho= ORM::for_table('vinho')->where('ID_vinho', $id)->find_one();
+        $vinho_tipo = ORM::for_table('tipo_vinho')->where('ID_tipo', $vinho['ID_tipo'])->find_one();
+        $vinho_estilo = ORM::for_table('estilo')->where('ID_estilo', $vinho['ID_estilo'])->find_one();
+        $vinho_regiao = ORM::for_table('regiao')->where('ID_regiao', $vinho['ID_regiao'])->find_one();
+        $vinho_uva = ORM::for_table('uva')->where('ID_uva', $vinho['ID_uva'])->find_one();
+
+        $vinho['ID_tipo'] = $vinho_tipo['nome'];
+        $vinho['ID_estilo'] = $vinho_estilo['nome'];
+        $vinho['ID_regiao'] = $vinho_regiao['nome'];
+        $vinho['ID_uva'] = $vinho_uva['tipo'];
+
         return $vinho;
     }
 
@@ -103,6 +113,12 @@ class conecta
         }
     }
 
+    public function calculaEstrelas($idVinho)
+    {
+        $estrelas = ORM::for_table('avaliacao')->where('ID_vinho', $idVinho)->avg('nota');
+        return $estrelas;
+    }
+
 
     //USUARIO
 
@@ -130,6 +146,37 @@ class conecta
         $meusVinhos->rotulo = $rotulo;
         $meusVinhos->save();
 
+    }
+
+    public function buscaComidasVinho($idVinho)
+    {
+        $comidas = ORM::for_table('vinho_comida')->where('ID_vinho', $idVinho)->find_many();
+        foreach ($comidas as $comida)
+        {
+            $res = ORM::for_table('comida')->select('nome')->where('ID_comida', $comida['ID_comida'])->find_one();
+        }
+        return $res;
+    }
+
+    //RESENHA
+    public function buscaResenhaVinho($idVinho)
+    {
+        $resenhas = ORM::for_table('resenha')->where('ID_vinho', $idVinho)->find_many();
+        foreach ($resenhas as $resenha)
+        {
+            $resenhas['nomeUsuario'] = ORM::for_table('usuario')->select('nome')->where('ID_usuario', $resenha['ID_usuario'])->find_one();
+        }
+        return $resenhas;
+    }
+
+    public function buscaResenhaUsuario($idUsuario)
+    {
+        $resenhas = ORM::for_table('resenha')->where('ID_usuario', $idUsuario)->find_many();
+        foreach ($resenhas as $resenha)
+        {
+            $resenhas['nomeVinho'] = ORM::for_table('vinho')->select('nome')->where('ID_vinho', $resenha['ID_vinho'])->find_one();
+        }
+        return $resenhas;
     }
 
     //OUTROS

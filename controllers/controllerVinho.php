@@ -31,4 +31,27 @@ class controllerVinho
         $res = $db->cadastraVinho($vinho, $arrayIDComida);
         return $res;
     }
+
+    public function buscaComidasVinho($idVinho)
+    {
+        $db = new conecta();
+        $res = $db->buscaComidasVinho($idVinho);
+        return $res;
+    }
+    public function buscaResenhaVinho($idVinho)
+    {
+        $db = new conecta();
+        $res = $db->buscaResenhaVinho($idVinho);
+        return $res;
+    }
+
+    public function calculaEstrelas($idVinho)
+    {
+        $db = new conecta();
+        $res = $db->calculaEstrelas($idVinho);
+        return $res;
+    }
+
+
+
 }

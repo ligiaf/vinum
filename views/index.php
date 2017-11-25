@@ -35,6 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         {
             $_SESSION['email'] = $_POST['txtLoginEmail'];
             $_SESSION['id'] = $usuario;
+            $nome = $ctrUsuario->buscaUsuarioID($usuario);
+            $_SESSION['nome'] = $nome['nome'];
             header("Location:viewVisualizarUsuario.php?id=$usuario");
         }
         else
@@ -43,7 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -61,93 +62,101 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
 
-<nav class="white" role="navigation">
-    <div class="nav-wrapper container">
-        <a id="logo-container" href="#" class="brand-logo"><img class="responsive-img" src="../images/logo.fw.png"></a>
-        <ul class="right hide-on-med-and-down">
-            <li><a href="viewBuscarVinho.php" class="valign-wrapper"><i class="material-icons left">search</i>Buscar vinhos</a></li>
-            <li>
-                <!-- Modal Trigger -->
-                <a class="modal-trigger valign-wrapper" href="#modal1">Login</a>
-            </li>
-            <!-- Modal Structure -->
-            <div id="modal1" class="modal">
-                <div class="modal-content">
-                    <h4 class="black-text">Login</h4>
-                    <form action="index.php" id="login" method="post" class="container grey-text col s6">
-                        <div class="row">
-                            <div class="input-field ">
-                                <input type="email" name="txtLoginEmail"/>
-                                <label>Email: </label>
+<?php
+if(isset($_SESSION['email']))
+{
+    ?>
+    <nav class="white" role="navigation">
+        <div class="nav-wrapper container">
+            <a href="index.php" class="brand-logo"><img class="responsive-img" src="../images/logo.fw.png"></a>
+            <ul id="nav-mobile" class=" right hide-on-med-and-down">
+                <li><a href="viewBuscarVinho.php" class="valign-wrapper"><i class="material-icons left">search</i>Buscar
+                        vinhos</a></li>
+                <li><a href="viewMeusVinhos.php?id=<?=$_SESSION['id']?>" class="valign-wrapper"><i class="material-icons left">dashboard</i>Meus
+                        vinhos</a></li>
+                <li><a href="viewVisualizarUsuario.php?id=<?=$_SESSION['id']?>" class="valign-wrapper"><i class="material-icons left">account_circle</i><?= $_SESSION['nome'] ?></a></li>
+            </ul>
+        </div>
+    </nav>
+<?php }
+else {
+    ?>
+    <nav class="white" role="navigation">
+        <div class="nav-wrapper container">
+            <a id="logo-container" href="index.php" class="brand-logo"><img class="responsive-img" src="../images/logo.fw.png"></a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="viewBuscarVinho.php" class="valign-wrapper"><i class="material-icons left">search</i>Buscar vinhos</a></li>
+                <li>
+                    <!-- Modal Trigger -->
+                    <a class="modal-trigger valign-wrapper" href="#modal1">Login</a>
+                </li>
+                <!-- Modal Structure -->
+                <div id="modal1" class="modal">
+                    <div class="modal-content">
+                        <h4 class="black-text">Login</h4>
+                        <form action="index.php" id="login" method="post" class="container grey-text col s6">
+                            <div class="row">
+                                <div class="input-field ">
+                                    <input type="email" name="txtLoginEmail"/>
+                                    <label>Email: </label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field ">
-                                <input type="password" name="txtLoginSenha"/>
-                                <label>Senha: </label>
+                            <div class="row">
+                                <div class="input-field ">
+                                    <input type="password" name="txtLoginSenha"/>
+                                    <label>Senha: </label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <a href="#" onclick="document.getElementById('login').submit();" class="modal-action waves-effect waves-green btn-flat" type="submit">Entrar</a>
-                            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <li>
-                <!-- Modal Trigger -->
-                <a class="modal-trigger valign-wrapper" href="#modal2">Cadastre-se</a>
-            </li>
-            <!-- Modal Structure -->
-            <div id="modal2" class="modal">
-                <div class="modal-content">
-                    <h4 class="black-text">Cadastro</h4>
-                    <form action="index.php" method="post" id="cadastrar" class="container grey-text">
-                        <div class="row">
-                            <div class="input-field">
-                                <input type="text" name="txtNome" class="validate"/>
-                                <label>Nome: </label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field ">
-                                <input type="email" name="txtEmail" class="validate"/>
-                                <label>Email: </label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field ">
-                                <input type="password" name="txtSenha" class="validate"/>
-                                <label>Senha: </label>
-                            </div>
-                        </div>
-
-                        <div class="row valign-wrapper">
                             <div class="modal-footer">
-                                <a href="#" onclick="document.getElementById('cadastrar').submit();" name="btnCadastrar" class="modal-action waves-effect waves-green btn-flat">Cadastrar</a>
-                                <a href="#!"class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+                                <a href="#" onclick="document.getElementById('login').submit();" class="modal-action waves-effect waves-green btn-flat" type="submit">Entrar</a>
+                                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
-            </div>
-        </ul>
-    </div>
-</nav>
+                <li>
+                    <!-- Modal Trigger -->
+                    <a class="modal-trigger valign-wrapper" href="#modal2">Cadastre-se</a>
+                </li>
+                <!-- Modal Structure -->
+                <div id="modal2" class="modal">
+                    <div class="modal-content">
+                        <h4 class="black-text">Cadastro</h4>
+                        <form action="index.php" method="post" id="cadastrar" class="container grey-text">
+                            <div class="row">
+                                <div class="input-field">
+                                    <input type="text" name="txtNome" class="validate"/>
+                                    <label>Nome: </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field ">
+                                    <input type="email" name="txtEmail" class="validate"/>
+                                    <label>Email: </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field ">
+                                    <input type="password" name="txtSenha" class="validate"/>
+                                    <label>Senha: </label>
+                                </div>
+                            </div>
 
-<!-- MENU DE NAVEGAÇAO QUANDO USUARIO ESTA LOGADO -->
-<!--
-<nav class="white" role="navigation">
-    <div class="nav-wrapper container">
-        <a href="index.php" class="brand-logo"><img class="responsive-img" src="images/logo.fw.png"></a>
-        <ul id="nav-mobile" class=" right hide-on-med-and-down">
-            <li><a href="viewBuscarVinho.php" class="valign-wrapper"><i class="material-icons left">search</i>Buscar vinhos</a></li>
-            <li><a href="viewMeusVinhos.html" class="valign-wrapper"><i class="material-icons left">dashboard</i>Meus vinhos</a></li>
-            <li><a href="viewVisualizarUsuario.php" class="valign-wrapper"><i class="material-icons left">account_circle</i>Nome do individuo</a></li>
-        </ul>
-    </div>
-</nav>
--->
+                            <div class="row valign-wrapper">
+                                <div class="modal-footer">
+                                    <a href="#" onclick="document.getElementById('cadastrar').submit();" name="btnCadastrar" class="modal-action waves-effect waves-green btn-flat">Cadastrar</a>
+                                    <a href="#!"class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </nav>
+    <?php
+}
+?>
 
 <div id="index-banner" class="parallax-container valign-wrapper">
     <div class="section no-pad-bot">
