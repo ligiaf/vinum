@@ -3,8 +3,8 @@ ORM::configure('mysql:host=localhost;dbname=vinum');
 ORM::configure('username', 'root');
 ORM::configure('password', '');
 
-require_once ('../models/usuario.php');
-require_once ('../models/vinho.php');
+require_once '../vendor/autoload.php';
+
 
 class conecta
 {
