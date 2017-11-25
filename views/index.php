@@ -17,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
            $_SESSION['nome'] = $_POST['txtNome'];
            $_SESSION['email'] = $_POST['txtEmail'];
            $res = $ctrUsuario->buscaUsuarioEmail($_POST['txtEmail']);
+           $_SESSION['id'] = $res;
            header("Location:viewVisualizarUsuario.php?id=$res");
        }
        else
@@ -32,6 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $usuario = $ctrUsuario->autenticaUsuario($_POST['txtLoginEmail'], $_POST['txtLoginSenha']);
         if($usuario)
         {
+            $_SESSION['email'] = $_POST['txtLoginEmail'];
+            $_SESSION['id'] = $usuario;
             header("Location:viewVisualizarUsuario.php?id=$usuario");
         }
         else
