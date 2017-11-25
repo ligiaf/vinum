@@ -132,7 +132,7 @@ class conecta
 
     }
 
-
+    //OUTROS
     public function buscaPaises()
     {
         $paises = ORM::for_table('regiao')->find_many();

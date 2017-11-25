@@ -12,13 +12,12 @@ if(!isset($_SESSION['nome']))
     exit;
 }
 
-$ctrUsuario = new controllerUsuario();
-$usuario = $ctrUsuario->buscaUsuarioEmail($_SESSION['email']);
-
 if(isset($_POST['autocomplete']))
 {
     $ctrVinho = new controllerVinho();
     $vinho = $ctrVinho->buscarVinho($_POST['autocomplete']);
+    $ctrUsuario = new controllerUsuario();
+    $usuario = $ctrUsuario->buscaUsuarioEmail($_SESSION['email']);
 }
 
 ?>
@@ -70,7 +69,7 @@ if(isset($_POST['autocomplete']))
             </div>
         </div>
         <div class="row">
-            <form action="viewMeusVinhos.php=?id=<?=$usuario['ID_usuario']?>" method="post" class="container grey-text">
+            <form action="viewMeusVinhos.php" method="post" class="container grey-text">
                 <div class="file-field input-field col s10">
                     <div class="btn grey">
                         <span>Rótulo: </span>
@@ -80,8 +79,8 @@ if(isset($_POST['autocomplete']))
                         <input class="file-path validate" type="text">
                     </div>
                 </div>
-                <input type="text" name="vinho" value="<?=$vinho['ID_vinho']?>">
-                <input type="text" name="idUsuario" value="<?=$usuario['ID_usuario']?>">
+                <input type="hidden" name="vinho" value="<?=$vinho['ID_vinho']?>">
+                <input type="hidden" name="idUsuario" value="<?=$_SESSION['id']?>">
                 <div class="col s2">
                     <input name="btnInserir" type="submit" value="Inserir" class="btn waves-effect waves-light teal darken-4">
                 </div>
@@ -89,5 +88,9 @@ if(isset($_POST['autocomplete']))
         </div>
     </div>
 </div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
+<script type="text/javascript" src="../js/materialize.js"></script>
 </body>
 </html>

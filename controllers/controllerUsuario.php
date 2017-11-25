@@ -44,7 +44,6 @@ class controllerUsuario
     {
         $db = new conecta();
         $db->addMeuVinho($idUsuario, $vinho, $rotulo);
-
     }
 
     public function buscaMeusVinhos($id)
