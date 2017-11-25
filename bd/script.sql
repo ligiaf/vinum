@@ -133,12 +133,12 @@ INSERT INTO vinho VALUES
 ('', 'Ciclos', '8.jpg', 'Mioranza', 'Almeirim', 890, 2, 6, 3, 11);
 
 INSERT INTO usuario VALUES
-('', 'joao@live.com', 'João', 'perfil.jpg', '12345'),
-('', 'maria@gmail.com', 'Maria', 'perfil.jpg', '12345'),
-('', 'julia@live.com', 'Júlia', 'perfil.jpg', '12345'),
+('', 'joao@live.com', 'João', '', '12345'),
+('', 'maria@gmail.com', 'Maria', '', '12345'),
+('', 'julia@live.com', 'Júlia', '', '12345'),
 ('', 'flavio@gmail.com', 'Flávio Mota', '4.jpg', '12345'),
-('', 'raffael@gmail.com', 'Raffael Carvalho', 'perfil.jpg', '12345'),
-('', 'ligia@hotmail.com', 'Lígia Fernandes', 'perfil.jpg', '12345'),
+('', 'raffael@gmail.com', 'Raffael Carvalho', '', '12345'),
+('', 'ligia@hotmail.com', 'Lígia Fernandes', '', '12345'),
 ('', 'jonas@hotmail.com', 'Jonas Henrique', '7.jpg', '12345');
 
 INSERT INTO vinho_comida VALUES 

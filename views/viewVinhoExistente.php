@@ -62,10 +62,8 @@ if(isset($_POST['autocomplete']))
                 <div class="card-stacked">
                     <h4 class="header" id="nome">&nbsp;&nbsp;<?= $vinho['nome'] ?></h4>
                     <div class="card-content">
-                        <p>Tipo: <?= $vinho['ID_tipo'] ?></p>
-                        <p>Estilo: <?= $vinho['ID_estilo'] ?></p>
-                        <p>Região: <?= $vinho['regiao'] ?></p>
-                        <p>País: <?= $vinho['ID_regiao'] ?></p>
+                        <p><b>Tipo:</b> <?=$vinho['ID_tipo']?> &nbsp; <b>Estilo:</b> <?=$vinho['ID_estilo']?> &nbsp; <b>Uva:</b> <?=$vinho['ID_uva']?></p>
+                        <p><b>Região:</b> <?=$vinho['regiao']?> &nbsp; <b>País de origem:</b> <?=$vinho['ID_regiao']?></p>
                     </div>
                 </div>
             </div>

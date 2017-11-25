@@ -34,6 +34,7 @@ $meusvinhos = $ctrUsuario->buscaMeusVinhos($_SESSION['id']);
 
 foreach ($meusvinhos as $meuvinho)
 {
+    global $vinhos;
     $vinhos = $ctrVinho->buscaVinhoID($meuvinho['ID_vinho']);
 }
 
@@ -79,14 +80,15 @@ foreach ($meusvinhos as $meuvinho)
                     foreach ($vinhos as $vinho){ ?>
                         <div class="card small hoverable col s3">
                             <div class="card-image">
-                                <img class="responsive-img" src="../images/vinhos/<?=$_GET['id'].$vinho['ID_vinho']?>">
+                                <img class="responsive-img" src="../images/vinhos/<?=$vinho['rotulo']?>">
                                 <a href="#" class="card-title"><?=$vinho['nome'] ?></a>
                             </div>
                             <div class="card-content">
-                                <p><?=$vinho['ID_tipo'] ?></p>
-                                <p><?=$vinho['ID_estilo'] ?></p>
-                                <p><?=$vinho['regiao'] ?></p>
-                                <p><?=$vinho['ID_regiao'] ?></p>
+                                <p><b>Tipo:</b> <?=$vinho['ID_tipo']?> &nbsp;</p>
+                                <p><b>Estilo:</b> <?=$vinho['ID_estilo']?> </p>
+                                <p><b>Uva:</b> <?=$vinho['ID_uva']?></p>
+                                <p><b>Região:</b> <?=$vinho['regiao']?> </p>
+                                <p><b>País de origem:</b> <?=$vinho['ID_regiao']?></p>
                             </div>
                         </div>
                     <?php }
