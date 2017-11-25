@@ -27,7 +27,7 @@ class controllerVinho
     public function cadastraVinho($nomeVinho, $rotulo, $produtor, $regiao, $preco, $idRegiao, $idTipo, $idEstilo, $idUva, $arrayIDComida)
     {
         $db = new conecta();
-        $vinho = new vinho($nomeVinho, $rotulo, $produtor, $regiao, $preco, $idRegiao, $idTipo, $idEstilo, $idUva);
+        $vinho = new classes\vinho($nomeVinho, $rotulo, $produtor, $regiao, $preco, $idRegiao, $idTipo, $idEstilo, $idUva);
         $res = $db->cadastraVinho($vinho, $arrayIDComida);
         return $res;
     }

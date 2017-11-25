@@ -1,5 +1,7 @@
 <?php
 
+namespace classes;
+
 class vinho
 {
     private $nome;

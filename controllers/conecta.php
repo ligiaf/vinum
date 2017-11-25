@@ -8,7 +8,7 @@ require_once '../vendor/autoload.php';
 
 class conecta
 {
-    public function cadastraUsuario(usuario $usuario)
+    public function cadastraUsuario(classes\usuario $usuario)
     {
         if($usuarioDB = ORM::for_table('usuario')->where('email',$usuario->getEmail())->find_one())
         {
@@ -80,7 +80,7 @@ class conecta
         return $vinho;
     }
 
-    public function cadastraVinho(vinho $vinho, $arrayComidas)
+    public function cadastraVinho(classes\vinho $vinho, $arrayComidas)
     {
         $addvinho = ORM::for_table('vinho')->create();
         $addvinho->nome = $vinho->getNome();

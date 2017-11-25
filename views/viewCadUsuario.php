@@ -1,6 +1,6 @@
 <?php
-require_once 'vendor/autoload.php';
-include 'conecta.php';
+require_once '../vendor/autoload.php';
+include '../controllers/conecta.php';
 header('Content-type: text/html; charset=ISO-8859-1');
 ?>
 

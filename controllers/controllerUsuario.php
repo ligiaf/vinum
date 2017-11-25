@@ -1,13 +1,15 @@
 <?php
+
+require_once 'conecta.php';
 require_once '../vendor/autoload.php';
-require_once ('conecta.php');
+
 
 class controllerUsuario
 {
     public function cadastraUsuario($nome, $email, $senha)
     {
         $db = new conecta();
-        $usuario = new usuario($nome, $email, $senha);
+        $usuario = new classes\usuario($nome, $email, $senha);
         $res = $db->cadastraUsuario($usuario);
         return $res;
     }
