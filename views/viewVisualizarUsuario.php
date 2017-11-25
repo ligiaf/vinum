@@ -133,7 +133,7 @@ if(isset($_GET['id']))
                 </div>
             </div>
             <div class="row">
-                <div class="col s6 valign-wrapper">
+                <div class="col s12 center">
                         <h5><b><?=$usuario['nome'];?></b></h5>
                 </div>
             </div>

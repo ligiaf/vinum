@@ -42,23 +42,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         isset($_FILES['arquivo']) && $_FILES['arquivo'] != '')
     {
         $ctrVinho = new controllerVinho();
-        $imagem = $_POST[''];
         $res = $ctrVinho->cadastraVinho($_POST['txtTitulo'], $_POST['txtRotulo'], $_POST['txtVinicola'], $_POST['selectPais'],
-                                        $_POST['txtPreco'], $_POST['txtRegiao'], $_POST['selectTipo'], $_POST['selectEstilo'],
-                                        $_POST['selectUva'], $_POST['selectComida']);
-
-
-
+            $_POST['txtPreco'], $_POST['txtRegiao'], $_POST['selectTipo'], $_POST['selectEstilo'],
+            $_POST['selectUva'], $_POST['selectComida']);
         if($res)
         {
-           $idVinho = $res['ID_vinho'];
+            $idVinho = $res['ID_vinho'];
+            $destino = 'images/vinhos/'.$idVinho;
+            $arquivo_tmp = $_FILES['arquivo']['tmp_name'];
+            move_uploaded_file( $arquivo_tmp, $destino);
             header("Location:viewVisualizarVinho.php?id=".$idVinho);
         }
-
     }
-
-
-
 }
 
 ?>

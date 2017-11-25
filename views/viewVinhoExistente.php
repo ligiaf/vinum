@@ -49,7 +49,7 @@ if(isset($_POST['autocomplete']))
 
 <div class="container" >
     <div class="card-panel grey lighten-3">
-        <div class="row" id="existente">
+        <div class="row">
             <section>
                 <h4>Adicione aos seus vinhos</h4>
             </section>
@@ -59,7 +59,7 @@ if(isset($_POST['autocomplete']))
                     <img src="../images/vinhos/<?= $vinho['rotulo'] ?>">
                 </div>
                 <div class="card-stacked">
-                    <h4 class="header" id="nome">&nbsp;<?= $vinho['nome'] ?></h4>
+                    <h4 class="header" id="nome">&nbsp;&nbsp;<?= $vinho['nome'] ?></h4>
                     <div class="card-content">
                         <p>Tipo: <?= $vinho['ID_tipo'] ?></p>
                         <p>Estilo: <?= $vinho['ID_estilo'] ?></p>
@@ -70,19 +70,18 @@ if(isset($_POST['autocomplete']))
             </div>
         </div>
         <div class="row">
-            <h5 class="black-text">Insira o seu rótulo</h5>
-            <form action="viewMeusVinhos.php" method="post" class="container grey-text">
-                <input type="hidden" name="vinho" value="<?=$vinho['ID_vinho']?>">
-                <input type="hidden" name="idUsuario" value="<?=$usuario['ID_usuario']?>">
+            <form action="viewMeusVinhos.php=?id=<?=$usuario['ID_usuario']?>" method="post" class="container grey-text">
                 <div class="file-field input-field col s10">
                     <div class="btn grey">
                         <span>Rótulo: </span>
                         <input type="file" name="rotulo" >
                     </div>
                     <div class="file-path-wrapper">
-                        <input class="file-path validate" type="text" name="txtRotulo" value="">
+                        <input class="file-path validate" type="text">
                     </div>
                 </div>
+                <input type="text" name="vinho" value="<?=$vinho['ID_vinho']?>">
+                <input type="text" name="idUsuario" value="<?=$usuario['ID_usuario']?>">
                 <div class="col s2">
                     <input name="btnInserir" type="submit" value="Inserir" class="btn waves-effect waves-light teal darken-4">
                 </div>

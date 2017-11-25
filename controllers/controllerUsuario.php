@@ -1,6 +1,6 @@
 <?php
 require_once('../models/usuario.php');
-include 'conecta.php';
+require_once ('conecta.php');
 
 class controllerUsuario
 {
@@ -44,5 +44,15 @@ class controllerUsuario
     {
         $db = new conecta();
         $db->addMeuVinho($idUsuario, $vinho, $rotulo);
+
     }
+
+    public function buscaMeusVinhos($id)
+    {
+        $db = new conecta();
+        $res = $db->buscaMeusVinhos($id);
+        return $res;
+    }
+
+
 }
