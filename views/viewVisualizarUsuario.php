@@ -11,12 +11,9 @@ if(!isset($_SESSION['nome']))
     exit;
 }
 
-if(isset($_GET['id']))
-{
-    $ctrUsuario = new controllerUsuario();
-    $usuario = $ctrUsuario->buscaUsuarioID($_GET['id']);
-    $resenhas = $ctrUsuario->buscaResenhaUsuario($_GET['id']);
-}
+$ctrUsuario = new controllerUsuario();
+$usuario = $ctrUsuario->buscaUsuarioID($_GET['id']);
+$resenhas = $ctrUsuario->buscaResenhaUsuario($_GET['id']);
 
 ?>
 
@@ -72,7 +69,8 @@ if(isset($_GET['id']))
             </div>
             <?php foreach ($resenhas as $resenha){ ?>
                 <div class="row">
-                    <p><a href="viewVisualizarVinho.php?id=<?=$resenha['ID_vinho']?>" class="black-text"><b><?=$resenha['nomeVinho']?></b></a><small><?=$resenha['datahora'] ?></small></p>
+                    <p><a href="viewVisualizarVinho.php?id=<?=$resenha['ID_vinho']?>" class="black-text"><b><?=$resenha['nomeVinho']?></b></a>
+                        <small>&nbsp;&nbsp;<?=$resenha['datahora'] ?></small></p>
                 </div>
                 <div class="row">
                     <blockquote>

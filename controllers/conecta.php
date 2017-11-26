@@ -175,7 +175,8 @@ class conecta
         $res = array();
         foreach ($comidas as $comida)
         {
-            $res = ORM::for_table('comida')->select('nome')->where('ID_comida', $comida['ID_comida'])->find_one();
+            $comida = ORM::for_table('comida')->select('nome')->where('ID_comida', $comida['ID_comida'])->find_one();
+            array_push($res, $comida['nome']);
         }
         return $res;
     }
@@ -196,9 +197,12 @@ class conecta
     public function buscaResenhaVinho($idVinho)
     {
         $resenhas = ORM::for_table('resenha')->where('ID_vinho', $idVinho)->find_many();
+        $i = 0;
         foreach ($resenhas as $resenha)
         {
-            $resenhas['nomeUsuario'] = ORM::for_table('usuario')->select('nome')->where('ID_usuario', $resenha['ID_usuario'])->find_one();
+            $nome = ORM::for_table('usuario')->where('ID_usuario', $resenha['ID_usuario'])->find_one();
+            $resenhas[$i]['nomeUsuario'] = $nome['nome'];
+            $i++;
         }
         return $resenhas;
     }
@@ -206,9 +210,12 @@ class conecta
     public function buscaResenhaUsuario($idUsuario)
     {
         $resenhas = ORM::for_table('resenha')->where('ID_usuario', $idUsuario)->find_many();
+        $i = 0;
         foreach ($resenhas as $resenha)
         {
-            $resenhas['nomeVinho'] = ORM::for_table('vinho')->select('nome')->where('ID_vinho', $resenha['ID_vinho'])->find_one();
+            $vinho = ORM::for_table('vinho')->where('ID_vinho', $resenha['ID_vinho'])->find_one();
+            $resenhas[$i]['nomeVinho'] = $vinho['nome'];
+            $i++;
         }
         return $resenhas;
     }

@@ -31,11 +31,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         }
     }
 
-    /*if(isset($_POST['inputavaliacao']) && $_POST['inputavaliacao'] != '')
+    if(isset($_POST['inputavaliacao']) && $_POST['inputavaliacao'] != '')
     {
-        echo $_POST['inputavaliacao'];
         $ctrUsuario->avaliar($_SESSION['id'], $_GET['id'], $_POST['inputavaliacao']);
-    }*/
+    }
 }
 ?>
 
@@ -170,10 +169,16 @@ else {
                 </div>
                 <div class="col s8 offset-s1">
                     <div class="row">
-                        <p class="light" style="font-size:30px"><i class="material-icons left yellow-text text-darken-2" style="font-size: 28px">star</i><?= $estrelas?></p>
+                        <p class="light" style="font-size:30px"><i class="material-icons left yellow-text text-darken-2" style="font-size: 28px">star</i>
+                            <?php
+                            if($estrelas)
+                            {
+                                echo $estrelas;
+                            }else echo 0;
+                            ?></p>
                         <p><b>Tipo:</b> <?=$vinho['ID_tipo']?> &nbsp; <b>Estilo:</b> <?=$vinho['ID_estilo']?> &nbsp; <b>Uva:</b> <?=$vinho['ID_uva']?></p>
                         <p><b>Região:</b> <?=$vinho['regiao']?> &nbsp; <b>País de origem:</b> <?=$vinho['ID_regiao']?></p>
-                        <p><b>Harmoniza com: </b><?php foreach($comidas as $comida){echo $comida['nome'].'<br/>';}?></p>
+                        <p><b>Harmoniza com: </b><?php foreach($comidas as $comida){echo $comida.' | ';}?></p>
                     </div>
                 </div>
             </div>
@@ -183,17 +188,21 @@ else {
                     <h5>Resenhas</h5>
                 </section>
             </div>
-            <?php foreach ($resenhas as $resenha){ ?>
+            <?php
+            if($resenhas){
+            foreach ($resenhas as $resenha){ ?>
                 <div class="divider"> </div>
                 <div class="row">
-                    <p><a href="viewVisualizarUsuario.php?id=<?=$resenha['ID_usuario']?>" class="black-text"><b><?=$resenha['nomeUsuario']?></b></a> <small><?= $resenha['datahora'] ?></small></p>
+                    <p><a href="viewVisualizarUsuario.php?id=<?=$resenha['ID_usuario']?>" class="black-text"><b><?=$resenha['nomeUsuario']?></b></a>
+                        <small>&nbsp;&nbsp;<?=$resenha['datahora'] ?></small></p>
                 </div>
                 <div class="row">
                     <blockquote>
                         <p class="light"><?=$resenha['resenha'] ?></p>
                     </blockquote>
                 </div>
-            <?php } ?>
+            <?php }
+            }?>
             <form action="viewVisualizarVinho.php?id=<?= $_GET['id'] ?>" method="post" class="col s12">
                 <div class="row">
                     <div class="input-field col s12">
@@ -226,9 +235,8 @@ else {
 
     $(function () {
         $("#rateYo").rateYo().on("rateyo.set", function (e, data) {
-            <?php
-            $ctrUsuario->avaliar($_SESSION['id'], $_GET['id'], "<script> </script>");
-            ?>
+            document.getElementById('inputavaliacao').setAttribute(value, data.rating);
+            document.forms['estrelas'].submit();
         });
     });
 
