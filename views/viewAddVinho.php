@@ -82,6 +82,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             $destino = $destino.$res->get('rotulo');
             $arquivo_tmp = $_FILES['arquivo']['tmp_name'];
             move_uploaded_file( $arquivo_tmp, $destino);
+            $idUsuario = $ctrVinho->buscaUsuario();
+            $destinoUsuario = "../images/vinhos_usuarios/".$idUsuario."-".$res->get('rotulo');
+            copy($destino, $destinoUsuario);
             header("Location:viewVisualizarVinho.php?id=".$idVinho);
         }
     }

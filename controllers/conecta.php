@@ -194,7 +194,7 @@ class conecta
         $meusVinhos = ORM::for_table('usuario_vinhos')->create();
         $meusVinhos->ID_usuario = $idUsuario;
         $meusVinhos->ID_vinho = $vinho;
-        $meusVinhos->rotulo = $idUsuario.$vinho.'.jpg';
+        $meusVinhos->rotulo = $idUsuario.'-'.$vinho.'.jpg';
         $meusVinhos->save();
     }
 
@@ -278,5 +278,10 @@ class conecta
     {
         $comidas = ORM::for_table('comida')->find_many();
         return $comidas;
+    }
+    public function buscaUsuario()
+    {
+        $res = $this->buscaUsuarioEmail($_SESSION['email']);
+        return $res;
     }
 }

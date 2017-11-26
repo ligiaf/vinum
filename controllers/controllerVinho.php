@@ -58,4 +58,11 @@ class controllerVinho
         $db->addHarmonizacao($idVinho, $idComida);
     }
 
+    public function buscaUsuario()
+    {
+        $db = new conecta();
+        $res = $db->buscaUsuario();
+        return $res;
+    }
+
 }
