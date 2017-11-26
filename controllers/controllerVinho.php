@@ -52,4 +52,11 @@ class controllerVinho
         return $res;
     }
 
+    public function buscaUsuario()
+    {
+        $db = new conecta();
+        $res = $db->buscaUsuario();
+        return $res;
+    }
+
 }

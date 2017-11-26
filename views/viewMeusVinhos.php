@@ -15,17 +15,17 @@ if(!isset($_SESSION['nome']))
 $ctrUsuario = new controllerUsuario();
 $ctrVinho = new controllerVinho();
 
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['vinho']) && ($_POST['vinho'] != '') && isset($_POST['idUsuario']) &&
-        ($_POST['idUsuario'] != '') && isset($_FILES['arquivo']) && ($_FILES['arquivo']['tmp_name'] != ''))
+        ($_POST['idUsuario'] != '') && isset($_FILES['rotulo']) && ($_FILES['rotulo']['tmp_name'] != ''))
     {
-        if ($ctrUsuario->verificaMeusVinhos($_POST['idUsuario'], $_POST['$vinho'])) {
+        if (!$ctrUsuario->verificaMeusVinhos($_POST['idUsuario'], $_POST['$vinho'])) {
             echo "<script language='JavaScript'>alert('Vinho já adicionado a sua coleção!');</script>";
         } else {
-            $rotulo = $_POST['idUsuario'].$_POST['vinho'].'.jpg';
-            $destino = '../images/vinhos/'.$rotulo;
-            echo $destino;
-            $arquivo_tmp = $_FILES['arquivo']['tmp_name'];
+            $rotulo = $_POST['idUsuario'].'-'.$_POST['vinho'].'.jpg';
+            $destino = '../images/vinhos_usuarios/'.$rotulo;
+            $arquivo_tmp = $_FILES['rotulo']['tmp_name'];
             move_uploaded_file($arquivo_tmp, $destino);
 
             $ctrUsuario->addMeuVinho($_POST['idUsuario'], $_POST['vinho']);
@@ -82,7 +82,7 @@ foreach ($meusvinhos as $meuvinho)
                     foreach ($vinhos as $vinho) { ?>
                         <div class="card small hoverable col s4 offset-s1">
                             <div class="card-image">
-                                <img class="responsive-img" src="../images/vinhos_usuarios/<?=$_SESSION['id'].$vinho['ID_vinho']?>.jpg">
+                                <img class="responsive-img" src="../images/vinhos_usuarios/<?=$_SESSION['id'].'-'.$vinho['ID_vinho']?>.jpg">
                                 <a href="viewVisualizarVinho.php?id=<?=$vinho['ID_vinho']?>" class="card-title"><?= $vinho['nome'] ?></a>
                             </div>
                             <div class="card-content">
