@@ -52,6 +52,4 @@ class controllerVinho
         return $res;
     }
 
-
-
 }

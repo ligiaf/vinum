@@ -82,7 +82,7 @@ primary key(ID_usuario, ID_vinho)
 )ENGINE=InnoDB;
 
 CREATE TABLE avaliacao(
-nota enum('1','2','3','4','5') not null,
+nota int not null,
 ID_usuario int,
 ID_vinho int,
 foreign key(ID_usuario) references usuario(ID_usuario) ON DELETE CASCADE,

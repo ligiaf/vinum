@@ -7,34 +7,36 @@ header('Content-type: text/html; charset=ISO-8859-1');
 
 session_start();
 
+$ctrUsuario= new controllerUsuario();
+$ctrVinho= new controllerVinho();
+$vinho = $ctrVinho->buscaVinhoID($_GET['id']);
+$comidas = $ctrVinho->buscaComidasVinho($_GET['id']);
+$resenhas = $ctrVinho->buscaResenhaVinho($_GET['id']);
+$estrelas = $ctrVinho->calculaEstrelas($_GET['id']);
+$avUsuario = $ctrUsuario->buscaAvaliacaoUsuario($_SESSION['id'], $_GET['id']);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
-    $ctrUsuario= new controllerUsuario();
-    if($ctrUsuario->verificaMeusVinhos($_SESSION['id'], $_GET['id']))
+    if(isset($_POST['txtResenha']) && $_POST['txtResenha'] != '')
     {
-        echo "<script language='JavaScript'>alert('Você precisa adicionar este vinho aos seus vinhos para escrever uma resenha!');</script>";
-    }
-    else
-    {
-        if(isset($_POST['txtResenha']) && $_POST['txtResenha'] != '')
+        if($ctrUsuario->verificaMeusVinhos($_SESSION['id'], $_GET['id']))
+        {
+            echo "<script language='JavaScript'>alert('Você precisa adicionar este vinho aos seus vinhos para escrever uma resenha!');</script>";
+        }
+        else
         {
             $ctrResenha = new controllerResenha();
             $datahora = new DateTime();
             $ctrResenha->cadastraResenha($_SESSION['id'], $_GET['id'], $_POST['txtResenha'], date_format($datahora, 'Y-m-d H:i:s'));
         }
     }
-}
 
-if(isset($_GET['id']))
-{
-    $ctrVinho= new controllerVinho();
-    $vinho = $ctrVinho->buscaVinhoID($_GET['id']);
-    $comidas = $ctrVinho->buscaComidasVinho($_GET['id']);
-    $resenhas = $ctrVinho->buscaResenhaVinho($_GET['id']);
-    $estrelas = $ctrVinho->calculaEstrelas($_GET['id']);
+    if(isset($_POST['inputavaliacao']) && $_POST['inputavaliacao'] != '')
+    {
+        echo $_POST['inputavaliacao'];
+        $ctrUsuario->avaliar($_SESSION['id'], $_GET['id'], $_POST['inputavaliacao']);
+    }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +50,7 @@ if(isset($_GET['id']))
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="../css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="css/nouislider.css.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link rel="stylesheet" href="../css/jquery.rateyo.min.css"/>
 </head>
 <body style="background-image: radial-gradient(#ffffff,#2e525a)">
 
@@ -160,12 +162,9 @@ else {
                         <h4><b><?= $vinho['nome']; ?></b></h4>
                     </div>
                     <div class="right-align col col s4">
-                        <form>
-                            <a href="#"><i class="material-icons grey-text">star</i></a>
-                            <a href="#"><i class="material-icons grey-text">star</i></a>
-                            <a href="#"><i class="material-icons grey-text">star</i></a>
-                            <a href="#"><i class="material-icons grey-text">star</i></a>
-                            <a href="#"><i class="material-icons grey-text">star</i></a>
+                        <form id="estrelas" method="post" action="viewVisualizarVinho.php?id=<?=$_GET['id']?>">
+                            <input id="inputavaliacao" type="hidden" value="">
+                            <div id="rateYo"></div>
                         </form>
                     </div>
                 </div>
@@ -214,6 +213,23 @@ else {
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="../js/materialize.js"></script>
 <script src="../js/init.js"></script>
-<script src="../js/nouislider.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/jquery.rateyo.js"></script>
+<script>
+    $(function () {
+        $("#rateYo").rateYo({
+            rating: <?php if($avUsuario['nota']) {echo $avUsuario['nota'];} else echo 0;?>,
+            fullStar: true,
+            ratedFill: "#004d40"
+        });
+    });
+
+    $(function () {
+        $("#rateYo").rateYo().on("rateyo.set", function (e, data) {
+            document.getElementById('inputavaliacao').value = data;
+            document.getElementById('estrelas').submit();
+        });
+    });
+</script>
 </body>
 </html>

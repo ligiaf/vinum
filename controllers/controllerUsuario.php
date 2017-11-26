@@ -3,7 +3,6 @@
 require_once 'conecta.php';
 require_once '../vendor/autoload.php';
 
-
 class controllerUsuario
 {
     public function cadastraUsuario($nome, $email, $senha)
@@ -60,6 +59,25 @@ class controllerUsuario
         $db = new conecta();
         $res = $db->buscaResenhaUsuario($idUsuario);
         return $res;
+    }
+
+    public function buscaAvaliacaoUsuario($idUsuario, $idVinho)
+    {
+        $db = new conecta();
+        $res = $db->buscaAvaliacaoUsuario($idUsuario, $idVinho);
+        return $res;
+    }
+
+    public function avaliar($idUsuario, $idVinho, $nota)
+    {
+        $db = new conecta();
+        $db->avaliar($idUsuario, $idVinho, $nota);
+    }
+
+    public function alteraAvaliacao($idUsuario, $idVinho, $nota)
+    {
+        $db = new conecta();
+        $db->alteraAvaliacao($idUsuario, $idVinho, $nota);
     }
 
 }

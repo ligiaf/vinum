@@ -43,6 +43,27 @@ class conecta
         return $usuario['ID_usuario'];
     }
 
+    public function buscaAvaliacaoUsuario($idUsuario, $idVinho)
+    {
+        $nota = ORM::for_table('avaliacao')->select('nota')->where(array('ID_usuario' => $idUsuario, 'ID_vinho' => $idVinho))->find_one();
+        return $nota;
+    }
+
+    public function avaliar($idUsuario, $idVinho, $nota)
+    {
+        $avaliacao = ORM::for_table('avaliacao')->create();
+        $avaliacao->ID_usuario = $idUsuario;
+        $avaliacao->ID_vinho = $idVinho;
+        $avaliacao->nota = $nota;
+        $avaliacao->save();
+    }
+
+    public function alteraAvaliacao($idUsuario, $idVinho, $nota)
+    {
+        $avaliacao = ORM::for_table('avaliacao')->where(array('ID_usuario' => $idUsuario, 'ID_vinho' => $idVinho))->set('nota', $nota);
+        $avaliacao->save();
+    }
+
     // VINHOS
 
     public function listaVinhos()
@@ -151,6 +172,7 @@ class conecta
     public function buscaComidasVinho($idVinho)
     {
         $comidas = ORM::for_table('vinho_comida')->where('ID_vinho', $idVinho)->find_many();
+        $res = array();
         foreach ($comidas as $comida)
         {
             $res = ORM::for_table('comida')->select('nome')->where('ID_comida', $comida['ID_comida'])->find_one();
