@@ -154,7 +154,7 @@ else {
         <div class="card-panel grey lighten-3">
             <div class="row col s12">
                 <div class="card-panel white center col s3" style="padding-top: 10px; padding-bottom: 8px">
-                    <img src="../images/vinhos/<?=$vinho['ID_vinho']?>.jpg" alt="" class="responsive-img">
+                    <img src="../images/vinhos/<?=$vinho['rotulo']?>" alt="" class="responsive-img">
                 </div>
                 <div class="col s9 valign-wrapper">
                     <div class="col s6 offset-s1 left-align">

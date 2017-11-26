@@ -41,10 +41,10 @@ class controllerUsuario
         return $res;
     }
 
-    public function addMeuVinho($idUsuario, $vinho, $rotulo)
+    public function addMeuVinho($idUsuario, $vinho)
     {
         $db = new conecta();
-        $db->addMeuVinho($idUsuario, $vinho, $rotulo);
+        $db->addMeuVinho($idUsuario, $vinho);
     }
 
     public function buscaMeusVinhos($id)
