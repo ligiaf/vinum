@@ -114,15 +114,27 @@ class conecta
         $addvinho->ID_estilo = $vinho->getIdEstilo();
         $addvinho->ID_uva = $vinho->getIdUva();
         $addvinho->save();
-
+        $rotulo=''.$addvinho->get(ID_vinho).'.jpg';
+        $id = intval($addvinho->get(ID_vinho));
+        //var_dump($rotulo);
+        //var_dump($addvinho->get(ID_vinho));
+        $addvinho = $this->atualizaRotulo($id,$rotulo);
         $idUsuario = $this->buscaUsuarioEmail($_SESSION['email']);
         //$res = $this->buscaVinho($vinho->getNome());
-        $this->addMeuVinho($idUsuario, $addvinho->id, $vinho->getRotulo());
-        $this->cadastraComidaVinho($addvinho->id, $arrayComidas);
+        $this->addMeuVinho($idUsuario, $addvinho->get(ID_vinho) , $vinho->getRotulo());
+        $this->cadastraComidaVinho($addvinho->ID_vinho, $arrayComidas);
 
         return $addvinho;
     }
 
+    public function atualizaRotulo($id,$rotulo)
+    {
+
+        $atualizaVinnho = ORM::for_table('vinho')->find_one($id);
+        $atualizaVinnho->set('rotulo',$rotulo);
+        $atualizaVinnho->save();
+        return $atualizaVinnho;
+    }
     public function cadastraComidaVinho($idVinho, $arrayComidas=array())
     {
         foreach($arrayComidas as $idComida)
