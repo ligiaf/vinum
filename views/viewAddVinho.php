@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         if($res)
         {
             $idVinho = $res->get('id');
-            $destino = 'C:\wamp64\www\com222\vinum\images\vinhos'.$idVinho.'.jpg';
+            $destino = "..\images\vinhos'".$idVinho.'.jpg';
             $arquivo_tmp = $_FILES['arquivo']['tmp_name'];
             move_uploaded_file( $arquivo_tmp, $destino);
             header("Location:viewVisualizarVinho.php?id=".$idVinho);
