@@ -30,33 +30,6 @@ $comidas = $ctrComida->buscaComidas();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
-    /*echo '<br/>titulo <br/>';
-    var_dump($_POST['txtTitulo']);
-    echo '<br/>vinicola <br/>';
-    var_dump($_POST['txtVinicola']);
-    echo '<br/>pais <br/>';
-    var_dump($_POST['selectPais']);
-    echo '<br/>regiao <br/>';
-    var_dump($_POST['txtRegiao']);
-    echo '<br/>tipo <br/>';
-    var_dump($_POST['selectTipo']);
-    echo '<br/>estilo <br/>';
-    var_dump($_POST['selectEstilo']);
-    echo '<br/>uva <br/>';
-    var_dump($_POST['selectUva']);
-    echo '<br/>preco <br/>';
-    var_dump($_POST['txtPreco']);
-    echo '<br/>comidas <br/>';
-    var_dump($_POST['selectComida']);
-    echo '<br/>rotulo <br/>';
-    var_dump($_POST['txtRotulo']);
-    echo '<br/>Arquivo erro <br/>';
-    var_dump($_FILES['arquivo']['error']);
-    echo '<br/>Arquivo nome <br/>';
-    var_dump($_FILES['arquivo']['tmp_name']);
-    if(isset($_FILES['arquivo'])){
-        echo '<br/>teste if 1<br/>';
-    }*/
     if(((isset($_POST['txtTitulo'])) && ($_POST['txtTitulo'] != '')) &&
         ((isset($_POST['txtVinicola']) && $_POST['txtVinicola'] != '')) &&
         ((isset($_POST['selectPais']) && $_POST['selectPais'] != '')) &&
@@ -72,11 +45,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         $res = $ctrVinho->cadastraVinho($_POST['txtTitulo'], $_POST['txtRotulo'], $_POST['txtVinicola'], $_POST['txtRegiao'],
             $_POST['txtPreco'], $_POST['selectPais'], $_POST['selectTipo'], $_POST['selectEstilo'],
             $_POST['selectUva'], $_POST['selectComida']);
-        //($nomeVinho, $rotulo, $produtor, $regiao, $preco, $idRegiao, $idTipo, $idEstilo, $idUva, $arrayIDComida)
+
         if($res)
         {
             $idVinho = $res->get('id');
-            $destino = "..\images\vinhos'".$idVinho.'.jpg';
+            $destino = "../images/vinhos/".$idVinho.".jpg";
             $arquivo_tmp = $_FILES['arquivo']['tmp_name'];
             move_uploaded_file( $arquivo_tmp, $destino);
             header("Location:viewVisualizarVinho.php?id=".$idVinho);

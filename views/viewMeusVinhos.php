@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo "<script language='JavaScript'>alert('Vinho já adicionado a sua coleção!');</script>";
         } else {
             $rotulo = $_POST['idUsuario'].$_POST['vinho'];
-            $destino = '../images/'.$rotulo;
+            $destino = '../images/vinhos/'.$rotulo;
             $arquivo_tmp = $_FILES['arquivo']['tmp_name'];
             move_uploaded_file($arquivo_tmp, $destino);
 
@@ -85,7 +85,7 @@ if(isset($_GET['id']))
                     foreach ($vinhos as $vinho) { ?>
                         <div class="card small hoverable col s3">
                             <div class="card-image">
-                                <img class="responsive-img" src="../images/vinhos/<?= $vinho['rotulo'] ?>">
+                                <img class="responsive-img" src="../images/vinhos/<?= $_GET['id'].$vinho['ID_vinho'] ?>">
                                 <a href="#" class="card-title"><?= $vinho['nome'] ?></a>
                             </div>
                             <div class="card-content">

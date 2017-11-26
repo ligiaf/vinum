@@ -31,11 +31,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         }
     }
 
-    if(isset($_POST['inputavaliacao']) && $_POST['inputavaliacao'] != '')
+    /*if(isset($_POST['inputavaliacao']) && $_POST['inputavaliacao'] != '')
     {
         echo $_POST['inputavaliacao'];
         $ctrUsuario->avaliar($_SESSION['id'], $_GET['id'], $_POST['inputavaliacao']);
-    }
+    }*/
 }
 ?>
 
@@ -155,7 +155,7 @@ else {
         <div class="card-panel grey lighten-3">
             <div class="row col s12">
                 <div class="card-panel white center col s3" style="padding-top: 10px; padding-bottom: 8px">
-                    <img src="../images/vinhos/<?=$vinho['rotulo']?>" alt="" class="responsive-img">
+                    <img src="../images/vinhos/<?=$vinho['ID_vinho']?>.jpg" alt="" class="responsive-img">
                 </div>
                 <div class="col s9 valign-wrapper">
                     <div class="col s6 offset-s1 left-align">
@@ -163,7 +163,7 @@ else {
                     </div>
                     <div class="right-align col col s4">
                         <form id="estrelas" method="post" action="viewVisualizarVinho.php?id=<?=$_GET['id']?>">
-                            <input id="inputavaliacao" type="hidden" value="">
+                            <input id="inputavaliacao" type="hidden">
                             <div id="rateYo"></div>
                         </form>
                     </div>
@@ -215,7 +215,7 @@ else {
 <script src="../js/init.js"></script>
 <script src="../js/jquery.min.js"></script>
 <script src="../js/jquery.rateyo.js"></script>
-<script>
+<script language="Javascript">
     $(function () {
         $("#rateYo").rateYo({
             rating: <?php if($avUsuario['nota']) {echo $avUsuario['nota'];} else echo 0;?>,
@@ -226,10 +226,12 @@ else {
 
     $(function () {
         $("#rateYo").rateYo().on("rateyo.set", function (e, data) {
-            document.getElementById('inputavaliacao').value = data;
-            document.getElementById('estrelas').submit();
+            <?php
+            $ctrUsuario->avaliar($_SESSION['id'], $_GET['id'], "<script> </script>");
+            ?>
         });
     });
+
 </script>
 </body>
 </html>
