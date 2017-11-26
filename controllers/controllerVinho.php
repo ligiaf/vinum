@@ -52,4 +52,10 @@ class controllerVinho
         return $res;
     }
 
+    public function addHarmonizacao($idVinho, $idComida)
+    {
+        $db = new conecta();
+        $db->addHarmonizacao($idVinho, $idComida);
+    }
+
 }

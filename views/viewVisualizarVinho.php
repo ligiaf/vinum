@@ -3,16 +3,19 @@ require_once '../vendor/autoload.php';
 require_once '../controllers/controllerVinho.php';
 require_once '../controllers/controllerUsuario.php';
 require_once '../controllers/controllerResenha.php';
+require_once '../controllers/controllerComida.php';
 header('Content-type: text/html; charset=ISO-8859-1');
 
 session_start();
 
 $ctrUsuario= new controllerUsuario();
-$ctrVinho= new controllerVinho();
+$ctrVinho = new controllerVinho();
+$ctrComida = new controllerComida();
 $vinho = $ctrVinho->buscaVinhoID($_GET['id']);
 $comidas = $ctrVinho->buscaComidasVinho($_GET['id']);
 $resenhas = $ctrVinho->buscaResenhaVinho($_GET['id']);
 $estrelas = $ctrVinho->calculaEstrelas($_GET['id']);
+$todasComidas = $ctrComida->buscaComidas();
 $avUsuario = $ctrUsuario->buscaAvaliacaoUsuario($_SESSION['id'], $_GET['id']);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -181,7 +184,7 @@ else {
                         <form id="avalia" method="post" action="viewVisualizarVinho.php?id=<?=$vinho['ID_vinho']?>">
                             <input name="input" id="inputavaliacao" type="hidden" value="">
                         </form>
-                            <div id="rateYo"></div>
+                        <div id="rateYo"></div>
                     </div>
                 </div>
                 <div class="col s8 offset-s1">
@@ -196,9 +199,22 @@ else {
                         <p><b>Tipo:</b> <?=$vinho['ID_tipo']?> &nbsp; <b>Estilo:</b> <?=$vinho['ID_estilo']?> &nbsp; <b>Uva:</b> <?=$vinho['ID_uva']?></p>
                         <p><b>Região:</b> <?=$vinho['regiao']?> &nbsp; <b>País de origem:</b> <?=$vinho['ID_regiao']?></p>
                         <p><b>Harmoniza com: </b><?php foreach($comidas as $comida){echo $comida.' | ';}?> &nbsp;&nbsp;
-                        <a href="" class="btn-floating waves-effect waves-light teal darken-4"><i class="material-icons">mode_edit</i></a></p>
+                            <a href="#" id="editar" class="btn-floating waves-effect waves-light teal darken-4"><i class="material-icons">mode_edit</i></a></p>
                     </div>
                 </div>
+            </div>
+            <div class="row">
+                <form id="addHarmonizacao" method="post" action="viewVisualizarVinho.php?id=<?=$_GET['id']?>">
+                    <div class="file-field input-field col s6">
+                        <select id="select" name="select">
+                            <option value="" disabled selected>Selecionar</option>
+                            <?php
+                            foreach ($todasComidas as $comida){
+                                echo "<option value=".$comida['ID_comida'].">".$comida['nome']."</option>";
+                            }?>
+                        </select>
+                    </div>
+                </form>
             </div>
             <div class="row">
                 <br/>
@@ -208,20 +224,20 @@ else {
             </div>
             <?php
             if($resenhas){
-            foreach ($resenhas as $resenha){ ?>
-                <div class="divider"> </div>
-                <div class="row">
-                    <p><a href="viewVisualizarUsuario.php?id=<?=$resenha['ID_usuario']?>" class="black-text"><b><?=$resenha['nomeUsuario']?></b></a>
-                        <small>&nbsp;&nbsp;<?=$resenha['datahora'] ?></small></p>
-                </div>
-                <div class="row">
-                    <blockquote>
-                        <p class="light"><?=$resenha['resenha'] ?></p>
-                    </blockquote>
-                </div>
-            <?php }
+                foreach ($resenhas as $resenha){ ?>
+                    <div class="divider"> </div>
+                    <div class="row">
+                        <p><a href="viewVisualizarUsuario.php?id=<?=$resenha['ID_usuario']?>" class="black-text"><b><?=$resenha['nomeUsuario']?></b></a>
+                            <small>&nbsp;&nbsp;<?=$resenha['datahora'] ?></small></p>
+                    </div>
+                    <div class="row">
+                        <blockquote>
+                            <p class="light"><?=$resenha['resenha'] ?></p>
+                        </blockquote>
+                    </div>
+                <?php }
             }?>
-            <form action="viewVisualizarVinho.php?id=<?= $_GET['id'] ?>" method="post" class="col s12">
+            <form action="viewVisualizarVinho.php?id=<?= $_GET['id']?>" method="post" class="col s12">
                 <div class="row">
                     <div class="input-field col s12">
                         <textarea name="txtResenha" id="textarea1" class="materialize-textarea"></textarea>
@@ -258,6 +274,13 @@ else {
             $("#avalia").submit();
         });
     });
+
+    $(function () {
+        $("#editar").click(function () {
+            $("#select").show();
+        }
+    });
+
 </script>
 </body>
 </html>

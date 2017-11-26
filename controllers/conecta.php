@@ -164,8 +164,10 @@ class conecta
 
     public function addHarmonizacao($idVinho, $idComida)
     {
-
         $addHarmonizacao = ORM::for_table('vinho_comida')->create();
+        $addHarmonizacao->ID_vinho = $idVinho;
+        $addHarmonizacao->ID_comida = $idComida;
+        $addHarmonizacao->save();
     }
 
 
