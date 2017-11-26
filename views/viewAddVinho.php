@@ -49,27 +49,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     echo '<br/>comidas <br/>';
     var_dump($_POST['selectComida']);
     echo '<br/>rotulo <br/>';
-    var_dump($_POST['txtRotulo']);*/
-
-    if(isset($_POST['txtTitulo']) && $_POST['txtTitulo'] != '' &&
-        isset($_POST['txtVinicola']) && $_POST['txtVinicola'] != '' &&
-        isset($_POST['selectPais']) && $_POST['selectPais'] != '' &&
-        isset($_POST['txtPreco']) && $_POST['txtPreco'] != '' &&
-        isset($_POST['txtRegiao']) && $_POST['txtRegiao'] != '' &&
-        isset($_POST['selectTipo']) && $_POST['selectTipo'] != '' &&
-        isset($_POST['selectEstilo']) && $_POST['selectEstilo'] != '' &&
-        isset($_POST['selectUva']) && $_POST['selectUva'] != '' &&
-        isset($_POST['selectComida']) && $_POST['selectComida'] != '' &&
-        isset($_FILES['arquivo']) && $_FILES['arquivo'] != '')
+    var_dump($_POST['txtRotulo']);
+    echo '<br/>Arquivo erro <br/>';
+    var_dump($_FILES['arquivo']['error']);
+    echo '<br/>Arquivo nome <br/>';
+    var_dump($_FILES['arquivo']['tmp_name']);
+    if(isset($_FILES['arquivo'])){
+        echo '<br/>teste if 1<br/>';
+    }*/
+    if(((isset($_POST['txtTitulo'])) && ($_POST['txtTitulo'] != '')) &&
+        ((isset($_POST['txtVinicola']) && $_POST['txtVinicola'] != '')) &&
+        ((isset($_POST['selectPais']) && $_POST['selectPais'] != '')) &&
+        ((isset($_POST['txtPreco']) && $_POST['txtPreco'] != '')) &&
+        ((isset($_POST['txtRegiao']) && $_POST['txtRegiao'] != '')) &&
+        ((isset($_POST['selectTipo']) && $_POST['selectTipo'] != '')) &&
+        ((isset($_POST['selectEstilo']) && $_POST['selectEstilo'] != '')) &&
+        ((isset($_POST['selectUva']) && $_POST['selectUva'] != '')) &&
+        ((isset($_POST['selectComida']) && $_POST['selectComida'] != '')) &&
+        ((isset($_FILES['arquivo']) && $_FILES['arquivo']['tmp_name'] != '')))
     {
         $ctrVinho = new controllerVinho();
-        $res = $ctrVinho->cadastraVinho($_POST['txtTitulo'], $_POST['txtRotulo'], $_POST['txtVinicola'], $_POST['selectPais'],
-            $_POST['txtPreco'], $_POST['txtRegiao'], $_POST['selectTipo'], $_POST['selectEstilo'],
+        $res = $ctrVinho->cadastraVinho($_POST['txtTitulo'], $_POST['txtRotulo'], $_POST['txtVinicola'], $_POST['txtRegiao'],
+            $_POST['txtPreco'], $_POST['selectPais'], $_POST['selectTipo'], $_POST['selectEstilo'],
             $_POST['selectUva'], $_POST['selectComida']);
+        //($nomeVinho, $rotulo, $produtor, $regiao, $preco, $idRegiao, $idTipo, $idEstilo, $idUva, $arrayIDComida)
         if($res)
         {
-            $idVinho = $res['ID_vinho'];
-            $destino = 'images/vinhos/'.$idVinho.'jpg';
+            $idVinho = $res->get('id');
+            $destino = 'C:\wamp64\www\com222\vinum\images\vinhos'.$idVinho.'.jpg';
             $arquivo_tmp = $_FILES['arquivo']['tmp_name'];
             move_uploaded_file( $arquivo_tmp, $destino);
             header("Location:viewVisualizarVinho.php?id=".$idVinho);
@@ -125,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
         <!-- ISSO APARECE SE NAO TIVER VINHO CADASTRADO -->
         <div class="row" id="cadastro">
-            <form action="viewAddVinho.php" method="post">
+            <form enctype="multipart/form-data" action="viewAddVinho.php" method="post">
                 <section>
                     <h5>Adicione um novo vinho</h5>
                 </section>
@@ -190,7 +197,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                         <label>Tipo de uva</label>
                     </div>
                     <div class="file-field input-field col s6">
-                        <select multiple name="selectComida">
+                        <select multiple name="selectComida[]">
                             <option value="" disabled selected>Selecionar</option>
                             <?php
                             foreach ($comidas as $comida){
@@ -208,7 +215,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                     <div class="file-field input-field col s6">
                         <div class="btn grey">
                             <span>Rótulo: </span>
-                            <input type="file" name="arquivo" >
+                            <input name="arquivo" type="file" />
                         </div>
                         <div class="file-path-wrapper">
                             <input class="file-path validate" type="text" name="txtRotulo" value="">

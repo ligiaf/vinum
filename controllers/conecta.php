@@ -80,7 +80,7 @@ class conecta
         return $vinho;
     }
 
-    public function cadastraVinho(classes\vinho $vinho, $arrayComidas)
+    public function cadastraVinho(classes\vinho $vinho, $arrayComidas=array())
     {
         $addvinho = ORM::for_table('vinho')->create();
         $addvinho->nome = $vinho->getNome();
@@ -95,14 +95,14 @@ class conecta
         $addvinho->save();
 
         $idUsuario = $this->buscaUsuarioEmail($_SESSION['email']);
-        $res = $this->buscaVinho($vinho->getNome());
-        $this->addMeuVinho($idUsuario, $res['ID_vinho'], $vinho->getRotulo());
-        $this->cadastraComidaVinho($res['ID_vinho'], $arrayComidas);
+        //$res = $this->buscaVinho($vinho->getNome());
+        $this->addMeuVinho($idUsuario, $addvinho->id, $vinho->getRotulo());
+        $this->cadastraComidaVinho($addvinho->id, $arrayComidas);
 
         return $addvinho;
     }
 
-    public function cadastraComidaVinho($idVinho, $arrayComidas)
+    public function cadastraComidaVinho($idVinho, $arrayComidas=array())
     {
         foreach($arrayComidas as $idComida)
         {
