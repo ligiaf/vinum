@@ -68,6 +68,13 @@ class controllerUsuario
         return $res;
     }
 
+    public function verificaAvaliacao($idUsuario, $idVinho)
+    {
+        $db = new conecta();
+        $res = $db->verificaAvaliacao($idUsuario, $idVinho);
+        return $res;
+    }
+
     public function avaliar($idUsuario, $idVinho, $nota)
     {
         $db = new conecta();

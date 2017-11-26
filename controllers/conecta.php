@@ -49,6 +49,16 @@ class conecta
         return $nota;
     }
 
+    public function verificaAvaliacao($idUsuario, $idVinho)
+    {
+        $res = ORM::for_table('avaliacao')->where(array('ID_usuario' => $idUsuario, 'ID_vinho' => $idVinho))->find_one();
+        if($res)
+        {
+            return true;
+        }
+        return false;
+    }
+
     public function avaliar($idUsuario, $idVinho, $nota)
     {
         $avaliacao = ORM::for_table('avaliacao')->create();
@@ -60,7 +70,8 @@ class conecta
 
     public function alteraAvaliacao($idUsuario, $idVinho, $nota)
     {
-        $avaliacao = ORM::for_table('avaliacao')->where(array('ID_usuario' => $idUsuario, 'ID_vinho' => $idVinho))->set('nota', $nota);
+        $avaliacao = ORM::for_table('avaliacao')->where(array('ID_usuario' => $idUsuario, 'ID_vinho' => $idVinho))->find_one();
+        $avaliacao->set('nota',$nota);
         $avaliacao->save();
     }
 
@@ -149,6 +160,12 @@ class conecta
     {
         $estrelas = ORM::for_table('avaliacao')->where('ID_vinho', $idVinho)->avg('nota');
         return $estrelas;
+    }
+
+    public function addHarmonizacao($idVinho, $idComida)
+    {
+
+        $addHarmonizacao = ORM::for_table('vinho_comida')->create();
     }
 
 

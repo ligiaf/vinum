@@ -31,9 +31,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         }
     }
 
-    if(isset($_POST['inputavaliacao']) && $_POST['inputavaliacao'] != '')
+    if(isset($_POST['input']) && $_POST['input'] != '')
     {
-        $ctrUsuario->avaliar($_SESSION['id'], $_GET['id'], $_POST['inputavaliacao']);
+        if($ctrUsuario->verificaMeusVinhos($_SESSION['id'], $_GET['id']))
+        {
+            echo "<script language='JavaScript'>alert('Você precisa adicionar este vinho aos seus vinhos para avaliá-lo!');</script>";
+        }
+        else
+        {
+            if($ctrUsuario->verificaAvaliacao($_SESSION['id'], $_GET['id']))
+            {
+                $ctrUsuario->alteraAvaliacao($_SESSION['id'], $_GET['id'], $_POST['input']);
+                header("Location:viewVisualizarVinho.php?id=".$_GET['id']);
+            }
+            else{
+                $ctrUsuario->avaliar($_SESSION['id'], $_GET['id'], $_POST['input']);
+                header("Location:viewVisualizarVinho.php?id=".$_GET['id']);
+            }
+        }
+
+
     }
 }
 ?>
@@ -161,10 +178,10 @@ else {
                         <h4><b><?= $vinho['nome']; ?></b></h4>
                     </div>
                     <div class="right-align col col s4">
-                        <form id="estrelas" method="post" action="viewVisualizarVinho.php?id=<?=$_GET['id']?>">
-                            <input id="inputavaliacao" type="hidden">
-                            <div id="rateYo"></div>
+                        <form id="avalia" method="post" action="viewVisualizarVinho.php?id=<?=$vinho['ID_vinho']?>">
+                            <input name="input" id="inputavaliacao" type="hidden" value="">
                         </form>
+                            <div id="rateYo"></div>
                     </div>
                 </div>
                 <div class="col s8 offset-s1">
@@ -178,7 +195,8 @@ else {
                             ?></p>
                         <p><b>Tipo:</b> <?=$vinho['ID_tipo']?> &nbsp; <b>Estilo:</b> <?=$vinho['ID_estilo']?> &nbsp; <b>Uva:</b> <?=$vinho['ID_uva']?></p>
                         <p><b>Região:</b> <?=$vinho['regiao']?> &nbsp; <b>País de origem:</b> <?=$vinho['ID_regiao']?></p>
-                        <p><b>Harmoniza com: </b><?php foreach($comidas as $comida){echo $comida.' | ';}?></p>
+                        <p><b>Harmoniza com: </b><?php foreach($comidas as $comida){echo $comida.' | ';}?> &nbsp;&nbsp;
+                        <a href="" class="btn-floating waves-effect waves-light teal darken-4"><i class="material-icons">mode_edit</i></a></p>
                     </div>
                 </div>
             </div>
@@ -235,11 +253,11 @@ else {
 
     $(function () {
         $("#rateYo").rateYo().on("rateyo.set", function (e, data) {
-            document.getElementById('inputavaliacao').setAttribute(value, data.rating);
-            document.forms['estrelas'].submit();
+            var nota = data.rating;
+            $("#inputavaliacao").val(nota);
+            $("#avalia").submit();
         });
     });
-
 </script>
 </body>
 </html>

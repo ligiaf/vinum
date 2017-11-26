@@ -136,7 +136,7 @@
         protected static $_default_config = array(
             'connection_string' => 'sqlite::memory:',
             'id_column' => 'id',
-            'id_column_overrides' => array('vinho'=>'ID_vinho'),
+            'id_column_overrides' => array('vinho'=>'ID_vinho', 'avaliacao'=>'ID_usuario', 'ID_vinho'),
             'error_mode' => PDO::ERRMODE_EXCEPTION,
             'username' => null,
             'password' => null,

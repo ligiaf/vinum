@@ -10,12 +10,6 @@ header('Content-type: text/html; charset=ISO-8859-1');
 
 session_start();
 
-if(!isset($_SESSION['nome']))
-{
-    header('Location:index.php');
-    exit;
-}
-
 $ctrPais = new controllerPais();
 $ctrTipo = new controllerTipoVinho();
 $ctrEstilo = new controllerEstilo();
@@ -156,8 +150,7 @@ else {
                     </section>
                     <br>
                     <?php
-                    $tiposVinho = ORM::for_table('tipo_vinho')->find_many();
-                    foreach ($tiposVinho as $tipo){
+                    foreach ($tipos as $tipo){
                         echo '<a href="#"><div class="chip">'.$tipo['nome'].'</div></a>';
                     }
                     //QUANDO SELECIONADO OS CHIPS FICAM NESSA COR <a href="#"><div class="chip teal white-text">'.$tipo['nome'].'</div></a>
@@ -183,7 +176,6 @@ else {
                     </section>
                     <br>
                     <?php
-                    $uvas = ORM::for_table('uva')->find_many();
                     foreach ($uvas as $uva){
                         echo '<a href="#"><div class="chip">'.$uva['tipo'].'</div></a>';
                     }
@@ -196,9 +188,8 @@ else {
                     <br>
                     <div class="chip">Brasil</div>
                     <?php
-                    $regioes = ORM::for_table('regiao')->find_many();
-                    foreach ($regioes as $regiao){
-                        echo '<a href="#"><div class="chip">'.$regiao['nome'].'</div></a>';
+                    foreach ($paises as $pais){
+                        echo '<a href="#"><div class="chip">'.$pais['nome'].'</div></a>';
                     }
                     ?>
                     <br>
@@ -208,7 +199,6 @@ else {
                     </section>
                     <br>
                     <?php
-                    $estilos = ORM::for_table('estilo')->find_many();
                     foreach ($estilos as $estilo){
                         echo '<a href="#"><div class="chip">'.$estilo['nome'].'</div></a>';
                     }
@@ -220,7 +210,6 @@ else {
                     </section>
                     <br>
                     <?php
-                    $comidas = ORM::for_table('comida')->find_many();
                     foreach ($comidas as $comida){
                         echo '<a href="#"><div class="chip">'.$comida['nome'].'</div></a>';
                     }
@@ -235,7 +224,7 @@ else {
                     <br>
                     <div class="card horizontal small">
                         <div class="card-image">
-                            <img class="responsive-img" src="../images/vinhos/vinho6.jpg">
+                            <img class="responsive-img" src="../images/vinhos/6.jpg">
                         </div>
                         <div class="card-stacked">
                             <a href="viewVisualizarVinho.php"> <h4 class="header teal-text">&nbsp; Nome vinho</h4> </a>
@@ -249,7 +238,7 @@ else {
                     </div>
                     <div class="card horizontal small">
                         <div class="card-image">
-                            <img class="responsive-img" src="../images/vinhos/vinho7.jpg">
+                            <img class="responsive-img" src="../images/vinhos/7.jpg">
                         </div>
                         <div class="card-stacked">
                             <a href="viewVisualizarVinho.php"> <h4 class="header teal-text">&nbsp; Nome vinho</h4> </a>
@@ -265,38 +254,38 @@ else {
             </div>
         </div>
     </div>
+</div>
 
+<!--  Scripts-->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="../js/materialize.js"></script>
+<script src="../js/init.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/10.1.0/nouislider.min.js"></script>
+<script src="../wnumb-1.1.0/wNumb.js"></script>
+<script>
+    var sliderPreco = document.getElementById('sliderPreco');
 
-    <!--  Scripts-->
-    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="../js/materialize.js"></script>
-    <script src="../js/init.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/10.1.0/nouislider.min.js"></script>
-    <script src="../wnumb-1.1.0/wNumb.js"></script>
-    <script>
-        var sliderPreco = document.getElementById('sliderPreco');
+    noUiSlider.create(sliderPreco, {
+        start: [300, 1000],
+        connect: true,
+        tooltips: [wNumb({ decimals: 0 }), wNumb({ decimals: 0 })],
+        range: {
+            'min': 0,
+            'max': 1300
+        }
+    });
 
-        noUiSlider.create(sliderPreco, {
-            start: [300, 1000],
-            connect: true,
-            tooltips: [wNumb({ decimals: 0 }), wNumb({ decimals: 0 })],
-            range: {
-                'min': 0,
-                'max': 1300
-            }
-        });
+    var sliderAv = document.getElementById('sliderAvaliacao');
 
-        var sliderAv = document.getElementById('sliderAvaliacao');
-
-        noUiSlider.create(sliderAv, {
-            start: [3],
-            connect: [false, true],
-            tooltips: [wNumb({ decimals: 1 })],
-            range: {
-                'min': 1,
-                'max': 5
-            }
-        });
-    </script>
+    noUiSlider.create(sliderAv, {
+        start: [3],
+        connect: [false, true],
+        tooltips: [wNumb({ decimals: 1 })],
+        range: {
+            'min': 1,
+            'max': 5
+        }
+    });
+</script>
 </body>
 </html>
