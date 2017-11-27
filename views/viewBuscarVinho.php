@@ -47,8 +47,12 @@ if(isset($_GET['maiorPreco'])){
 if(isset($_GET['estrelas'])){
     $estrelas = $_GET['estrelas'];
 }
-if(isset($_GET['tipoVinho'])){
+if(isset($_GET['tipoVinho'])&& $_GET['tipoVinho']!= ','){
     $tipo_vinho = explode(',',$_GET['tipoVinho']);
+    $key = array_search(',', $tipo_vinho);
+    if($key!==false){
+        unset($tipo_vinho[$key]);
+    }
 }
 if(isset($_GET['regiaoVinho'])&& $_GET['regiaoVinho']!= ','){
     $regiao_vinho = explode(',',$_GET['regiaoVinho']);
@@ -92,6 +96,9 @@ if(!$estilo_vinho){
 }
 if(!$harmonizacao_vinho){
     $harmonizacao_vinho = [','];
+}
+if(!$tipo_vinho){
+    $tipo_vinho = [','];
 }
 
 ?>
@@ -222,9 +229,12 @@ else {
                     </section>
                     <br>
                     <?php
+                    $key=false;
                     foreach ($tipos as $tipo){
                         $tipo_vinho_c = $tipo_vinho;
-                        $key = array_search($tipo['nome'], $tipo_vinho_c);
+                        if($tipo_vinho) {
+                            $key = array_search($tipo['nome'], $tipo_vinho_c);
+                        }
                         if($key!==false){
                             unset($tipo_vinho_c[$key]);
                             echo '<a href="viewBuscarVinho.php?tipoVinho='.implode(',', $tipo_vinho_c).'&estrelas='.$estrelas.'&menorPreco='.$menorPreco.'&maiorPreco='.$maiorPreco.'&regiaoVinho='.implode(',', $regiao_vinho).'&tipoUva='.implode(',', $tipo_uva).'&estiloVinho='.implode(',', $estilo_vinho).'&harmonizacao='.implode(',', $harmonizacao_vinho).'">';

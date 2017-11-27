@@ -358,8 +358,8 @@ class conecta
         if ($estilo){
             $vinhos_estilo = array();
             foreach ($estilo as $value) {
-                foreach ($vinhos as $value) {
-                    if ($vinho['nome_estilo']==$estilo){
+                foreach ($vinhos as $vinho) {
+                    if ($vinho['nome_estilo']==$value){
                         array_push($vinhos_estilo, $vinho);
                     }
                 }

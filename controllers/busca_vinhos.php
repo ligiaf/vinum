@@ -56,8 +56,8 @@ function buscaVinhos($estrela, $preco_min, $preco_max, $regiao=array(), $estilo=
 	if ($estilo){
 		$vinhos_estilo = array();
 		foreach ($estilo as $value) {
-			foreach ($vinhos as $value) {
-				if ($vinho['nome_estilo']==$estilo){
+			foreach ($vinhos as $vinho) {
+				if ($vinho['nome_estilo']==$value){
 					array_push($vinhos_estilo, $vinho);
 				}
 			}
@@ -107,8 +107,8 @@ $filtro = array();
 array_push($filtro, 'Merlot');
 array_push($filtro, 'Blend');
 $filtro2 = array();
-array_push($filtro2, 'Brasil');
-$vinhos = buscaVinhos(null,0,200,null,null,null,$filtro,null);
+array_push($filtro2, 'Pinot Noir');
+$vinhos = buscaVinhos('','','',null,$filtro2,'',null,null);
 	foreach ($vinhos as $vinho) {
 		echo $vinho ['nome']." - ".$vinho['preco']." - ".$vinho['estrela'].' | REGIÃO - '.$vinho['nome_regiao'].' | TIPO - '.$vinho['nome_tipo'].' | ESTILO -'.$vinho['nome_estilo'].' | TIPO UVA - '.$vinho['tipo_uva'].'<br>'.'COMIDAS: ';
 		foreach ($vinho['comidas'] as $comida) {
