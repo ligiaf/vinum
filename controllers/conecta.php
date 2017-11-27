@@ -235,7 +235,7 @@ class conecta
 
     public function buscaResenhaVinho($idVinho)
     {
-        $resenhas = ORM::for_table('resenha')->where('ID_vinho', $idVinho)->find_many();
+        $resenhas = ORM::for_table('resenha')->where('ID_vinho', $idVinho)->order_by_desc('datahora')->find_many();
         $i = 0;
         foreach ($resenhas as $resenha)
         {
@@ -248,7 +248,7 @@ class conecta
 
     public function buscaResenhaUsuario($idUsuario)
     {
-        $resenhas = ORM::for_table('resenha')->where('ID_usuario', $idUsuario)->find_many();
+        $resenhas = ORM::for_table('resenha')->where('ID_usuario', $idUsuario)->order_by_desc('datahora')->find_many();
         $i = 0;
         foreach ($resenhas as $resenha)
         {
