@@ -223,8 +223,16 @@ else {
                     <br>
                     <?php
                     foreach ($tipos as $tipo){
-                        echo '<a href="viewBuscarVinho.php?tipoVinho='.$tipo['nome'].','.implode(',', $tipo_vinho).'&estrelas='.$estrelas.'&menorPreco='.$menorPreco.'&maiorPreco='.$maiorPreco.'&regiaoVinho='.implode(',', $regiao_vinho).'&tipoUva='.implode(',', $tipo_uva).'&estiloVinho='.implode(',', $estilo_vinho).'&harmonizacao='.implode(',', $harmonizacao_vinho).'">
-                        <div class="chip" id="'.$tipo['nome'].'">'.$tipo['nome'].'</div></a>';
+                        $key = array_search($tipo['nome'], $tipo_vinho);
+                        if($key==false && count($tipo_vinho) > 1){
+                            unset($tipo_vinho[$key]);
+                            echo '<a href="viewBuscarVinho.php?tipoVinho='.implode(',', $tipo_vinho).'&estrelas='.$estrelas.'&menorPreco='.$menorPreco.'&maiorPreco='.$maiorPreco.'&regiaoVinho='.implode(',', $regiao_vinho).'&tipoUva='.implode(',', $tipo_uva).'&estiloVinho='.implode(',', $estilo_vinho).'&harmonizacao='.implode(',', $harmonizacao_vinho).'">
+                                    <div class="chip" id="'.$tipo['nome'].'">'.$tipo['nome'].'</div></a>';
+                        }
+                        else {
+                            echo '<a href="viewBuscarVinho.php?tipoVinho=' . $tipo['nome'] . ',' . implode(',', $tipo_vinho) . '&estrelas=' . $estrelas . '&menorPreco=' . $menorPreco . '&maiorPreco=' . $maiorPreco . '&regiaoVinho=' . implode(',', $regiao_vinho) . '&tipoUva=' . implode(',', $tipo_uva) . '&estiloVinho=' . implode(',', $estilo_vinho) . '&harmonizacao=' . implode(',', $harmonizacao_vinho) . '">
+                            <div class="chip" id="' . $tipo['nome'] . '">' . $tipo['nome'] . '</div></a>';
+                        }
                     }
                     //QUANDO SELECIONADO OS CHIPS FICAM NESSA COR <a href="#"><div class="chip teal white-text">'.$tipo['nome'].'</div></a>
                     ?>
@@ -250,8 +258,16 @@ else {
                     <br>
                     <?php
                     foreach ($uvas as $uva){
-                        echo '<a href="viewBuscarVinho.php?tipoVinho='.implode(',', $tipo_vinho).'&estrelas='.$estrelas.'&menorPreco='.$menorPreco.'&maiorPreco='.$maiorPreco.'&regiaoVinho='.implode(',', $regiao_vinho).'&tipoUva='.$uva['tipo'].','.implode(',', $tipo_uva).'&estiloVinho='.implode(',', $estilo_vinho).'&harmonizacao='.implode(',', $harmonizacao_vinho).'">
-                            <div class="chip">'.$uva['tipo'].'</div></a>';
+                        $key = array_search($uva['tipo'], $tipo_uva);
+                        if($key==false && count($tipo_uva) > 1) {
+                            unset($tipo_uva[$key]);
+                            echo '<a href="viewBuscarVinho.php?tipoVinho=' . implode(',', $tipo_vinho) . '&estrelas=' . $estrelas . '&menorPreco=' . $menorPreco . '&maiorPreco=' . $maiorPreco . '&regiaoVinho=' . implode(',', $regiao_vinho) . '&tipoUva='. implode(',', $tipo_uva) . '&estiloVinho=' . implode(',', $estilo_vinho) . '&harmonizacao=' . implode(',', $harmonizacao_vinho) . '">
+                            <div class="chip">' . $uva['tipo'] . '</div></a>';
+                        }
+                        else{
+                            echo '<a href="viewBuscarVinho.php?tipoVinho=' . implode(',', $tipo_vinho) . '&estrelas=' . $estrelas . '&menorPreco=' . $menorPreco . '&maiorPreco=' . $maiorPreco . '&regiaoVinho=' . implode(',', $regiao_vinho) . '&tipoUva=' . $uva['tipo'] . ','. implode(',', $tipo_uva) . '&estiloVinho=' . implode(',', $estilo_vinho) . '&harmonizacao=' . implode(',', $harmonizacao_vinho) . '">
+                            <div class="chip">' . $uva['tipo'] . '</div></a>';
+                        }
                     }
                     ?>
                     <br>
@@ -263,8 +279,16 @@ else {
                     <div class="chip">Brasil</div>
                     <?php
                     foreach ($paises as $pais){
-                        echo '<a href="viewBuscarVinho.php?tipoVinho='.implode(',', $tipo_vinho).'&estrelas='.$estrelas.'&menorPreco='.$menorPreco.'&maiorPreco='.$maiorPreco.'&regiaoVinho='.$pais['nome'].','.implode(',', $regiao_vinho).'&tipoUva='.implode(',', $tipo_uva).'&estiloVinho='.implode(',', $estilo_vinho).'&harmonizacao='.implode(',', $harmonizacao_vinho).'">
-                        <div class="chip">'.$pais['nome'].'</div></a>';
+                        $key = array_search($pais['nome'], $regiao_vinho);
+                        if($key==false && count($regiao_vinho) > 1) {
+                            unset($regiao_vinho[$key]);
+                            echo '<a href="viewBuscarVinho.php?tipoVinho=' . implode(',', $tipo_vinho) . '&estrelas=' . $estrelas . '&menorPreco=' . $menorPreco . '&maiorPreco=' . $maiorPreco . '&regiaoVinho=' . implode(',', $regiao_vinho) . '&tipoUva=' . implode(',', $tipo_uva) . '&estiloVinho=' . implode(',', $estilo_vinho) . '&harmonizacao=' . implode(',', $harmonizacao_vinho) . '">
+                            <div class="chip">' . $pais['nome'] . '</div></a>';
+                        }
+                        else{
+                            echo '<a href="viewBuscarVinho.php?tipoVinho=' . implode(',', $tipo_vinho) . '&estrelas=' . $estrelas . '&menorPreco=' . $menorPreco . '&maiorPreco=' . $maiorPreco . '&regiaoVinho=' . $pais['nome'] . ',' . implode(',', $regiao_vinho) . '&tipoUva=' . implode(',', $tipo_uva) . '&estiloVinho=' . implode(',', $estilo_vinho) . '&harmonizacao=' . implode(',', $harmonizacao_vinho) . '">
+                            <div class="chip">' . $pais['nome'] . '</div></a>';
+                        }
                     }
                     ?>
                     <br>
@@ -275,8 +299,16 @@ else {
                     <br>
                     <?php
                     foreach ($estilos as $estilo){
-                        echo '<a href="viewBuscarVinho.php?tipoVinho='.implode(',', $tipo_vinho).'&estrelas='.$estrelas.'&menorPreco='.$menorPreco.'&maiorPreco='.$maiorPreco.'&regiaoVinho='.implode(',', $regiao_vinho).'&tipoUva='.implode(',', $tipo_uva).'&estiloVinho='.$estilo['nome'].','.implode(',', $estilo_vinho).'&harmonizacao='.implode(',', $harmonizacao_vinho).'">
-                        <div class="chip">'.$estilo['nome'].'</div></a>';
+                        $key = array_search($estilo['nome'], $estilo_vinho);
+                        if($key==false && count($estilo_vinho) > 1) {
+                            unset($estilo_vinho[$key]);
+                            echo '<a href="viewBuscarVinho.php?tipoVinho=' . implode(',', $tipo_vinho) . '&estrelas=' . $estrelas . '&menorPreco=' . $menorPreco . '&maiorPreco=' . $maiorPreco . '&regiaoVinho=' . implode(',', $regiao_vinho) . '&tipoUva=' . implode(',', $tipo_uva) . '&estiloVinho=' . implode(',', $estilo_vinho) . '&harmonizacao=' . implode(',', $harmonizacao_vinho) . '">
+                                <div class="chip">' . $estilo['nome'] . '</div></a>';
+                        }
+                        else{
+                            echo '<a href="viewBuscarVinho.php?tipoVinho=' . implode(',', $tipo_vinho) . '&estrelas=' . $estrelas . '&menorPreco=' . $menorPreco . '&maiorPreco=' . $maiorPreco . '&regiaoVinho=' . implode(',', $regiao_vinho) . '&tipoUva=' . implode(',', $tipo_uva) . '&estiloVinho=' . $estilo['nome'] . ',' . implode(',', $estilo_vinho) . '&harmonizacao=' . implode(',', $harmonizacao_vinho) . '">
+                                <div class="chip">' . $estilo['nome'] . '</div></a>';
+                        }
                     }
                     ?>
                     <br>
@@ -287,8 +319,16 @@ else {
                     <br>
                     <?php
                     foreach ($comidas as $comida){
-                        echo '<a href="viewBuscarVinho.php?tipoVinho='.implode(',', $tipo_vinho).'&estrelas='.$estrelas.'&menorPreco='.$menorPreco.'&maiorPreco='.$maiorPreco.'&regiaoVinho='.implode(',', $regiao_vinho).'&tipoUva='.implode(',', $tipo_uva).'&estiloVinho='.implode(',', $estilo_vinho).'&harmonizacao='.$comida['nome'].','.implode(',', $harmonizacao_vinho).'">
-                        <div class="chip">'.$comida['nome'].'</div></a>';
+                        $key = array_search($comida['nome'], $harmonizacao_vinho);
+                        if($key==false && count($harmonizacao_vinho) > 1) {
+                            unset($harmonizacao_vinho[$key]);
+                            echo '<a href="viewBuscarVinho.php?tipoVinho=' . implode(',', $tipo_vinho) . '&estrelas=' . $estrelas . '&menorPreco=' . $menorPreco . '&maiorPreco=' . $maiorPreco . '&regiaoVinho=' . implode(',', $regiao_vinho) . '&tipoUva=' . implode(',', $tipo_uva) . '&estiloVinho=' . implode(',', $estilo_vinho) . '&harmonizacao=' . implode(',', $harmonizacao_vinho) . '">
+                                <div class="chip">' . $comida['nome'] . '</div></a>';
+                        }
+                        else{
+                            echo '<a href="viewBuscarVinho.php?tipoVinho=' . implode(',', $tipo_vinho) . '&estrelas=' . $estrelas . '&menorPreco=' . $menorPreco . '&maiorPreco=' . $maiorPreco . '&regiaoVinho=' . implode(',', $regiao_vinho) . '&tipoUva=' . implode(',', $tipo_uva) . '&estiloVinho=' . implode(',', $estilo_vinho) . '&harmonizacao=' . $comida['nome'] . ',' . implode(',', $harmonizacao_vinho) . '">
+                                <div class="chip">' . $comida['nome'] . '</div></a>';
+                        }
                     }
                     ?>
                     <br>
