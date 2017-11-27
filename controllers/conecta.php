@@ -259,6 +259,16 @@ class conecta
         return $resenhas;
     }
 
+    public function verificaResenha($idUsuario, $idVinho)
+    {
+        $res = ORM::for_table('resenha')->where(array('ID_usuario' => $idUsuario, 'ID_vinho' => $idVinho))->find_one();
+        if($res)
+        {
+            return true;
+        }
+        else return false;
+    }
+
     //OUTROS
     public function buscaPaises()
     {

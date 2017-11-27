@@ -11,6 +11,7 @@ session_start();
 $ctrUsuario= new controllerUsuario();
 $ctrVinho = new controllerVinho();
 $ctrComida = new controllerComida();
+$ctrResenha = new controllerResenha();
 $vinho = $ctrVinho->buscaVinhoID($_GET['id']);
 $comidas = $ctrVinho->buscaComidasVinho($_GET['id']);
 $resenhas = $ctrVinho->buscaResenhaVinho($_GET['id']);
@@ -28,10 +29,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         }
         else
         {
-            $ctrResenha = new controllerResenha();
-            $datahora = new DateTime();
-            $ctrResenha->cadastraResenha($_SESSION['id'], $_GET['id'], $_POST['txtResenha'], date_format($datahora, 'Y-m-d H:i:s'));
-            header("Location:viewVisualizarVinho.php?id=".$_GET['id']);
+            if($ctrResenha->verificaResenha($_SESSION['id'], $_GET['id']))
+            {
+                echo "<script language='JavaScript'>alert('Você já escreveu uma resenha para este vinho!');</script>";
+            }
+            else
+            {
+                $ctrResenha = new controllerResenha();
+                $datahora = new DateTime();
+                $ctrResenha->cadastraResenha($_SESSION['id'], $_GET['id'], $_POST['txtResenha'], date_format($datahora, 'Y-m-d H:i:s'));
+                header("Location:viewVisualizarVinho.php?id=".$_GET['id']);
+            }
         }
     }
 

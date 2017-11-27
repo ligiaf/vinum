@@ -10,4 +10,11 @@ class controllerResenha
         $resenha = new classes\resenha($idUsuario, $idVinho, $resenha, $datahora);
         $db->cadastraResenha($resenha);
     }
+
+    public function verificaResenha($idUsuario, $idVinho)
+    {
+        $db = new conecta();
+        $res = $db->verificaResenha($idUsuario, $idVinho);
+        return $res;
+    }
 }
