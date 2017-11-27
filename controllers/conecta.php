@@ -159,7 +159,7 @@ class conecta
     public function calculaEstrelas($idVinho)
     {
         $estrelas = ORM::for_table('avaliacao')->where('ID_vinho', $idVinho)->avg('nota');
-        return $estrelas;
+        return round($estrelas,1);
     }
 
     public function addHarmonizacao($idVinho, $idComida)
