@@ -170,6 +170,16 @@ class conecta
         $addHarmonizacao->save();
     }
 
+    public function verificaHarmonizacao($idVinho, $idComida)
+    {
+        $res = ORM::for_table('vinho_comida')->where(array('ID_vinho' => $idVinho, 'ID_comida' => $idComida))->find_one();
+        if($res)
+        {
+            return true;
+        }
+        return false;
+    }
+
 
     //USUARIO
 

@@ -31,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             $ctrResenha = new controllerResenha();
             $datahora = new DateTime();
             $ctrResenha->cadastraResenha($_SESSION['id'], $_GET['id'], $_POST['txtResenha'], date_format($datahora, 'Y-m-d H:i:s'));
+            header("Location:viewVisualizarVinho.php?id=".$_GET['id']);
         }
     }
 
@@ -52,8 +53,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                 header("Location:viewVisualizarVinho.php?id=".$_GET['id']);
             }
         }
+    }
 
+    if(isset($_POST['selectComida']) && $_POST['selectComida'] != '')
+    {
+        if($ctrUsuario->verificaMeusVinhos($_SESSION['id'], $_GET['id']))
+        {
+            echo "<script language='JavaScript'>alert('Você precisa adicionar este vinho aos seus vinhos para editá-lo!');</script>";
+        }
+        else
+        {
+            if($ctrVinho->verificaHarmonizacao($_GET['id'], $_POST['selectComida']))
+            {
+                echo "<script language='JavaScript'>alert('Esta harmonização já foi adicionada!');</script>";
+            }
+            else
+            {
+                $ctrVinho->addHarmonizacao($_GET['id'], $_POST['selectComida']);
+                header("Location:viewVisualizarVinho.php?id=".$_GET['id']);
+            }
 
+        }
     }
 }
 ?>
@@ -195,29 +215,32 @@ else {
                             {
                                 echo $estrelas;
                             }else echo 0;
-                            ?></p>
+                            ?>
+                        </p>
                         <p><b>Tipo:</b> <?=$vinho['ID_tipo']?> &nbsp; <b>Estilo:</b> <?=$vinho['ID_estilo']?> &nbsp; <b>Uva:</b> <?=$vinho['ID_uva']?></p>
                         <p><b>Região:</b> <?=$vinho['regiao']?> &nbsp; <b>País de origem:</b> <?=$vinho['ID_regiao']?></p>
-                        <p><b>Harmoniza com: </b><?php foreach($comidas as $comida){echo $comida.' | ';}?> &nbsp;&nbsp;
-                            <a href="#" id="editar" class="btn-floating waves-effect waves-light teal darken-4"><i class="material-icons">mode_edit</i></a></p>
+                        <p><b>Harmoniza com: </b><?php foreach($comidas as $comida){echo $comida.' | ';}?> &nbsp;&nbsp;</p>
+                        <form action="viewVisualizarVinho.php?id=<?=$_GET['id']?>" method="post" id="harmonizacao">
+                            <div class="input-field col s5">
+                                <select name="selectComida">
+                                    <option disabled selected>Selecionar</option>
+                                    <?php
+                                    foreach ($todasComidas as $comida)
+                                    {
+                                        echo "<option value=".$comida['ID_comida'].">".$comida['nome']."</option>";
+                                    }
+                                    ?>
+                                </select>
+                                <label>Adicione uma harmonização</label>
+                            </div>
+                            <div class="input-field col s1">
+                                <a onclick="document.getElementById('harmonizacao').submit();" class="btn-floating waves-effect waves-light teal darken-4"><i class="material-icons">add</i></a>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <form id="addHarmonizacao" method="post" action="viewVisualizarVinho.php?id=<?=$_GET['id']?>">
-                    <div class="file-field input-field col s6">
-                        <select id="select" name="select">
-                            <option value="" disabled selected>Selecionar</option>
-                            <?php
-                            foreach ($todasComidas as $comida){
-                                echo "<option value=".$comida['ID_comida'].">".$comida['nome']."</option>";
-                            }?>
-                        </select>
-                    </div>
-                </form>
-            </div>
-            <div class="row">
-                <br/>
                 <section>
                     <h5>Resenhas</h5>
                 </section>
@@ -237,7 +260,7 @@ else {
                     </div>
                 <?php }
             }?>
-            <form action="viewVisualizarVinho.php?id=<?= $_GET['id']?>" method="post" class="col s12">
+            <form id="resenha" action="viewVisualizarVinho.php?id=<?= $_GET['id']?>" method="post" class="col s12">
                 <div class="row">
                     <div class="input-field col s12">
                         <textarea name="txtResenha" id="textarea1" class="materialize-textarea"></textarea>
@@ -253,10 +276,9 @@ else {
 </div>
 
 <!--  Scripts-->
-<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="../js/materialize.js"></script>
 <script src="../js/init.js"></script>
-<script src="../js/jquery.min.js"></script>
 <script src="../js/jquery.rateyo.js"></script>
 <script language="Javascript">
     $(function () {
@@ -275,11 +297,6 @@ else {
         });
     });
 
-    $(function () {
-        $("#editar").click(function () {
-            $("#select").show();
-        }
-    });
 
 </script>
 </body>

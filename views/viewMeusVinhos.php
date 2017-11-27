@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['vinho']) && ($_POST['vinho'] != '') && isset($_POST['idUsuario']) &&
         ($_POST['idUsuario'] != '') && isset($_FILES['rotulo']) && ($_FILES['rotulo']['tmp_name'] != ''))
     {
-        if (!$ctrUsuario->verificaMeusVinhos($_POST['idUsuario'], $_POST['$vinho'])) {
+        if (!$ctrUsuario->verificaMeusVinhos($_POST['idUsuario'], $_POST['vinho'])) {
             echo "<script language='JavaScript'>alert('Vinho já adicionado a sua coleção!');</script>";
         } else {
             $rotulo = $_POST['idUsuario'].'-'.$_POST['vinho'].'.jpg';
