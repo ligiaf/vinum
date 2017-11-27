@@ -35,7 +35,7 @@ $resenhas = $ctrUsuario->buscaResenhaUsuario($_GET['id']);
     <div class="nav-wrapper container">
         <a href="index.php" class="brand-logo"><img class="responsive-img" src="../images/logo.fw.png"></a>
         <ul id="nav-mobile" class=" right hide-on-med-and-down">
-            <li><a href="viewBuscarVinho.php" class="valign-wrapper"><i class="material-icons left">search</i>Buscar
+            <li><a href="viewBuscarVinho.php?tipoVinho=&menorPreco=&maiorPreco=&estrelas=" class="valign-wrapper"><i class="material-icons left">search</i>Buscar
                     vinhos</a></li>
             <li><a href="viewMeusVinhos.php?id=<?=$_SESSION['id']?>" class="valign-wrapper"><i class="material-icons left">dashboard</i>Meus
                     vinhos</a></li>

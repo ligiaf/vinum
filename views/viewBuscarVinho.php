@@ -119,7 +119,7 @@ if(isset($_SESSION['id']))
         <div class="nav-wrapper container">
             <a href="index.php" class="brand-logo"><img class="responsive-img" src="../images/logo.fw.png"></a>
             <ul id="nav-mobile" class=" right hide-on-med-and-down">
-                <li><a href="viewBuscarVinho.php" class="valign-wrapper"><i class="material-icons left">search</i>Buscar
+                <li><a href="viewBuscarVinho.php?tipoVinho=&menorPreco=&maiorPreco=&estrelas=" class="valign-wrapper"><i class="material-icons left">search</i>Buscar
                         vinhos</a></li>
                 <li><a href="viewMeusVinhos.php?id=<?=$_SESSION['id']?>" class="valign-wrapper"><i class="material-icons left">dashboard</i>Meus
                         vinhos</a></li>
@@ -134,7 +134,7 @@ else {
         <div class="nav-wrapper container">
             <a id="logo-container" href="index.php" class="brand-logo"><img class="responsive-img" src="../images/logo.fw.png"></a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="viewBuscarVinho.php" class="valign-wrapper"><i class="material-icons left">search</i>Buscar vinhos</a></li>
+                <li><a href="viewBuscarVinho.php?tipoVinho=&menorPreco=&maiorPreco=&estrelas=" class="valign-wrapper"><i class="material-icons left">search</i>Buscar vinhos</a></li>
                 <li>
                     <!-- Modal Trigger -->
                     <a class="modal-trigger valign-wrapper" href="#modal1">Login</a>
@@ -353,8 +353,6 @@ else {
             'max': 5
         }
     });
-
-
 
     function atualizaSliders() {
         sliderPreco.noUiSlider.set([<?= $menorPreco?>, <?= $maiorPreco?>]);
