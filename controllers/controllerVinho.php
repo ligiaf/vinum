@@ -72,4 +72,10 @@ class controllerVinho
         return $res;
     }
 
+    public function buscarVinhosTotal($estrela, $preco_min, $preco_max, $regiao=array(), $estilo=array(), $tipo_vinho=array(), $tipo_uva=array(), $harmonizacao=array()){
+        $db = new conecta();
+        $res = $db->buscaVinhosTotal($estrela, $preco_min, $preco_max, $regiao, $estilo, $tipo_vinho, $tipo_uva, $harmonizacao);
+        return $res;
+    }
+
 }

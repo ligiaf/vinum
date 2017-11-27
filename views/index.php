@@ -181,16 +181,14 @@ else {
                     <p class="left-align light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Nullam eget dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
                 </div>
             </div>
-            <form class="container col s12 valign-wrapper">
+            <form action="viewBuscarVinho.php" method="post" id="buscar" class="container col s12 valign-wrapper">
                 <div class="input-field col s3">
-                    <select>
+                    <select name="selectTipoVinho">
                         <option value="" class="disabled">Selecionar</option>
                         <?php
                         $tipos = ORM::for_table('tipo_vinho')->find_many();
-                        $i = 0 ;
                         foreach ($tipos as $tipo){
-                            echo '<option value="'.$i.'">'.$tipo['nome'].'</option>';
-                            $i++;
+                            echo '<option value="'.$tipo['nome'].'">'.$tipo['nome'].'</option>';
                         }
                         ?>
                     </select>
@@ -199,13 +197,16 @@ else {
                 <label>Preço</label>
                 <div class="input-field col s4">
                     <div id="slider"></div>
+                    <input type="hidden" name="menorPreco" id="menorPreco"/>
+                    <input type="hidden" name="maiorPreco" id="maiorPreco"/>
                 </div>
                 <label>Nota</label>
                 <div class="input-field col s3">
                     <div id="slider2"></div>
+                    <input type="hidden" name="estrelas" id="estrelas"/>
                 </div>
                 <div class="col s2">
-                    <a href="#" id="download-button" class="btn-large waves-effect waves-light teal darken-4">Buscar</a>
+                    <a href="#" onclick="document.getElementById('buscar').submit();" id="btnBuscar" class="btn-large waves-effect waves-light teal darken-4">Buscar</a>
                 </div>
             </form>
         </div>
@@ -278,6 +279,16 @@ else {
             'min': 1,
             'max': 5
         }
+    });
+
+    slider.noUiSlider.on('update', function() {
+        var valores = slider.noUiSlider.get();
+        $("#menorPreco").val(valores[0]);
+        $("#maiorPreco").val(valores[1]);
+    });
+
+    slider2.noUiSlider.on('update', function() {
+        $("#estrelas").val(slider2.noUiSlider.get());
     });
 
 </script>

@@ -15,12 +15,28 @@ $ctrTipo = new controllerTipoVinho();
 $ctrEstilo = new controllerEstilo();
 $ctrUva = new controllerUva();
 $ctrComida = new controllerComida();
+$ctrVinho = new controllerVinho();
 
 $paises = $ctrPais->buscaPaises();
 $tipos = $ctrTipo->buscaTipos();
 $estilos = $ctrEstilo->buscaEstilos();
 $uvas = $ctrUva->buscaUvas();
 $comidas = $ctrComida->buscaComidas();
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if(isset($_POST['menorPreco']) && $_POST['menorPreco'] != '' &&
+        isset($_POST['maiorPreco']) && $_POST['menorPreco'] != '' &&
+        isset($_POST['selectTipoVinho']) && $_POST['selectTipoVinho'] != '' &&
+        isset($_POST['estrelas']) && $_POST['estrelas'] != ''){
+        $tipo_vinho = array();
+        array_push($tipo_vinho, $_POST['selectTipoVinho']);
+        $menorPreco = $_POST['menorPreco'];
+        $maiorPreco = $_POST['maiorPreco'];
+        $estrelas = $_POST['estrelas'];
+        $vinhos = $ctrVinho->buscarVinhosTotal($estrelas,$menorPreco, $maiorPreco, null, null, $tipo_vinho, null, null);
+
+    }
+}
 
 ?>
 
@@ -222,34 +238,24 @@ else {
                     </section>
                     <div class="divider"></div>
                     <br>
+                    <?php
+
+                    foreach ($vinhos as $vinho){ ?>
                     <div class="card horizontal small">
                         <div class="card-image">
                             <img class="responsive-img" src="../images/vinhos/6.jpg">
                         </div>
                         <div class="card-stacked">
-                            <a href="viewVisualizarVinho.php"> <h4 class="header teal-text">&nbsp; Nome vinho</h4> </a>
+                            <a href="viewVisualizarVinho.php"> <h4 class="header teal-text">&nbsp; <?= $vinho['nome']?></h4> </a>
                             <div class="card-content">
-                                <p><i class="material-icons left yellow-text text-darken-2">star</i>4.5</p>
-                                <p>Tipo do vinho.</p>
-                                <p>Estilo do vinho.</p>
-                                <p>Região do vinho.</p>
+                                <p><i class="material-icons left yellow-text text-darken-2">star</i><?= $vinho['estrela']?></p>
+                                <p><?= $vinho['nome_tipo']?></p>
+                                <p><?= $vinho['nome_estilo']?></p>
+                                <p><?= $vinho['nome_regiao']?></p>
                             </div>
                         </div>
                     </div>
-                    <div class="card horizontal small">
-                        <div class="card-image">
-                            <img class="responsive-img" src="../images/vinhos/7.jpg">
-                        </div>
-                        <div class="card-stacked">
-                            <a href="viewVisualizarVinho.php"> <h4 class="header teal-text">&nbsp; Nome vinho</h4> </a>
-                            <div class="card-content">
-                                <p><i class="material-icons left yellow-text text-darken-2">star</i>3.0</p>
-                                <p>Tipo do vinho.</p>
-                                <p>Estilo do vinho.</p>
-                                <p>Região do vinho.</p>
-                            </div>
-                        </div>
-                    </div>
+                    <?php }?>
                 </div>
             </div>
         </div>
@@ -286,6 +292,16 @@ else {
             'max': 5
         }
     });
+
+
+
+    function atualizaSliders() {
+        sliderPreco.noUiSlider.set([<?= $menorPreco?>, <?= $maiorPreco?>]);
+        sliderAv.noUiSlider.set(<?= $estrelas?>);
+    }
+
+    atualizaSliders();
+
 </script>
 </body>
 </html>
