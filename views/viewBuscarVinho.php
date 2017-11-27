@@ -321,6 +321,16 @@ else {
             </div>
         </div>
     </div>
+    <form id="form-slider" method="get" action="viewBuscarVinho.php">
+        <input hidden="hidden" id="menorPreco" name="menorPreco">
+        <input hidden="hidden" id="maiorPreco" name="maiorPreco">
+        <input hidden="hidden" id="tipoVinho" name="tipoVinho" value="<?= implode(',', $tipo_vinho);?>">
+        <input hidden="hidden" id="estrelas" name="estrelas">
+        <input hidden="hidden" id="regiaoVinho" name="regiaoVinho" value="<?= implode(',', $regiao_vinho);?>">
+        <input hidden="hidden" id="estiloVinho" name="estiloVinho" value="<?= implode(',', $estilo_vinho);?>">
+        <input hidden="hidden" id="tipoUva" name="tipoUva" value="<?= implode(',', $tipo_uva);?>">
+        <input hidden="hidden" id="harmonizacao" name="harmonizacao" value="<?= implode(',', $harmonizacao_vinho);?>">
+    </form>
 </div>
 
 <!--  Scripts-->
@@ -353,6 +363,29 @@ else {
             'max': 5
         }
     });
+
+    sliderPreco.noUiSlider.on('update', function(){
+        var valores = sliderPreco.noUiSlider.get();
+        $("#menorPreco").val(valores[0]);
+        $("#maiorPreco").val(valores[1]);
+        $("#estrelas").val(sliderAv.noUiSlider.get());
+    });
+
+    sliderAv.noUiSlider.on('update', function(){
+        var valores = sliderPreco.noUiSlider.get();
+        $("#menorPreco").val(valores[0]);
+        $("#maiorPreco").val(valores[1]);
+        $("#estrelas").val(sliderAv.noUiSlider.get());
+    });
+
+    sliderPreco.noUiSlider.on('end', function(){
+        $("#form-slider").submit();
+    });
+
+    sliderAv.noUiSlider.on('end', function(){
+        $("#form-slider").submit();
+    });
+
 
     function atualizaSliders() {
         sliderPreco.noUiSlider.set([<?= $menorPreco?>, <?= $maiorPreco?>]);
