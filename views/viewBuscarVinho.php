@@ -297,7 +297,6 @@ else {
                         <b>País de origem</b>
                     </section>
                     <br>
-                    <div class="chip">Brasil</div>
                     <?php
                     foreach ($paises as $pais){
                         $regiao_vinho_c = $regiao_vinho;
@@ -379,22 +378,32 @@ else {
                     <div class="divider"></div>
                     <br>
                     <?php
-                    foreach ($vinhos as $vinho){ ?>
-                        <div class="card horizontal small">
-                            <div class="card-image">
-                                <img class="responsive-img" src="../images/vinhos/<?= $vinho['ID_vinho']?>.jpg">
-                            </div>
-                            <div class="card-stacked">
-                                <a href="viewVisualizarVinho.php?id=<?=$vinho['ID_vinho']?>"> <h4 class="header teal-text">&nbsp; <?= $vinho['nome']?></h4> </a>
-                                <div class="card-content">
-                                    <p><i class="material-icons left yellow-text text-darken-2">star</i><?= $vinho['estrela']?></p>
-                                    <p><?= $vinho['nome_tipo']?></p>
-                                    <p><?= $vinho['nome_estilo']?></p>
-                                    <p><?= $vinho['nome_regiao']?></p>
+                    $ant = array();
+                    foreach ($vinhos as $vinho){
+                        $id = $vinho['ID_vinho'];
+                        if(!in_array($id,$ant)) {
+                            ?>
+                            <div class="card horizontal small">
+                                <div class="card-image">
+                                    <img class="responsive-img" src="../images/vinhos/<?= $vinho['ID_vinho'] ?>.jpg">
+                                </div>
+                                <div class="card-stacked">
+                                    <a href="viewVisualizarVinho.php?id=<?= $vinho['ID_vinho'] ?>"><h4
+                                                class="header teal-text">&nbsp; <?= $vinho['nome'] ?></h4></a>
+                                    <div class="card-content">
+                                        <p>
+                                            <i class="material-icons left yellow-text text-darken-2">star</i><?= $vinho['estrela'] ?>
+                                        </p>
+                                        <p><?= $vinho['nome_tipo'] ?></p>
+                                        <p><?= $vinho['nome_estilo'] ?></p>
+                                        <p><?= $vinho['nome_regiao'] ?></p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    <?php }?>
+                            <?php
+                            array_push($ant, $vinho['ID_vinho']);
+                        }
+                    }?>
                 </div>
             </div>
         </div>
