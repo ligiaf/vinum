@@ -391,12 +391,11 @@ else {
                                     <a href="viewVisualizarVinho.php?id=<?= $vinho['ID_vinho'] ?>"><h4
                                                 class="header teal-text">&nbsp; <?= $vinho['nome'] ?></h4></a>
                                     <div class="card-content">
-                                        <p>
-                                            <i class="material-icons left yellow-text text-darken-2">star</i><?= $vinho['estrela'] ?>
-                                        </p>
-                                        <p><?= $vinho['nome_tipo'] ?></p>
-                                        <p><?= $vinho['nome_estilo'] ?></p>
-                                        <p><?= $vinho['nome_regiao'] ?></p>
+                                        <p><i class="material-icons left yellow-text text-darken-2">star</i><?= $vinho['estrela'] ?></p>
+                                        <p><b>Tipo:</b> <?= $vinho['nome_tipo'] ?></p>
+                                        <p><b>Estilo:</b> <?= $vinho['nome_estilo'] ?></p>
+                                        <p><b>País:</b> <?= $vinho['nome_regiao'] ?></p>
+                                        <p><b>Preço:</b> <?= $vinho['preco'] ?></p>
                                     </div>
                                 </div>
                             </div>
