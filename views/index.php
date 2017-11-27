@@ -181,9 +181,9 @@ else {
                     <p class="left-align light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Nullam eget dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
                 </div>
             </div>
-            <form action="viewBuscarVinho.php" method="post" id="buscar" class="container col s12 valign-wrapper">
+            <form action="viewBuscarVinho.php" method="get" id="buscar" class="container col s12 valign-wrapper">
                 <div class="input-field col s3">
-                    <select name="selectTipoVinho">
+                    <select name="tipoVinho">
                         <option value="" class="disabled">Selecionar</option>
                         <?php
                         $tipos = ORM::for_table('tipo_vinho')->find_many();
