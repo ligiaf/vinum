@@ -73,7 +73,7 @@ if(isset($_POST['autocomplete']))
                 <div class="file-field input-field col s10">
                     <div class="btn grey">
                         <span>Rótulo: </span>
-                        <input type="file" name="rotulo" >
+                        <input type="file" name="rotulo" required="required">
                     </div>
                     <div class="file-path-wrapper">
                         <input class="file-path validate" type="text">

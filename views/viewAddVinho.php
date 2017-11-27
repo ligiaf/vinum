@@ -118,11 +118,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                 <br>
                 <div class="row">
                     <div class="input-field col s6">
-                        <input placeholder="" name="txtTitulo" id="txtTitulo" type="text" class="validate">
+                        <input placeholder="" name="txtTitulo" id="txtTitulo" type="text" class="validate" required="required">
                         <label>Título</label>
                     </div>
                     <div class="input-field col s6">
-                        <input placeholder="" name="txtVinicola" type="text" class="validate">
+                        <input placeholder="" name="txtVinicola" type="text" class="validate" required="required">
                         <label>Vinícola</label>
                     </div>
                 </div>
@@ -138,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                         <label>País de origem</label>
                     </div>
                     <div class="input-field col s6">
-                        <input placeholder="" name="txtRegiao" type="text" class="validate">
+                        <input placeholder="" name="txtRegiao" type="text" class="validate" required="required">
                         <label>Região</label>
                     </div>
                 </div>
@@ -188,13 +188,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
-                        <input placeholder="" name="txtPreco" type="text" class="validate">
+                        <input placeholder="" name="txtPreco" type="text" class="validate" required="required">
                         <label>Preço</label>
                     </div>
                     <div class="file-field input-field col s6">
                         <div class="btn grey">
                             <span>Rótulo: </span>
-                            <input name="arquivo" type="file" />
+                            <input name="arquivo" type="file" required="required"/>
                         </div>
                         <div class="file-path-wrapper">
                             <input class="file-path validate" type="text" name="txtRotulo" value="">

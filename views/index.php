@@ -185,7 +185,6 @@ else {
             <form action="viewBuscarVinho.php" method="get" id="buscar" class="container col s12 valign-wrapper">
                 <div class="input-field col s3">
                     <select name="tipoVinho">
-                        <option value="" class="disabled">Selecionar</option>
                         <?php
                         $tipos = ORM::for_table('tipo_vinho')->find_many();
                         foreach ($tipos as $tipo){
