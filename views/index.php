@@ -75,6 +75,7 @@ if(isset($_SESSION['email']))
                 <li><a href="viewMeusVinhos.php?id=<?=$_SESSION['id']?>" class="valign-wrapper"><i class="material-icons left">dashboard</i>Meus
                         vinhos</a></li>
                 <li><a href="viewVisualizarUsuario.php?id=<?=$_SESSION['id']?>" class="valign-wrapper"><i class="material-icons left">account_circle</i><?= $_SESSION['nome'] ?></a></li>
+                <li><a href="sair.php" class="valign-wrapper"><i class="material-icons left">power_settings_new</i>Sair</a></li>
             </ul>
         </div>
     </nav>
@@ -97,13 +98,13 @@ else {
                         <form action="index.php" id="login" method="post" class="container grey-text col s6">
                             <div class="row">
                                 <div class="input-field ">
-                                    <input type="email" name="txtLoginEmail"/>
+                                    <input type="email" name="txtLoginEmail" required="required"/>
                                     <label>Email: </label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field ">
-                                    <input type="password" name="txtLoginSenha"/>
+                                    <input type="password" name="txtLoginSenha" required="required"/>
                                     <label>Senha: </label>
                                 </div>
                             </div>
@@ -125,19 +126,19 @@ else {
                         <form action="index.php" method="post" id="cadastrar" class="container grey-text">
                             <div class="row">
                                 <div class="input-field">
-                                    <input type="text" name="txtNome" class="validate"/>
+                                    <input type="text" name="txtNome" class="validate" required="required"/>
                                     <label>Nome: </label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field ">
-                                    <input type="email" name="txtEmail" class="validate"/>
+                                    <input type="email" name="txtEmail" class="validate" required="required"/>
                                     <label>Email: </label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field ">
-                                    <input type="password" name="txtSenha" class="validate"/>
+                                    <input type="password" name="txtSenha" class="validate" required="required"/>
                                     <label>Senha: </label>
                                 </div>
                             </div>

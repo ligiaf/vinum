@@ -87,6 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             <li><a href="viewMeusVinhos.php?id=<?=$_SESSION['id']?>" class="valign-wrapper"><i class="material-icons left">dashboard</i>Meus
                     vinhos</a></li>
             <li><a href="viewVisualizarUsuario.php?id=<?=$_SESSION['id']?>" class="valign-wrapper"><i class="material-icons left">account_circle</i><?= $_SESSION['nome'] ?></a></li>
+            <li><a href="sair.php" class="valign-wrapper"><i class="material-icons left">power_settings_new</i>Sair</a></li>
         </ul>
     </div>
 </nav>
